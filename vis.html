@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>Visualisation Prototype</title>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.29.1"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="map.js"></script>
+<script type="text/javascript" src="zip97303.js"></script>
+
+<style type="text/css">
+   html { height: 100% }
+   body { height: 100%; margin: 0; padding: 0; clear: both; }
+   h1 { text-align: center;}
+
+   #wrap{ height: 100%; width: 800px; margin: 0 auto}
+
+   #map_canvas {
+  	float: left;  
+    width: 450px;
+    height:100%;
+   }
+   
+   .info {
+  	float: right;  
+    width: 300px;
+    height:100%;
+   }
+  
+   #chart {
+     margin-left: 50px;
+     font: 12px sans-serif;
+   }
+   
+   .chart div {
+     background-color: steelblue;
+     text-align: right;
+     padding: 1px;
+     margin: 1px;
+     color: white;
+   }   
+   
+</style>
+</head>
+
+<body onload="initialize()">
+  <h1>Salem, OR  97303</h1>
+
+  <div id="wrap">
+  	<div id="map_canvas"></div>
+  	<div class="info">
+	Education Data for 97303 from 2000 Census
+	
+	<script type="text/javascript" src="population.js"></script>
+  		
+  	</div>
+  </div>
+
+</body>
+</html>
+
