@@ -3,7 +3,8 @@
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <title>Visualisation Prototype</title>
-<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.29.1"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.29.6"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.csv.js?1.29.6"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="map.js"></script>
 <script type="text/javascript" src="zip97303.js"></script>
@@ -13,32 +14,50 @@
    body { height: 100%; margin: 0; padding: 0; clear: both; }
    h1 { text-align: center;}
 
-   #wrap{ height: 100%; width: 800px; margin: 0 auto}
+   #wrap{ height: 100%; width: 1000px; margin: 0 auto}
 
    #map_canvas {
   	float: left;  
     width: 450px;
     height:100%;
    }
-   
+      
    .info {
   	float: right;  
-    width: 300px;
+    width: 420px;
     height:100%;
+ 	margin-left: 50px; 
    }
   
-   #chart {
-     margin-left: 50px;
-     font: 12px sans-serif;
+   #bar {
+	margin-left: 20px
    }
    
-   .chart div {
+   .label div {
+     padding: 1px;
+     margin-right: 20px;
+     margin: 1px;
+   	font-size: 10pt;
+   }
+      
+   .bar div {
      background-color: steelblue;
      text-align: right;
      padding: 1px;
      margin: 1px;
      color: white;
+     font-size: 10pt;
    }   
+   
+   .leftSide div {
+   	width: 200px;
+   	float: left;
+   }
+   
+   .rightSide div {
+   	width: 150px;
+   	float: right;
+   }
    
 </style>
 </head>
@@ -48,11 +67,13 @@
 
   <div id="wrap">
   	<div id="map_canvas"></div>
+  	
   	<div class="info">
-	Education Data for 97303 from 2000 Census
-	
-	<script type="text/javascript" src="population.js"></script>
-  		
+		Education Data for 97303 from 2000 Census
+		<div class = "leftSide"></div>
+		<div class = "rightSide"></div>
+		<script type="text/javascript" src="population.js"></script>
+
   	</div>
   </div>
 
