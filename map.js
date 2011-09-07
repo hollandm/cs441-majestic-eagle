@@ -39,6 +39,7 @@ function initialize(){
     	fillOpacity: 0.35
     });
 
+  // Draw the polygon on the map.
   zipCodeArea.setMap(map);
     
 }    
