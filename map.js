@@ -1,6 +1,9 @@
-/**
- * @author crenshaw
- */
+// Name: map.js
+// Description: A script to construct a google map centered
+// at Salem, Oregon in the map_canvas container of an html
+// document.
+// Written by: Tanya L. Crenshaw
+
 function initialize(){
 
 	// Initialize map information

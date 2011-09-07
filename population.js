@@ -1,6 +1,6 @@
-// Name:	 	population.js
+// Name: population.js
 // Description:	A script to import data from education.csv and 
-// 				render it as a barchart.
+// render it as a barchart.
 // Written by: 	Tanya L. Crenshaw
 
 

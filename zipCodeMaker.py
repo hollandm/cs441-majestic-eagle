@@ -1,7 +1,7 @@
-# Name:        zipCodeMaker.py
+# Name: zipCodeMaker.py
 # Description: To parse the US Census Bureau ZCTA data for the zip
-#              code 97303 and from it automatically generate the
-#              google maps call to overlay that area on a Google Map.
+# code 97303 and from it automatically generate the google maps call
+# to overlay that area on a Google Map.
 # Written by:  Tanya L. Crenshaw
 
 import csv
