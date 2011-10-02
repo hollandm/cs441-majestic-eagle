@@ -6,7 +6,6 @@ function constructZipCodeArray()
 { 
 
     var zipCoords = [ 
-         new google.maps.LatLng(       0.450284012654321E+02, 	  -0.123029125964579E+03),
          new google.maps.LatLng(       0.450905530000000E+02,      -0.123045614000000E+03),
          new google.maps.LatLng(       0.450897700000000E+02,      -0.123039695000000E+03),
          new google.maps.LatLng(       0.450897910000000E+02,      -0.123033692000000E+03),
