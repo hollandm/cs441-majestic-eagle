@@ -62,8 +62,11 @@ evalGPA <- function() {
   # create a data frame of results
   result = (data.frame(meanGpa = means, total=totalApplicants, numReported=reportingApplicants,year=years));
 
+  # create a sub-directory in "auto" to store the results
+  dir.create("auto/97303");
+
   # write the data frame to an external .csv file 
-  write.csv(result,"97303/gpa.csv"); 
+  write.csv(result,"auto/97303/gpa.csv"); 
 
   # return the data frame of results
   return (result);
