@@ -36,13 +36,13 @@ evalGPA <- function(zipcode) {
   # get all the .csv files in this directory 
   files <- list.files(pattern=".csv$")
 
-  # for each .csv file, find the average GPA of students who applied in zip code 97303 
+  # for each .csv file, find the average GPA of students who applied in the target zipcode 
   for (i in files) {
 
     # load the .csv files of interest
     admissionsData = read.csv(i, header = TRUE, stringsAsFactors=FALSE);
 
-    # obtain the gpa scores for people in zip code 97303
+    # obtain the gpa scores for people in the target zipcode 
     # who *applied* to the university of portland
     gpaScores <- admissionsData$HS_GPA[admissionsData$Zip == zipcode & admissionsData$Applied=="Y", drop=TRUE];
 
