@@ -8,7 +8,7 @@
 	  
 	// Import the data from the .csv file, applying the callback
 	// function to the data array, data, produced by the file.
-	d3.csv("adminData/97303/gpa.csv", function(data) {
+	d3.csv("adminData/auto/97303/gpa.csv", function(data) {
 
 		// Hereth begin the body of the callback function for
 		// the .csv() call.
@@ -38,7 +38,7 @@
    	   bar.selectAll("div")
          .data(data)
    	     .enter().append("div")
-         .style("width", function(d) { return d.meanGpa * 10 + "px"; })
+         .style("width", function(d) { return d.meanGpa * 30 + "px"; })
          .text(function(d) { return d.meanGpa; })
 
 	   // Apply a similar operation to the labels.
@@ -51,6 +51,6 @@
 	     label.selectAll("div")
 		   .data(data)
 		   .enter().append("div")
-              .text(function(d) {return d.label})
+              .text(function(d) {return d.year})
 		
 });
