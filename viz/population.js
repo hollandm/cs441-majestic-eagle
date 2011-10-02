@@ -17,7 +17,7 @@
 	  
 	// Import the data from the .csv file, applying the callback
 	// function to the data in the file.
-	d3.csv("adminData/education.csv", function(data) {
+	d3.csv("data/education.csv", function(data) {
 
   		// Convert strings to numbers.
   		data.forEach(function(d) {
