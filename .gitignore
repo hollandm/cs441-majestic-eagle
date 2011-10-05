@@ -1,3 +1,7 @@
 *.class
 *.pyc
 *.pyo
+adminData/*.csv
+adminData/auto/
+adminData/.R*
+originalAdmissionsData/
