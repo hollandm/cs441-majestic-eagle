@@ -3,8 +3,9 @@
 // render it as a barchart.
 // Written by: 	Tanya L. Crenshaw
 
-
-	console.log("Hi");
+	// The following line is useful for debugging.
+	console.log("This is an example of logging information to the console");
+	  
 	  
 	// Import the data from the .csv file, applying the callback
 	// function to the data array, data, produced by the file.
@@ -42,9 +43,7 @@
          .text(function(d) { return d.meanGpa; })
 
 	   // Apply a similar operation to the labels.
-	   var label = d3.select("body")
-  	      .select(".info")
-  	      .select(".leftSide")
+	   var label = d3.select(".leftSide")
   	      .append("div")
 	      .attr("class","label")
 	  

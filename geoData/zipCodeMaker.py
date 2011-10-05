@@ -8,11 +8,11 @@ import csv
 import datetime
 
 # Read in Longitude and Latitude Information
-reader = csv.reader(open('zip97303.txt'), delimiter = ',')
+reader = csv.reader(open('zip97302.txt'), delimiter = ',')
 
 # Open the .js file that will be generated.  Note that if the
 # file already exists, it will be over-written.
-output = open('zip97303.js', 'w')
+output = open('zip97302.js', 'w')
 
 # Get the current date and time to timestamp
 # the automatically generated file.

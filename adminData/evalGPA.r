@@ -63,9 +63,6 @@ evalGPA <- function(city) {
 
   # listz all the .csv files in this directory 
   filenames <- list.files(pattern=".csv$")
-
-  # determine how many .csv files there are
-  n <- length(files);
     
   # Open the set of .csv files, storing them in the vector
   # admissionsData.  Use $datset to add a last column entry
