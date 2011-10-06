@@ -61,9 +61,12 @@ evalGPA <- function(city) {
 
   allzips = NULL;     		# all the zipcodes for the target city
 
-  # listz all the .csv files in this directory 
+  # list all the .csv files in this directory 
   filenames <- list.files(pattern=".csv$")
-    
+
+  # Determine how many files were listed.    
+  n <- length(filenames);
+
   # Open the set of .csv files, storing them in the vector
   # admissionsData.  Use $datset to add a last column entry
   # that will indicate which dataset is which.
@@ -125,7 +128,7 @@ evalGPA <- function(city) {
      }
 
   # create a data frame of results for this zipcode
-  result <- (data.frame(meanGpa = means, total=totalApplicants, numReported=reportingApplicants,year=years));
+  result <- (data.frame(item = c(1:n), meanGpa = means, total=totalApplicants, numReported=reportingApplicants,year=years));
 
   # construct the pathname in which to store the results
   path <- paste("auto/", j, sep="");
