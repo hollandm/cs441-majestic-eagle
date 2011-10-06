@@ -83,6 +83,6 @@ function initialize(){
 
 function dispatchCityMap(city)
 {
-	console.log("Hi " + city + "!"); 	
 	location.href = "citymap.html";
+	console.log("Hi " + city + "!"); 	
 }

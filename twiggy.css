@@ -15,6 +15,10 @@
    	 margin-top: 0.1em;
   	 font-size: 10pt;
    }   
+   
+   svg {  
+     background-color: #FFC;  
+   }
 
    #wrap{ height: 100%; width: 800px; margin: 0 auto}
 
@@ -36,11 +40,10 @@
     height:100%;
    }
       
-   .info {
+   #info {
   	float: right;  
     width: 250px;
     height:100%;
- 	margin-left: 50px; 
    }
      
    .label div {
