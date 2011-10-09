@@ -19,15 +19,10 @@
 # note that this preprocessing is not performed, but *expected* by
 # this program.
 
-# Warning: This function currently does not handle duplicate city
-# names, like Springfield, OR and Springfield, IL.  However, the
-# result will not be erroneous; simply GPA averages for all zipcodes
-# for both cities for all years will be produced.
-
 # To run the script in the R console, use:
 # 
 #  source("evalGPA.r");
-#  result = evalGPA(<target city>);
+#  result = evalGPA(<target city>, <target state>);
 #
 # a file called gpa.csv will be created in the zipcode sub-directory
 # in the "auto" sub-directory of the current directory.
@@ -51,7 +46,7 @@
 # "4",3.42,2,1,2010
 
 
-evalGPA <- function(city) {
+evalGPA <- function(city, state) {
 
   # initialize results vectors
   means = NULL;			# the mean GPA for a particular year
@@ -88,9 +83,61 @@ evalGPA <- function(city) {
   # holds the set of years (2007, 2008, etc) addressed in the
   # files.
 
-  # gather all the zipcodes for the target city
+  # gather all the zipcodes for the target city and state
   # across all of the files.  
-  zips <- admissionsData$Zip[admissionsData$City == city, drop=TRUE];
+  zips <- admissionsData$Zip[admissionsData$City == city & admissionsData$State == state, drop=TRUE];
+
+  # calculate the average gpa for the entire city for each year
+  for (i in years) {
+
+        # This is gross as I've mostly copied and pasted the contents of the loop
+        # below.  TODO: Create a function that does this?
+
+      	# obtain the gpa scores for people in the target city
+        # who *applied* to the University of Portland
+        gpaScores <- admissionsData$HS_GPA[admissionsData$EntryYear == i & admissionsData$Applied=="Y" & admissionsData$City == city & admissionsData$State == state, drop=TRUE];
+
+        # convert the result from R-factors to numeric values
+        gpaScores <- as.numeric(as.character(gpaScores));
+
+        # find the total number of applicants and append
+        totalApplicants <- c(totalApplicants, length(gpaScores));
+
+        # remove all blank entries from the vector
+        gpaScores <- gpaScores[!is.na(gpaScores)];
+
+        reportingApplicants <- c(reportingApplicants, length(gpaScores));
+
+        # calculate the mean and append
+        means <- c(means, mean(gpaScores));
+
+   }
+
+  # create a data frame of results for this city
+  result <- (data.frame(item = c(1:n), meanGpa = means, total=totalApplicants, numReported=reportingApplicants,year=years));
+
+  # construct the pathname in which to store the results
+  path <- paste("auto/", city, sep="");
+
+  # create a sub-directory in "auto" to store the results
+  dir.create(path);
+
+  # construct the filename in which to store the results
+  filename <- paste(path, "/gpa.csv", sep="");
+
+  # write the data frame to an external .csv file
+  write.csv(result,filename);
+
+  # reset the results for the next zipcode
+  length(means) <- 0;
+  length(totalApplicants) <- 0;
+  length(reportingApplicants) <- 0;
+  length(result) <- 0;
+
+
+  # Now that the city has been summarized, perform the same calculation
+  # for each zip code.
+
 
   # convert the zips to a vector of numeric values
   zips <- as.numeric(as.character(zips)); 

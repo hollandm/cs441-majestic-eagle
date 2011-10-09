@@ -6,6 +6,7 @@
 <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.29.6"></script>
 <script type="text/javascript" src="http://mbostock.github.com/d3/d3.csv.js?1.29.6"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="application/javascript;version=1.7" src="cityInformation.js"></script>
 <script type="application/javascript;version=1.7" src="citymap.js"></script>
 <script type="text/javascript" src="geoData/zips.js"></script>
 
@@ -13,17 +14,15 @@
 
 </head>
 
-<body onload="initialize()">
+<body onload="dispatchCitySummary()">
 
   <div id="wrap">
-  	<h1>Salem, OR  97303</h1>
+    <div id ="map_title"></div>
 
   	<div id="map_canvas"></div>
   	
   	<div id="info">
 		<p>Average GPA of students applying to UP</p>
-		<script type="text/javascript" src="viz/gpa.js"></script>
-
   	</div>
   </div>
 
