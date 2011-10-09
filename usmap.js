@@ -6,38 +6,10 @@
 
 function initialize(){
 
+	// Get the directory of city information.
+	cities = cityDirectory();
 
-   
-    // How many people applied to each city in 2007.
-	var cities = {}
-	
-    cities['beaverton'] = {
-        center: new google.maps.LatLng(45.479686, -122.809954),
-        applications: 490
-    };
-
-    cities['honolulu'] = {
-        center: new google.maps.LatLng(21.308950, -157.826182),
-        applications: 524
-    };
-    
-    cities['portland'] = {
-        center: new google.maps.LatLng(45.523040, -122.640155),
-        applications: 1455
-    };
-    
-    cities['seattle'] = {
-        center: new google.maps.LatLng(47.6740, -122.2882),
-        applications: 945
-    };
-
-    cities['spokane'] = {
-        center: new google.maps.LatLng(47.66, -117.43),
-        applications: 302
-    };
-
-
-	// The center point of the map is Lincoln, NB.
+   	// The center point of the map is Lincoln, NB.
     var latlng = new google.maps.LatLng(40.8358, -96.6452);
       
     var myOptions = {
@@ -70,8 +42,7 @@ function initialize(){
 
 	   let i = city;
        google.maps.event.addListener(cityCircles[i], 'click', function(event) {	
-			dispatchCityMap(i);
-			
+			location.href = "citymap.html?" + i ;
         });   
      	       
        // Draw the polygon on the map.
@@ -81,8 +52,4 @@ function initialize(){
 
 }
 
-function dispatchCityMap(city)
-{
-	location.href = "citymap.html";
-	console.log("Hi " + city + "!"); 	
-}
+
