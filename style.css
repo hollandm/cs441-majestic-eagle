@@ -31,17 +31,19 @@
    #top{
    	margin-top: 20px;
    	width: 800px;
-   	height: 40px;
+   	height: 80px;
    	
    }
 
    #contig_us_map_canvas{
    	width: 800px;
-   	height: 400px;	
+   	height: 600px;	
    }
  
-   #map_title{}
-     
+   #map_title{
+   	float: right;
+   }
+        
    #map_canvas {
   	float: left;  
     width: 450px;

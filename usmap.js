@@ -1,30 +1,56 @@
-// Name: usmap.js
-// Description: A script to construct a google map centered
-// at the contiguous United States in the contig_us_map_canvas container 
-// of an html document.
-// Written by: Tanya L. Crenshaw
+/* 
+ *  usmap.js
+ *
+ *  @author Tanya L. Crenshaw 
+ */
 
+
+/*
+ *  initialize()
+ * 
+ *  A function to: 1. create a google map centered at the us and 
+ *  2: instantiate a google maps geocoder service.  Note that the 
+ *  variables geocoder and map are not declared using var -- this 
+ *  is so that they can be written to the window object and used by
+ *  other functions.
+ * 
+ *  @param void
+ *  @return void
+ */
 function initialize(){
 
 	// Get the directory of city information.
 	cities = cityDirectory();
 
+	// Instatiate a new geocoder service
+	geocoder = new google.maps.Geocoder();
+
    	// The center point of the map is Lincoln, NB.
-    var latlng = new google.maps.LatLng(40.8358, -96.6452);
+    var usa = new google.maps.LatLng(40.8358, -96.6452);
       
     var myOptions = {
       zoom: 4,
-      center: latlng,
+      center: usa,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
            
   	// Draw the map using the options defined above.
-    var usmap = new google.maps.Map(document.getElementById("contig_us_map_canvas"),
+    map = new google.maps.Map(document.getElementById("contig_us_map_canvas"),
         myOptions);
+    
     
     // Create an array to hold a bunch of circles, one per city.        
     var cityCircles = {};
     
+    
+    // TLC:
+    // The subsequent code does not work in Google Chrome as Chrome does
+    // not support Javascript 1.7 'let' statement.   However, I'm leaving
+    // this code in here until I find a suitable replacement solution
+    // that works in both Firefox and Chrome.
+    
+    /*
 	for(city in cities)
 	{
 		 var circleOptions = {
@@ -47,8 +73,9 @@ function initialize(){
      	       
        // Draw the polygon on the map.
        cityCircles[city].setMap(usmap);
+       
       
-   }
+   }*/
 
 }
 
