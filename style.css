@@ -37,7 +37,7 @@
 
    #contig_us_map_canvas{
    	width: 800px;
-   	height: 600px;	
+   	height: 450px;	
    }
  
    #map_title{
@@ -51,7 +51,7 @@
    }
       
    #info {
-  	float: right;  
+  	float: left;  
     width: 250px;
     height:100%;
    }

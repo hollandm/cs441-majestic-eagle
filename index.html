@@ -7,23 +7,24 @@
         <script type="text/javascript" src="cityInformation.js"></script>
         <script type="text/javascript" src="usmap.js"></script>
         <script type="text/javascript" src="geocode.js"></script>
-
-
+        <script type="text/javascript" src="information.js"></script>
+        <script type="text/javascript" src="layers.js"></script>
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
     <body onload="initialize()">
         <div id="wrap">
             <div id="top">
                 <h1>Zip Code Area Lookup</h1>
-                    <p>
-                        Enter a zipcode:
-                        <input type="text" id="zipcode" value='97217'>
-                        <input type="button" value="Lookup" onclick="goToZip()">
-                    </p>
+                <p>
+                    Enter a zipcode:
+                    <input type="text" id="zipcode" value='97401'>
+                    <input type="button" value="Lookup" onclick="goToZip()">
+                </p>
                 <div id="map_title"></div>
-
             </div>
-            <div id="contig_us_map_canvas"></div>
+            <div id="bottom>">
+                <div id="contig_us_map_canvas"></div>
+            </div>
         </div>
     </body>
 </html>
