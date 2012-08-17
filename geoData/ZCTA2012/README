@@ -1,5 +1,26 @@
 README FILE for ~/geoData/ZCTA2012/*
 
+When fully-formed, this directory contains hundreds of MB of data.  I
+don't want to commit that to the git sourcebase, so I describe here
+how to reconstruct it.
+
+First, download all of the 2010 ZCTA shapefiles .zips from the US Census
+Bureau.
+
+http://www.census.gov/cgi-bin/geo/shapefiles2010/layers.cgi
+
+(One may be tempted to download the great big file, "All states in one
+national file" since it's just one click, but for performance reasons,
+I think it's better to have all the smaller files)
+
+Second, move all the .zips to this directory.
+
+Third, unzip them all.
+
+Fourth, convert them all to .kml using the script described below.
+
+* * *
+
 Shapefiles are a format developed by ESRI (the makers of ArcGIS) to
 store and share geospatial data.  The collection of shapefiles (.shp)
 and supporting data (.shp.xml, .prj, .dbf, .shx) in this directory
