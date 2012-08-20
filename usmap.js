@@ -53,7 +53,7 @@ function initialize(){
 	});
     
     
-    // The Encrypted ID used below is that of 
+	// The Encrypted ID used below is that of 
 	// OregonHighSchools_withManualFusionTableFixes.csv available
 	// in Tanya Crenshaw's public fusion tables.  Use a query to display 
 	// only the zipcode entered by the user on the page.
@@ -112,9 +112,9 @@ function initialize(){
      	       
        // Draw the polygon on the map.
        cityCircles[city].setMap(usmap);
-       
       
-   }*/
+   }
+    */
 
 }
 
