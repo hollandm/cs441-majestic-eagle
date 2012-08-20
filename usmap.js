@@ -18,6 +18,7 @@
  */
 function initialize() {
 
+
 	// Get the directory of city information.
 	cities = cityDirectory();
 
