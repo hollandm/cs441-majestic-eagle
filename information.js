@@ -26,7 +26,7 @@
 function formatInfoWindow(displayedArea, information)
 {
 			displayedArea.infoWindowHtml ="";
-	        displayedArea.infoWindowHtml += "<p>Zip Code: " + information + "</p>";
+	        displayedArea.infoWindowHtml += "<p><strong>Zip Code:</strong> " + information + "</p>";
 }
 
     

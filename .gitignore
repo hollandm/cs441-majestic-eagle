@@ -1,7 +1,13 @@
+.DS_Store
 *.class
 *.pyc
 *.pyo
 *~
+*.dbf
+*.prj
+*.shp
+*.shp.xml
+*.shx
 adminData/*.csv
 adminData/auto/
 adminData/.R*

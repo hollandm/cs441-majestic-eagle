@@ -1,12 +1,16 @@
-// cityInformation.js
-// Written by: Tanya L. Crenshaw
-// A centralized array of city names, geographical centers, and their corresponding
-// zipcodes.  The city centers were obtained manually from wunderground.  The number of
-// applications were obtained manually from R.  The zipcodes were obtained manually from 
-// http://www.city-data.com.  
-//
-// TODO: Write scripts to automate the making of the city information.
-// 
+/*
+ * cityInformation.js
+ *
+ * A centralized array of city names, geographical centers, and their
+ * corresponding zipcodes.  The city centers were obtained manually 
+ * from wunderground.  The number of applications were obtained 
+ * manually from R.  The zipcodes were obtained manually from 
+ * http://www.city-data.com.   
+ * 
+ * Note: This file is currently not used by the application.  It is 
+ * retained in the repository as a mediocre example of how one might
+ * organize such city information. 
+ */
 	var cities = {}
 	
     cities['beaverton'] = {

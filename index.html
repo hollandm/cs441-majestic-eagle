@@ -4,21 +4,21 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <title>Zip Code Areas in the United States</title>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <script type="text/javascript" src="cityInformation.js"></script>
         <script type="text/javascript" src="usmap.js"></script>
         <script type="text/javascript" src="geocode.js"></script>
         <script type="text/javascript" src="information.js"></script>
         <script type="text/javascript" src="layers.js"></script>
         <link href="style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body onload="initialize()">
+    </head>                
+
         <div id="wrap">
             <div id="top">
                 <h1>Zip Code Area Lookup</h1>
                 <p>
                     Enter a zipcode:
                     <input type="text" id="zipcode" value='97401'>
-                    <input type="button" value="Lookup" onclick="goToZip()">
+                    <input type="button" id="lookupButton" value="Lookup">
+                    <input type="button" id="toggleButton" value="Toggle Surroundings">
                 </p>
                 <div id="map_title"></div>
             </div>
