@@ -26,6 +26,10 @@
      background-color: #FFC;  
    }
 
+   select {
+   	width: 100px;
+   }
+   
    #wrap{ height: 100%; width: 800px; margin: 0 auto}
 
    #top{
@@ -55,7 +59,18 @@
     width: 250px;
     height:100%;
    }
+   
+   #panels{
+   	margin-top: 10px;
+   }
      
+   .filterPanel {
+   	width: 150px;
+   	height: 50px;
+   	margin: 1px;
+   	float: left;
+   }
+   
    .label div {
      padding: 1px;
      margin-right: 20px;

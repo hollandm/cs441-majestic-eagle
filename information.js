@@ -8,6 +8,15 @@
  */
 
 
+/* From JavaScript patterns by S. Stefanov, 
+ *    "As the complexity of a program grows and some parts of the code
+ * get split into different files, it becomes unsafe to just assume that 
+ * your code is first.  Therefore, before adding a property or creating
+ * a namespace, it's best to check first that it doesn't already exist"
+ */
+var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
+
+
 /*
  *  formatInfoWindow()
  * 
@@ -23,10 +32,10 @@
  * 
  * @return void
  */
-function formatInfoWindow(displayedArea, information)
+cs441GoogleMapsViz.formatInfoWindow = function(displayedArea, information)
 {
 			displayedArea.infoWindowHtml ="";
 	        displayedArea.infoWindowHtml += "<p><strong>Zip Code:</strong> " + information + "</p>";
-}
+};
 
     

@@ -2,18 +2,21 @@
 <html>
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <title>Zip Code Areas in the United States</title>
+        <title>Admissions Data Visualization Tool</title>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="utilities.js"></script>
+        <script type="text/javascript" src="filterMenus.js"></script>
         <script type="text/javascript" src="usmap.js"></script>
         <script type="text/javascript" src="geocode.js"></script>
         <script type="text/javascript" src="information.js"></script>
         <script type="text/javascript" src="layers.js"></script>
+        <script type="text/javascript" src="admissionsDomainModel.js"></script>
         <link href="style.css" rel="stylesheet" type="text/css" />
-    </head>                
-
+    </head>
+    <body>
         <div id="wrap">
             <div id="top">
-                <h1>Zip Code Area Lookup</h1>
+                <h1>Admissions Data Visualization Tool</h1>
                 <p>
                     Enter a zipcode:
                     <input type="text" id="zipcode" value='97401'>
@@ -22,8 +25,13 @@
                 </p>
                 <div id="map_title"></div>
             </div>
-            <div id="bottom>">
+            <div id="bottom">
                 <div id="contig_us_map_canvas"></div>
+            </div>
+            <div id="panels">
+                <div class="filterPanel" id="regionFilterPanel">
+                    Filter by Region:
+                </div>
             </div>
         </div>
     </body>

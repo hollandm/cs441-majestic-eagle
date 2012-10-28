@@ -1,56 +1,22 @@
 /*
  *  usmap.js
- *
+ * 
+ *  This file has these main responsibilities:
+ *  1. Initialize the main page, index.html.
+ *  2. Setup all the listners for the main page.  
+ *  3. Grab values of HTML elements for other parts of the application.
+ * 
  *  @author Tanya L. Crenshaw
  */
 
-/* Define the global namespace and setup all the listners for the main
- * page.  Scroll to the bottom to see listeners get setup.
+/* From JavaScript patterns by S. Stefanov,
+ *    "As the complexity of a program grows and some parts of the code
+ * get split into different files, it becomes unsafe to just assume that
+ * your code is first.  Therefore, before adding a property or creating
+ * a namespace, it's best to check first that it doesn't already exist"
  */
-var cs441GoogleMapsViz = {};
+var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
-/*
- * cs441GoogleMapsViz.addEvent()
- *
- * A utility function adapted from Google Code university to
- * simplify the browser-dependent act of adding events to
- * html elements.  Given an element, an event, and a function
- * this function checks the browser capability, and uses the
- * correct "add listener" or "attach event" function to
- * bind the function to the event for the element.
- *
- * @param el The html element.
- * @param evt A string representing the event.  e.g. 'click'
- * @param fn The function that will be invoked when the given
- * event 'evt' is experienced by the given element 'el'.
- *
- * @return void
- */
-cs441GoogleMapsViz.addEvent = function(el, evt, fn) {
-	if(el.addEventListener) {
-		el.addEventListener(evt, fn, false);
-	} else if(el.attachEvent) {
-		el.attachEvent('on' + evt, fn);
-	}
-};
-/* cs441GoogleMapsViz.forEach()
- *
- * A utility function adopted from "Eloquent JavaScript" that
- * accepts an action and applies that action to each element in
- * an array.  This helps to abstract the tedium of for-loops.
- *
- * @param array The array of elements to operate upon.
- * @param action The action to perform on each element.
- *
- * @return void
- */
-cs441GoogleMapsViz.forEach = function(array, action) {
-
-	for(var i = 0; i < array.length; i++) {
-		action(array[i]);
-	}
-
-};
 /*
  * cs441GoogleMapsViz.getZip()
  *
@@ -61,10 +27,23 @@ cs441GoogleMapsViz.forEach = function(array, action) {
  * @return The value of the html element with id "zipcode"
  */
 cs441GoogleMapsViz.getZip = function() {
-	// TLC TODO: Use the memoization pattern so that the
-	// zipcode element only has to be grabbed once.
+
 	return document.getElementById("zipcode").value;
 };
+/*
+ * cs441GoogleMapsViz.getRegion()
+ *
+ * This function gets the region from the page, as entered by
+ * the user in the select input element with id "regionFilterMenu."
+ *
+ * @param void
+ * @return The value of the html element with id "regionFilterMenu"
+ */
+cs441GoogleMapsViz.getRegion = function() {
+
+	return document.getElementById("regionFilterMenu").value;
+};
+
 /*
  *  cs441GoogleMapsViz.lookup()
  *
@@ -87,12 +66,13 @@ cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 
 	// Filter each layer by the zip.
 	cs441GoogleMapsViz.forEach(layerArray, function(t) {
-		filterByZip.call(t, zip);
+		cs441GoogleMapsViz.filterByZip.call(t, zip);
 	});
-	// Set the zoom for each layer.
+	
+	// Set the zoom.
 	layerArray[0].map.setZoom(11);
 
-	// Center the map for each layer.
+	// Center the map.
 	centerAt(layerArray[0].map, zip, geocoder);
 }
 /*
@@ -108,8 +88,35 @@ cs441GoogleMapsViz.toggle = function(layerArray) {
 
 	// Toggle each layer by the zip.
 	cs441GoogleMapsViz.forEach(layerArray, function(t) {
-		toggleLayer.call(t, zip);
+		cs441GoogleMapsViz.toggleLayer.call(t, zip);
 	});
+}
+/*
+ *  cs441GoogleMapsViz.regionalize()
+ * 
+ *  This function filters an array of layer objects based on the
+ *  region name grabbed from the page (that is, entered by the user)
+ *  and recenters the map at the region.
+ *
+ *  @param layerArray An array of Layer objects to regionalize.
+ *  @param geocoder The geocoder service to use to recenter the map.
+ *  @return void
+ */
+cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
+
+	// Get the region name from the page, as entered by the user.
+	var region = cs441GoogleMapsViz.getRegion();
+	
+	// Filter each layer by the region.
+	cs441GoogleMapsViz.forEach(layerArray, function(t) {
+		cs441GoogleMapsViz.filterByRegion.call(t, region);
+	});
+	
+		// Set the zoom.
+	layerArray[0].map.setZoom(6);
+	
+	// Center the map at the state corresponding to the region.
+	centerAt(layerArray[0].map, cs441GoogleMapsViz.convertRegionToState(region), geocoder);
 }
 /*
  *  cs441GoogleMapsViz.initialize()
@@ -148,11 +155,13 @@ cs441GoogleMapsViz.initialize = function() {
 		center : usa,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
-
+	//
+	//	Constructing the layers
+	//
 	// Create a Layer object for the zip code boundary layer.  The first parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
-	var zipLayer = new Layer(new google.maps.FusionTablesLayer({
+	var zipLayer = new cs441GoogleMapsViz.Layer("zip", new google.maps.FusionTablesLayer({
 		query : {
 			from : zipEID
 		}
@@ -161,7 +170,7 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a Layer object for the high schools layer.  The first parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
-	var schoolLayer = new Layer(new google.maps.FusionTablesLayer({
+	var schoolLayer = new cs441GoogleMapsViz.Layer("school", new google.maps.FusionTablesLayer({
 		query : {
 			from : schoolEID
 		}
@@ -182,7 +191,7 @@ cs441GoogleMapsViz.initialize = function() {
 		var information = displayedArea.row['ZipCodeArea'].value + "<br>";
 
 		// Format and display it in the information window for the displayed area.
-		formatInfoWindow(displayedArea, information)
+		cs441GoogleMapsViz.formatInfoWindow(displayedArea, information)
 	});
 	// Attach the function lookup() to the lookupButton on the main page.
 	cs441GoogleMapsViz.addEvent(document.getElementById('lookupButton'), 'click', function() {
@@ -192,6 +201,19 @@ cs441GoogleMapsViz.initialize = function() {
 	cs441GoogleMapsViz.addEvent(document.getElementById('toggleButton'), 'click', function() {
 		return cs441GoogleMapsViz.toggle(layerArray);
 	});
+	//
+	// Constructing the Filter Menus
+	//
+	// Create the Region Filtering menu
+	// Connect the filter menu to the "regionFilterPanel" that is on the index.html page.
+	// Get the menu options from the admissions domain model method, getRegions().
+	// Attach the method filter() to the menu such that whenever the menu changes,
+	// the filter() method is called.
+	var regionFilterMenu = new cs441GoogleMapsViz.FilterMenu("regionFilterMenu", "regionFilterMenu", "filterMenu", "regionFilterPanel", cs441GoogleMapsViz.getRegions(), function() {
+		return cs441GoogleMapsViz.regionalize(layerArray, geocoder);
+	});
+	regionFilterMenu.createMenu();
+
 }
 // Setup an event listener to execute the init() function for this namespace
 // upon page load.

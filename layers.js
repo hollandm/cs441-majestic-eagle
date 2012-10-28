@@ -3,10 +3,18 @@
  *
  *  A collection of methods for the application-specific Layer object,
  *  including the constructor for the Layer object. The methods control
- *  what portions of the layers are visible on the map.
+ *  filtering, or what portions of the layers are visible on the map.
  *
  *  @author Tanya L. Crenshaw
  */
+
+/* From JavaScript patterns by S. Stefanov,
+ *    "As the complexity of a program grows and some parts of the code
+ * get split into different files, it becomes unsafe to just assume that
+ * your code is first.  Therefore, before adding a property or creating
+ * a namespace, it's best to check first that it doesn't already exist"
+ */
+var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /* Layer constructor
  *
@@ -16,6 +24,7 @@
  * to hold the methods for this object as well as all
  * this information:
  *
+ * @param name The name of the layer, e.g. "school", "zip", or "student".
  * @param ref A reference to the FusionTablesLayer object.
  * @param eID The encrypted ID of the layer.
  * @param map The map on which the layer is being filtered.
@@ -26,7 +35,8 @@
  *
  * @returns void
  */
-function Layer(ref, eID, map, zipName, filtered) {
+cs441GoogleMapsViz.Layer = function(name, ref, eID, map, zipName, filtered) {
+	this.name = name;
 	this.ref = ref;
 	this.eID = eID;
 	this.map = map;
@@ -40,13 +50,75 @@ function Layer(ref, eID, map, zipName, filtered) {
 	// But for now, the application only has two layers, so this is
 	// okay for now.
 	this.filterByZip = function(zip) {
-		return filterByZip.call(this, zip);
+		return cs441GoogleMapsViz.filterByZip.call(this, zip);
 	};
 	this.toggleLayer = function(zip) {
-		return toggleLayer.call(this, zip);
+		return cs441GoogleMapsViz.toggleLayer.call(this, zip);
 	};
-}
 
+	this.applyFilter = function(newEID, select, predicate) {
+		return cs441GoogleMapsViz.applyFilter.call(this, newEID, select, predicate);
+	};
+};
+/*
+ * applyFilter()
+ *
+ * For the given layer, this function filters it based on a given
+ * encypted ID, a table column name, and a filtering predicate.
+ * The rationale behind this little function is to avoid copy-pasting
+ * the Google Maps FusionTable Layer setOptions() method call all
+ * over the place.
+ *
+ * @param newEID The enccrypted id for the table that should be
+ * associated with this layer.  Set this parameter to null
+ * if the EID doesn't need to change.  If this parameter is not null,
+ * the layer object's eID property is updated with this parameter's
+ * value.
+ *
+ * @param column The "select" portion of the query to filter the layer.
+ * Set this parameter to null if there is no select portion of the
+ * query.
+ *
+ * @param predicate The "where" portion of the query to filter the
+ * layer. If this parameter is null, then no filtering is taking place,
+ * and the layer object's filtered property is set to false.  If this
+ * parameter is not null, then the layer object's filtered property is
+ * set to true.
+ *
+ * @return void
+ */
+cs441GoogleMapsViz.applyFilter = function(newEID, column, predicate) {
+
+	// Check if newEID is null.
+	if(newEID != null) {
+		// Update the EID of the filter with the newEID.
+		this.eID = newEID;
+
+	}
+
+	// Note that placing 'map' in the options is equivalent to
+	// calling 'setMap(map)' on a layer.  Thus, this layer
+	// will be filtered and displayed on the map after
+	// setting these options.
+	this.ref.setOptions({
+		query : {
+			select : column,
+			from : this.eID,
+			where : predicate
+		},
+
+		map : this.map
+	});
+
+	// Update the filtered property for this object.
+	if(predicate == null) {
+		// Indicate that the layer is not filtered.
+		this.filtered = false;
+	} else {
+		// Indicate that the layer is filtered
+		this.filtered = true;
+	}
+}
 /*
  * filterByZip()
  *
@@ -55,29 +127,47 @@ function Layer(ref, eID, map, zipName, filtered) {
  *
  * @param zip The zipcode by which to filter the layer.
  */
-function filterByZip(zip) {
+cs441GoogleMapsViz.filterByZip = function(zip) {
 
 	var filter = '' + this.zipName + ' = ' + zip;
 
-	// Restrict the layer to view only the given zip.  Note
-	// that placing 'map' in the options is equivalent to
-	// calling 'setMap(map)' on a layer.  Thus, this layer
-	// will be filtered and displayed on the map after
-	// setting these options.
-	this.ref.setOptions({
-		query : {
-			from : this.eID,
-			where : filter
-		},
+	this.applyFilter(null, null, filter);
 
-		map : this.map
-	});
+};
+/*
+ * filterByRegion()
+ *
+ * For the given layer, this function filters it based
+ * on a given region.
+ *
+ */
+cs441GoogleMapsViz.filterByRegion = function(region) {
 
-	// Indicate that the layer is filtered
-	this.filtered = true;
+	// What is the name of the layer?  Get the name of the layer
+	// so that the appropriate part of the table can be indexed
+	// and the right encrypted ID can be looked up.
+	if(this.name == "zip") {
+		index = "zips";
+	}
+	if(this.name == "school") {
+		index = "schools"
+	}
 
-}
+	var state = cs441GoogleMapsViz.convertRegionToState(region);
 
+	var filter = 'State = ' + state;
+	newEID = cs441GoogleMapsViz.tables[index][state];
+
+	// A little debugging information, as region filtering takes some
+	// time, and it helps to know if the choices were actually
+	// registered and converted.
+	console.log(region);
+	console.log(state);
+	console.log(newEID);
+
+	this.applyFilter(newEID, state, filter);
+
+};
 /*
  * toggleLayers()
  *
@@ -91,32 +181,19 @@ function filterByZip(zip) {
  * @return void
  *
  */
-function toggleLayer(zip) {
+cs441GoogleMapsViz.toggleLayer = function(zip) {
 
 	// If the layer is currently filtered, then show everything
 	// in the layer.
 	if(this.filtered === true) {
 
-		// Show everything in the layer.
-		this.ref.setOptions({
-			query : {
-				from : this.eID
-			}
-		});
-
-		// Indicate that this layer is not being filtered.
-		this.filtered = false;
+		// Turn off all filters.
+		this.applyFilter(null, null, null);
 
 	} else {
 
+		// Filter this layer by zipcode.
 		this.filterByZip(zip);
-		
-		// TLC TODO: Trying to decide if this belongs in the 
-		// function or here.  Right now, I'm doing both, which
-		// is redundant....
-
-		// Indicate that this layer is being filtered.
-		this.filtered = true;
 
 	}
-}
+};
