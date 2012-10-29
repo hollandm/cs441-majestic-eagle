@@ -161,7 +161,7 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a Layer object for the zip code boundary layer.  The first parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
-	var zipLayer = new cs441GoogleMapsViz.Layer("zip", new google.maps.FusionTablesLayer({
+	var zipLayer = new cs441GoogleMapsViz.Layer("zips", new google.maps.FusionTablesLayer({
 		query : {
 			from : zipEID
 		}
@@ -170,7 +170,7 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a Layer object for the high schools layer.  The first parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
-	var schoolLayer = new cs441GoogleMapsViz.Layer("school", new google.maps.FusionTablesLayer({
+	var schoolLayer = new cs441GoogleMapsViz.Layer("schools", new google.maps.FusionTablesLayer({
 		query : {
 			from : schoolEID
 		}

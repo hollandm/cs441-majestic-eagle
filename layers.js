@@ -143,26 +143,31 @@ cs441GoogleMapsViz.filterByZip = function(zip) {
  */
 cs441GoogleMapsViz.filterByRegion = function(region) {
 
-	// What is the name of the layer?  Get the name of the layer
-	// so that the appropriate part of the table can be indexed
-	// and the right encrypted ID can be looked up.
-	if(this.name == "zip") {
-		index = "zips";
-	}
-	if(this.name == "school") {
-		index = "schools"
-	}
-
 	var state = cs441GoogleMapsViz.convertRegionToState(region);
+	var filter = "";
+	
+	// What is the name of the layer?  Get the name of the layer
+	// so that the filter is constructed correctly.  In the zips
+	// tables, the state is a number.  In the schools tables, the
+	// state is a two-letter acronym.
+	if(this.name == "zips") {
+		var stateNumber = cs441GoogleMapsViz.convertStateToUSBNumber(state);
+		filter = 'State = ' + stateNumber;	
+	}
+	if(this.name == "schools") {
+		filter = "State = '" + state + "'"; 
+	}
 
-	var filter = 'State = ' + state;
-	newEID = cs441GoogleMapsViz.tables[index][state];
+	// Get the encrypted ID, using the name of the layer to index the
+	// giant object containing encrypted IDs.
+	newEID = cs441GoogleMapsViz.tables[this.name][state];
 
 	// A little debugging information, as region filtering takes some
 	// time, and it helps to know if the choices were actually
 	// registered and converted.
 	console.log(region);
 	console.log(state);
+	console.log(filter);
 	console.log(newEID);
 
 	this.applyFilter(newEID, state, filter);

@@ -25,21 +25,26 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * of each property is an array.  The first element of the array
  * is the two-letter state abbreviation associated with the region.
  * The remainder of the array is any subregions for the region.
+ * 
+ * TODO: Incomplete list.  I don't feel, either, that this is the
+ * best way to organize this data.  
  */
 cs441GoogleMapsViz.regions = {
+	"Alaska" : ["AK"],
 	"Arizona" : ["AZ"],
+    "Californa" : ["CA"],
 	"Colorado" : ["CO"],
 	"Hawaii" : ["HI"],
+    "Idaho" : ["ID"],
 	"Illinois" : ["IL"],
 	"Maine" : ["ME"],
+	"Minnesota" : ["MN"],
 	"Nebraska" : ["NE"],
 	"New Mexico" : ["NM"],
 	"New York" : ["NY"],
 	"North Nevada - Reno" : ["NV"],
 	"Oregon" : ["OR", "Salem", "Corvallis", "Eugene"],
 	"Portland" : ["OR", "Area1", "Catholic1", "Catholic2", "Area2", "Area3", "Area4", "North Coast"],
-	//"Set 1" : ["Set1"],  // TODO:  TLC.  Not an actual Admissions region.  Meyer et al. submitted a table not organized by state.  Need to fix this.
-	//"Set 2" : ["Set2"],  // TODO:  TLC.  Not an actual Admissions region.  Meyer et al. submitted a table not organized by state.  Need to fix this.
 	"Texas" : ["TX"],
 	"Utah" : ["UT"],
 	"Washington" : ["WA"]
