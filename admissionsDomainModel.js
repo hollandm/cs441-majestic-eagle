@@ -43,6 +43,7 @@ cs441GoogleMapsViz.regions = {
 	"New Mexico" : ["NM"],
 	"New York" : ["NY"],
 	"North Nevada - Reno" : ["NV"],
+	"South Nevada - Las Vegas" : ["NV"],
 	"Oregon" : ["OR", "Salem", "Corvallis", "Eugene"],
 	"Portland" : ["OR", "Area1", "Catholic1", "Catholic2", "Area2", "Area3", "Area4", "North Coast"],
 	"Texas" : ["TX"],
