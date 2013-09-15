@@ -58,6 +58,78 @@ cs441GoogleMapsViz.getRegion = function() {
 };
 
 /*
+ * cs441GoogleMapsViz.getErrorMsgElement()
+ *
+ * This function gets the element from the page where error messages
+ * should be placed.
+ *
+ * @param void
+ * @return The html element with id "errormessage"
+ */
+cs441GoogleMapsViz.getErrorMsgElement = function() {
+
+	return document.getElementById("errormessage");
+};
+
+/*
+ *  cs441GoogleMapsViz.makeRequestor()
+ *
+ *  This function makes an object to make http requests.
+ * 
+ *  This function is adapted from: 
+ *    https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+ * 
+ *  This application calls this function only once; it uses only
+ *  one httpRequest object to send all subsequent GET requests.
+ *
+ *  @param void
+ *  @return void
+ */
+cs441GoogleMapsViz.makeRequestor = function() {
+
+	if(window.XMLHttpRequest) {// Mozilla, Safari, ...
+		cs441GoogleMapsViz.httpRequest = new XMLHttpRequest();
+	} else if(window.ActiveXObject) {// IE
+		try {
+			cs441GoogleMapsViz.httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				cs441GoogleMapsViz.httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+			}
+		}
+	}
+
+	if(!cs441GoogleMapsViz.httpRequest) {
+		alert('Cannot create http requestor!');
+		return false;
+	}
+}
+
+/*
+ *  cs441GoogleMapsViz.sendRequest()
+ *
+ *  This function utlizes the namespace's httpRequest object to make 
+ *  http requests.  It sets up the httpRequest onreadystatechange
+ *  property to be the response function passed to this function.
+ * 
+ *  This function is adapted from: 
+ *    https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+ *
+ *  @param url The well-formed url representing the http request.
+ *  @param response The function describing the behavior that should
+ *         occur after the httpRequest object gets a response.
+ *  @return void
+ */
+
+cs441GoogleMapsViz.sendRequest = function(url, response) {
+	
+	cs441GoogleMapsViz.httpRequest.onreadystatechange = response;
+	cs441GoogleMapsViz.httpRequest.open('GET', url);
+	cs441GoogleMapsViz.httpRequest.send();
+
+}
+/*
  *  cs441GoogleMapsViz.lookup()
  *
  *  For an array of layers, this function filters the layers
@@ -77,107 +149,77 @@ cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 
 	// Get the CEEB code from the page, as entered by the user.
 	var ceeb = cs441GoogleMapsViz.getCEEB();
-	
+
 	// Did the user type anything?
-	if(ceeb == "")
-	{
+	if(ceeb == "") {
+
 		// Give an error message to the user:
-		document.getElementById("message").innerHTML = "Error: Please enter a CEEB";
+		cs441GoogleMapsViz.getErrorMsgElement().innerHTML = "Error: Please enter a CEEB";
 	}
-	
-	// Did the user enter the CEEB?  
-	else
-	{
+
+	// Did the user enter the CEEB?
+	else {
 		// Clear any error message.
-		document.getElementById("message").innerHTML = "";
-		
+		cs441GoogleMapsViz.getErrorMsgElement().innerHTML = "";
+
 		// Get the corresponding zipcode for this CEEB.  The zipcode for this
 		// CEEB is contained in the same row as the CEEB in the Google Fusion
 		// tables.  So, I need to get the Zip in the row whose 'Code' is
 		// the CEEB entered by the user.  This is done using the GET API
 		// specified in the Google Fusion Tables Developer documentation.
-		
-		// Step 1. Create a url for
+
+		// Create a url for
 		// a subsequent GET request to a Google server.
-		var apikey = 'AIzaSyBi-AAi-4lbdMhWHY1kv8o9QDX8vAcOFeM';
-		
-		var query = "SELECT 'Zip' FROM " +
-            layerArray[1].eID + " WHERE Code = " + ceeb;
-		
+		var query = "SELECT 'Zip' FROM " + layerArray[1].eID + " WHERE Code = " + ceeb;
+
 		var url = "https://www.googleapis.com/fusiontables/v1/query";
 		url = url + "?sql=";
 		url = url + query;
-		url = url + " &key=" + apikey;
-		
-		var httpRequest;
-		var zipcode;
-	
-		// Send the GET Request to the Google Server
-		makeRequest(url);
+		url = url + " &key=" + cs441GoogleMapsViz.apikey;
 
-		// The following GET request code is adapted from: 
-		// https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
-		function makeRequest(url) {
-			if(window.XMLHttpRequest) {// Mozilla, Safari, ...
-				httpRequest = new XMLHttpRequest();
-			} else if(window.ActiveXObject) {// IE
-				try {
-					httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-				} catch (e) {
-					try {
-						httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-					} catch (e) {
-					}
-				}
-			}
+		function filterLayers() {
+			if(cs441GoogleMapsViz.httpRequest.readyState === 4) {
+				if(cs441GoogleMapsViz.httpRequest.status === 200) {
 
-			if(!httpRequest) {
-				alert('Cannot contact Google server');
-				return false;
-			}
-            
-			httpRequest.onreadystatechange = alertContents;
-			httpRequest.open('GET', url);
-			httpRequest.send();
-		
-			function alertContents() {
-				if(httpRequest.readyState === 4) {
-					if(httpRequest.status === 200) {
+					// The code reaches this point because the Google server
+					// responded with some useful data.
+					console.log(cs441GoogleMapsViz.httpRequest.responseText);
 
-						// The code reaches this point because the Google server
-						// responded with some useful data.
-						console.log(httpRequest.responseText);
+					// The response is just a string.  I need
+					// to parse it so that I can extract the zip code from it.
+					var response = JSON.parse(cs441GoogleMapsViz.httpRequest.responseText);
+
+					if(response["rows"] != undefined) {
+						// Set 	the zoom.
+						layerArray[0].map.setZoom(11);
+
+						var zipcode = response["rows"][0].toString();
+
+						// Center the map.
+						centerAt(layerArray[0].map, zipcode, geocoder);
+
+						// Filter the zip layer by zip
+						cs441GoogleMapsViz.filterByZip.call(layerArray[0], zipcode);
 						
-						// The response is just a string.  I need
-						// to parse it so that I can extract the zip code from it.
-						var response = JSON.parse(httpRequest.responseText);
+						// Filter the school layer by CEEB.
+						cs441GoogleMapsViz.filterByCEEB.call(layerArray[1], ceeb);
 						
-						if(response["rows"] != undefined)	
-						{				
-							// Set 	the zoom.
-							layerArray[0].map.setZoom(11);
-
-							// Center the map.
-							centerAt(layerArray[0].map, response["rows"][0].toString(), geocoder);
-							
-							// Filter the school layer by CEEB.
-							cs441GoogleMapsViz.filterByCEEB.call(layerArray[1], ceeb);
-						}
-						else
-						{
-							// Indicate to the user that I could not find that
-							// CEEB.
-							document.getElementById("message").innerHTML = "Cannot locate CEEB: " + ceeb + ".";
-						}
 						
 					} else {
-						alert('There was a problem with the request.');
+						// Indicate to the user that I could not find that
+						// CEEB.
+						cs441GoogleMapsViz.getErrorMsgElement().innerHTML = "Cannot locate CEEB: " + ceeb + ".";
 					}
-				}
-			}			
-		}				
-	}	
+
+				} 
+			}
+		}
+	}
+
+	// Send the GET Request to the Google Server
+	cs441GoogleMapsViz.sendRequest(url, filterLayers);
 }
+
 /*
  *  cs441GoogleMapsViz.toggle()
  *
@@ -224,16 +266,21 @@ cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
 /*
  *  cs441GoogleMapsViz.initialize()
  *
- *  A function to: 1. create a google map centered at the us and
- *  2: instantiate a google maps geocoder service.  Note that the
- *  variables geocoder and map are not declared using var -- this
- *  is so that they can be written to the window object and used by
- *  other functions.
- *
+ *  A function to: 
+ *  1. create a google map centered at the us
+ *  2. Initialize two layer objects, one for zipcodes and one for schools.
+ *  3. instantiate a google maps geocoder service.  
+ *   
  *  @param void
  *  @return void
  */
 cs441GoogleMapsViz.initialize = function() {
+
+	// Set the Google API key for this namespace.
+	cs441GoogleMapsViz.apikey = 'Your API Key Here';
+	
+	// Create the httpRequestor for this namespace.
+	cs441GoogleMapsViz.makeRequestor();
 
 	// Encrypted IDs for the Google Fusion Table containing the
 	// Oregon high school and CEEB data.
@@ -242,7 +289,6 @@ cs441GoogleMapsViz.initialize = function() {
 	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
 	// available in Tanya Crenshaw's public fusion tables.
 	var zipEID = '1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU';
-
 
 	// Instatiate a new geocoder service
 	var geocoder = new google.maps.Geocoder();
@@ -257,7 +303,7 @@ cs441GoogleMapsViz.initialize = function() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 	//
-	//	Constructing the layers
+	//	Construct the layers
 	//
 	// Create a Layer object for the zip code boundary layer.  The first parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
