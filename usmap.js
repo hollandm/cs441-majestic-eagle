@@ -90,9 +90,6 @@ cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 	{
 		// Clear any error message.
 		document.getElementById("message").innerHTML = "";
-
-		// Filter the school layer by CEEB.
-		cs441GoogleMapsViz.filterByCEEB.call(layerArray[1], ceeb);
 		
 		// Get the corresponding zipcode for this CEEB.  The zipcode for this
 		// CEEB is contained in the same row as the CEEB in the Google Fusion
@@ -162,11 +159,15 @@ cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 
 							// Center the map.
 							centerAt(layerArray[0].map, response["rows"][0].toString(), geocoder);
+							
+							// Filter the school layer by CEEB.
+							cs441GoogleMapsViz.filterByCEEB.call(layerArray[1], ceeb);
 						}
 						else
 						{
-							// Clear any error message.
-							document.getElementById("message").innerHTML = "Cannot locate CEEB";
+							// Indicate to the user that I could not find that
+							// CEEB.
+							document.getElementById("message").innerHTML = "Cannot locate CEEB: " + ceeb + ".";
 						}
 						
 					} else {
