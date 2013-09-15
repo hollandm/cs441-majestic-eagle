@@ -18,17 +18,30 @@
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /*
- * cs441GoogleMapsViz.getZip()
+ * cs441GoogleMapsViz.getCEEB()
  *
- * This function gets the zipcode from the page, as entered by
- * the user in the input textbox with id "zipcode".
+ * This function gets the ceeb from the page, as entered by
+ * the user in the input textbox with id "ceeb".
  *
  * @param void
- * @return The value of the html element with id "zipcode"
+ * @return The value of the html element with id "ceeb"
  */
-cs441GoogleMapsViz.getZip = function() {
+cs441GoogleMapsViz.getCEEB = function() {
 
-	return document.getElementById("zipcode").value;
+	return document.getElementById("ceeb").value;
+};
+/*
+ * cs441GoogleMapsViz.getHighSchool()
+ *
+ * This function gets the high school from the page, as entered by
+ * the user in the input textbox with id "highschool".
+ *
+ * @param void
+ * @return The value of the html element with id "highschool"
+ */
+cs441GoogleMapsViz.getHighSchool = function() {
+
+	return document.getElementById("highschool").value;
 };
 /*
  * cs441GoogleMapsViz.getRegion()
@@ -48,8 +61,9 @@ cs441GoogleMapsViz.getRegion = function() {
  *  cs441GoogleMapsViz.lookup()
  *
  *  For an array of layers, this function filters the layers
- *  according to the zipcode grabbed from the page (that is,
- * 	entered by the user) and recenters the layer's map at the zipcode.
+ *  according to the CEEB grabbed from the page (that is,
+ * 	entered by the user) and recenters the layer's map at the zipcode
+ *  associated with the given CEEB.
  *
  *  This function assumes that all the layers are on the same map.
  *  Thus, when resetting the zoom and recentering the map, these
@@ -61,19 +75,107 @@ cs441GoogleMapsViz.getRegion = function() {
  */
 cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 
-	// Get the zip code from the page, as entered by the user.
-	var zip = cs441GoogleMapsViz.getZip();
-
-	// Filter each layer by the zip.
-	cs441GoogleMapsViz.forEach(layerArray, function(t) {
-		cs441GoogleMapsViz.filterByZip.call(t, zip);
-	});
+	// Get the CEEB code from the page, as entered by the user.
+	var ceeb = cs441GoogleMapsViz.getCEEB();
 	
-	// Set the zoom.
-	layerArray[0].map.setZoom(11);
+	// Did the user type anything?
+	if(ceeb == "")
+	{
+		// Give an error message to the user:
+		document.getElementById("message").innerHTML = "Error: Please enter a CEEB";
+	}
+	
+	// Did the user enter the CEEB?  
+	else
+	{
+		// Clear any error message.
+		document.getElementById("message").innerHTML = "";
 
-	// Center the map.
-	centerAt(layerArray[0].map, zip, geocoder);
+		// Filter the school layer by CEEB.
+		cs441GoogleMapsViz.filterByCEEB.call(layerArray[1], ceeb);
+		
+		// Get the corresponding zipcode for this CEEB.  The zipcode for this
+		// CEEB is contained in the same row as the CEEB in the Google Fusion
+		// tables.  So, I need to get the Zip in the row whose 'Code' is
+		// the CEEB entered by the user.  This is done using the GET API
+		// specified in the Google Fusion Tables Developer documentation.
+		
+		// Step 1. Create a url for
+		// a subsequent GET request to a Google server.
+		var apikey = 'AIzaSyBi-AAi-4lbdMhWHY1kv8o9QDX8vAcOFeM';
+		
+		var query = "SELECT 'Zip' FROM " +
+            layerArray[1].eID + " WHERE Code = " + ceeb;
+		
+		var url = "https://www.googleapis.com/fusiontables/v1/query";
+		url = url + "?sql=";
+		url = url + query;
+		url = url + " &key=" + apikey;
+		
+		var httpRequest;
+		var zipcode;
+	
+		// Send the GET Request to the Google Server
+		makeRequest(url);
+
+		// The following GET request code is adapted from: 
+		// https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+		function makeRequest(url) {
+			if(window.XMLHttpRequest) {// Mozilla, Safari, ...
+				httpRequest = new XMLHttpRequest();
+			} else if(window.ActiveXObject) {// IE
+				try {
+					httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					try {
+						httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+					} catch (e) {
+					}
+				}
+			}
+
+			if(!httpRequest) {
+				alert('Cannot contact Google server');
+				return false;
+			}
+            
+			httpRequest.onreadystatechange = alertContents;
+			httpRequest.open('GET', url);
+			httpRequest.send();
+		
+			function alertContents() {
+				if(httpRequest.readyState === 4) {
+					if(httpRequest.status === 200) {
+
+						// The code reaches this point because the Google server
+						// responded with some useful data.
+						console.log(httpRequest.responseText);
+						
+						// The response is just a string.  I need
+						// to parse it so that I can extract the zip code from it.
+						var response = JSON.parse(httpRequest.responseText);
+						
+						if(response["rows"] != undefined)	
+						{				
+							// Set 	the zoom.
+							layerArray[0].map.setZoom(11);
+
+							// Center the map.
+							centerAt(layerArray[0].map, response["rows"][0].toString(), geocoder);
+						}
+						else
+						{
+							// Clear any error message.
+							document.getElementById("message").innerHTML = "Cannot locate CEEB";
+						}
+						
+					} else {
+						alert('There was a problem with the request.');
+					}
+				}
+			}			
+		}				
+	}	
 }
 /*
  *  cs441GoogleMapsViz.toggle()
@@ -132,16 +234,14 @@ cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
  */
 cs441GoogleMapsViz.initialize = function() {
 
-	// Encrypted IDs for the two layers
+	// Encrypted IDs for the Google Fusion Table containing the
+	// Oregon high school and CEEB data.
+	var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
 
 	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
 	// available in Tanya Crenshaw's public fusion tables.
 	var zipEID = '1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU';
 
-	// The Encrypted ID used below is that of
-	// OregonHighSchools_withManualFusionTableFixes.csv available
-	// in Tanya Crenshaw's public fusion tables.
-	var schoolEID = '1YcgR53xYb2OQm77NNyYfMh7-nwkrtZxoig7U_ms';
 
 	// Instatiate a new geocoder service
 	var geocoder = new google.maps.Geocoder();
@@ -197,10 +297,7 @@ cs441GoogleMapsViz.initialize = function() {
 	cs441GoogleMapsViz.addEvent(document.getElementById('lookupButton'), 'click', function() {
 		return cs441GoogleMapsViz.lookup(layerArray, geocoder);
 	});
-	// Attach the function toggleLayers() to the toggleButton on the main page.
-	cs441GoogleMapsViz.addEvent(document.getElementById('toggleButton'), 'click', function() {
-		return cs441GoogleMapsViz.toggle(layerArray);
-	});
+
 	//
 	// Constructing the Filter Menus
 	//

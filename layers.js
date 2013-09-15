@@ -95,6 +95,9 @@ cs441GoogleMapsViz.applyFilter = function(newEID, column, predicate) {
 		this.eID = newEID;
 
 	}
+	
+	console.log(this);
+	console.log(this.ref);
 
 	// Note that placing 'map' in the options is equivalent to
 	// calling 'setMap(map)' on a layer.  Thus, this layer
@@ -133,6 +136,20 @@ cs441GoogleMapsViz.filterByZip = function(zip) {
 
 	this.applyFilter(null, null, filter);
 
+};
+/*
+ * filterByCEEB()
+ *
+ * For the given layer, this function filters it
+ * based on a given CEEB.
+ *
+ * @param ceeb The CEEB by which to filter the layer.
+ */
+cs441GoogleMapsViz.filterByCEEB = function(ceeb) {
+
+	var filter = ''  + ' Code = ' + ceeb;
+	
+	this.applyFilter(null, null, filter);
 };
 /*
  * filterByRegion()
