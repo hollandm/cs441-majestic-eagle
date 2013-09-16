@@ -3,7 +3,7 @@
  * 
  *  This file has these main responsibilities:
  *  1. Initialize the main page, index.html.
- *  2. Setup all the listners for the main page.  
+ *  2. Setup all the listeners for the main page.  
  *  3. Grab values of HTML elements for other parts of the application.
  * 
  *  @author Tanya L. Crenshaw
@@ -277,7 +277,7 @@ cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
 cs441GoogleMapsViz.initialize = function() {
 
 	// Set the Google API key for this namespace.
-	cs441GoogleMapsViz.apikey = 'Your API Key Here';
+	cs441GoogleMapsViz.apikey = 'Your API key here';
 	
 	// Create the httpRequestor for this namespace.
 	cs441GoogleMapsViz.makeRequestor();
@@ -305,7 +305,7 @@ cs441GoogleMapsViz.initialize = function() {
 	//
 	//	Construct the layers
 	//
-	// Create a Layer object for the zip code boundary layer.  The first parameter
+	// Create a Layer object for the zip code boundary layer.  The second parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
 	var zipLayer = new cs441GoogleMapsViz.Layer("zips", new google.maps.FusionTablesLayer({
@@ -314,7 +314,7 @@ cs441GoogleMapsViz.initialize = function() {
 		}
 	}), zipEID, map, 'ZipCodeArea', false);
 
-	// Create a Layer object for the high schools layer.  The first parameter
+	// Create a Layer object for the high schools layer.  The second parameter
 	// creates the Google FusionTablesLayer object.  The Layer is not currently being
 	// filtered, so the final parameter is false.
 	var schoolLayer = new cs441GoogleMapsViz.Layer("schools", new google.maps.FusionTablesLayer({
@@ -328,7 +328,7 @@ cs441GoogleMapsViz.initialize = function() {
 	layerArray.push(zipLayer);
 	layerArray.push(schoolLayer);
 
-	// Add a listener to the layer.  When the user clicks on the
+	// Add a listener to the zip layer.  When the user clicks on the
 	// particular zip code area in the layer, some information
 	// about the particular zip code is displayed in the info portion
 	// of the page.
