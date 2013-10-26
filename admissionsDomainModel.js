@@ -88,4 +88,4 @@ cs441GoogleMapsViz.convertRegionToState = function(region) {
 
 	return state;
 
-}
+};

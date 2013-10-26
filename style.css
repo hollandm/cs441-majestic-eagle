@@ -1,20 +1,15 @@
-
-   html { height: 100% }
-   body { height: 100%; margin: 0; padding: 0; clear: both; font-family: "Bryant", "Gill Sans", sans-serif;   }
-
-   
-   h1 { 
-   	text-align: left;
- 	font-size: 12pt;
- 	text-decoration: none;
- 	font-weight: normal;
- 	margin-bottom: 0.1em;
+   html { 
+   	height: 100%;
+   	margin: 0;
+   	padding: 0; 
    }
-
-   a {
-   	color  : #7592D3;
-   	text-decoration: none;
    	
+   body { 
+   	height: 100%; 
+   	width: 100%;
+   	margin: 0; 
+   	padding: 0; 
+   	font-family: "Bryant", "Gill Sans", sans-serif;
    }
    
    p {
@@ -22,88 +17,54 @@
   	 font-size: 10pt;
    }
    
-   #zip{
-   	background-color: blue !important;
+   div {
+   	display: block;
    }
    
    svg {  
      background-color: #FFC;  
    }
-
-   select {
-   	width: 100px;
-   }
    
-   #wrap{ height: 100%; width: 800px; margin: 0 auto}
-
-   #top{
-   	margin-top: 20px;
-   	width: 800px;
-   	height: 80px;
-   	
+   #wrapper { 
+   	height: 100%; 
+   	width: 100%; 
+   	margin: 0;
    }
 
-   #contig_us_map_canvas{
-   	width: 800px;
-   	height: 450px;	
-   }
- 
-   #map_title{
-   	float: right;
-   }
-        
-   #map_canvas {
-  	float: left;  
-    width: 450px;
-    height:100%;
-   }
-      
-   #info {
-  	float: left;  
-    width: 250px;
-    height:100%;
-   }
-   
-   #panels{
-   	margin-top: 10px;
-   }
-     
-   .filterPanel {
-   	width: 150px;
-   	height: 50px;
-   	margin: 1px;
+   #left {
+   	position:fixed;
+   	height: 132px;
+   	width: 256px;
    	float: left;
    }
+
+   #filterBar {
+
+   }
    
-   .label div {
-     padding: 1px;
-     margin-right: 20px;
-     margin: 1px;
+   #right {
+   	width: calc(100% - 256px);
+   	height: 100%;
+   	float:right;
+   }
+
+   #contig_us_map_canvas {
+   	margins: 2px;
+   	width: 100%;
+   	height: 100%;
+   	border: 1px groove gray;  
+   }
+
+  #footer{
+  	clear: both;
+  }
+   
+  .label div {
+    padding: 1px;
+    margin-right: 20px;
+    margin: 1px;
    	font-size: 10pt;
-   }
-      
-   .bar div {
-     background-color: #006666;
-     text-align: right;
-     padding: 1px;
-     margin: 1px;
-     color: white;
-     font-size: 10pt;
-     clear: both;
-   }   
+  }
    
-   .leftSide div {
-   	width: 100px;
-   	float: left;
-   }
    
-   .rightSide div {
-   	width: 100px;
-   	float: right;
-   }
-  
-   .label{
-   	 font-size:7pt;
-   	
-   }
    

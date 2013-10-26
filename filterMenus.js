@@ -80,4 +80,4 @@ cs441GoogleMapsViz.createMenu = function() {
 	// Attach the function toggleLayers() to the toggleButton on the main page.
 	cs441GoogleMapsViz.addEvent(document.getElementById(this.divId), 'change', this.action);
 
-}
+};

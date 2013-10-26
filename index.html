@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <title>Admissions Data Visualization Tool</title>
+        <title>Majestic Eagle Data Visualization</title>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="utilities.js"></script>
         <script type="text/javascript" src="filterMenus.js"></script>
@@ -15,25 +15,25 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div id="wrap">
-            <div id="top">
-                <h1>Admissions Data Visualization Tool</h1>
-                <p>
-                    Enter a CEEB:
-                    <input type="text" id="ceeb" value="380000">
-                    <input type="button" id="lookupButton" value="Lookup">
-                </p>
+        <div id="wrapper">
+            <div id="left">
                 <p id="errormessage"> </p>
-                <div id="map_title"></div>
-            </div>
-            <div id="bottom">
+                <div id="filterBar">
+            		<div id="filterPanel">
+            			Filters
+            		</div>
+                	<div id="filterMenu">
+                    
+	                </div>
+    	        </div> <!--end of filterBar-->
+            </div><!--end of top-->
+            
+            <div id="right">
                 <div id="contig_us_map_canvas"></div>
-            </div>
-            <div id="panels">
-                <div class="filterPanel" id="regionFilterPanel">
-                    Filter by Region:
-                </div>
-            </div>
-        </div>
+            </div><!--end of bottom-->
+        </div><!--end of wrapper-->
+        
+        <div id="footer">
+        </div><!--end of footer-->
     </body>
 </html>

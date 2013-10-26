@@ -104,7 +104,7 @@ cs441GoogleMapsViz.makeRequestor = function() {
 		alert('Cannot create http requestor!');
 		return false;
 	}
-}
+};
 
 /*
  *  cs441GoogleMapsViz.sendRequest()
@@ -128,7 +128,7 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
 	cs441GoogleMapsViz.httpRequest.open('GET', url);
 	cs441GoogleMapsViz.httpRequest.send();
 
-}
+};
 /*
  *  cs441GoogleMapsViz.lookup()
  *
@@ -218,7 +218,7 @@ cs441GoogleMapsViz.lookup = function(layerArray, geocoder) {
 
 	// Send the GET Request to the Google Server
 	cs441GoogleMapsViz.sendRequest(url, filterLayers);
-}
+};
 
 /*
  *  cs441GoogleMapsViz.toggle()
@@ -235,7 +235,7 @@ cs441GoogleMapsViz.toggle = function(layerArray) {
 	cs441GoogleMapsViz.forEach(layerArray, function(t) {
 		cs441GoogleMapsViz.toggleLayer.call(t, zip);
 	});
-}
+};
 /*
  *  cs441GoogleMapsViz.regionalize()
  * 
@@ -262,7 +262,7 @@ cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
 	
 	// Center the map at the state corresponding to the region.
 	centerAt(layerArray[0].map, cs441GoogleMapsViz.convertRegionToState(region), geocoder);
-}
+};
 /*
  *  cs441GoogleMapsViz.initialize()
  *
@@ -338,7 +338,7 @@ cs441GoogleMapsViz.initialize = function() {
 		var information = displayedArea.row['ZipCodeArea'].value + "<br>";
 
 		// Format and display it in the information window for the displayed area.
-		cs441GoogleMapsViz.formatInfoWindow(displayedArea, information)
+		cs441GoogleMapsViz.formatInfoWindow(displayedArea, information);
 	});
 	// Attach the function lookup() to the lookupButton on the main page.
 	cs441GoogleMapsViz.addEvent(document.getElementById('lookupButton'), 'click', function() {
@@ -358,7 +358,7 @@ cs441GoogleMapsViz.initialize = function() {
 	});
 	regionFilterMenu.createMenu();
 
-}
+};
 // Setup an event listener to execute the init() function for this namespace
 // upon page load.
 google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
