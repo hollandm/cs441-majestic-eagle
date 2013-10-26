@@ -46,10 +46,12 @@
    
    #filterPanel {
    	height: calc(100% - 256px);
+   	border-bottom: 2px #808080 solid;
    }
    
    #filterMenu {
-   	border: #808080;
+   	border: 2px #808080 solid;
+   	height: 256px;
    }
    
    #right {
