@@ -18,59 +18,33 @@
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /*
- * regions
+ * filters
  *
- * An object that represents all of the region assignments in the
- * Admissions Unit.  Each property is a region name.  Each value
- * of each property is an array.  The first element of the array
- * is the two-letter state abbreviation associated with the region.
- * The remainder of the array is any subregions for the region.
+ * An object that represents all of the unadded filters.
+ * TODO: Add more documentation to this 
  * 
- * TODO: Incomplete list.  I don't feel, either, that this is the
- * best way to organize this data.  
+ * TODO: Incorporate this with the current selected filters
  */
-cs441GoogleMapsViz.regions = {
-	"Alaska" : ["AK"],
-	"Arizona" : ["AZ"],
-    "Californa" : ["CA"],
-	"Colorado" : ["CO"],
-	"Hawaii" : ["HI"],
-    "Idaho" : ["ID"],
-	"Illinois" : ["IL"],
-	"Maine" : ["ME"],
-	"Minnesota" : ["MN"],
-	"Nebraska" : ["NE"],
-	"New Mexico" : ["NM"],
-	"New York" : ["NY"],
-	"North Nevada - Reno" : ["NV"],
-	"South Nevada - Las Vegas" : ["NV"],
-	"Oregon" : ["OR", "Salem", "Corvallis", "Eugene"],
-	"Portland" : ["OR", "Area1", "Catholic1", "Catholic2", "Area2", "Area3", "Area4", "North Coast"],
-	"Texas" : ["TX"],
-	"Utah" : ["UT"],
-	"Washington" : ["WA"]
-
+cs441GoogleMapsViz.filters = {
+	"GPA": ["GPA"], 
+	"High School Major": ["HS"], 
+	"Declared Major": ["Major"], 
+	"SAT (Math and Reading)": ["SAT"]
 };
 
-/*
- * getRegions
+/*TODO: Make this return a dynamic list based on what filters have been selected
+ * getFilters
  *
- * Based on the "Counselor Assignments" provided by Jason McDonald, this
- * method supplies an array of all of the Region Names for the Admissions
- * Unit, as group by counselor.
- *
- * TODO: TLC.  Currently, this is only a partial list, as I am doing a
- * proof of concept with regards to drop-down menus.  I need to finish
- * enumerating all the regions.
+ * This supplies a list of the current valid filters that can be applied.
+ * That is, any filter which has not already been added.
  *
  * @param none
- * @return regions An object containing each region as a property and
- * an array of all subregions as the value of each property.
+ * @return filters An object containing each filter as a string
  *
  */
-cs441GoogleMapsViz.getRegions = function() {
+cs441GoogleMapsViz.getFilters = function() {
 
-	return cs441GoogleMapsViz.regions;
+	return cs441GoogleMapsViz.filters;
 };
 /*
  * convertRegionToState

@@ -49,9 +49,9 @@
    }
 
    #contig_us_map_canvas {
-   	margins: 2px;
+   	margin: 5px;
    	width: 100%;
-   	height: 100%;
+   	height: calc(100% - 10px);
    	border: 1px groove gray;  
    }
 

@@ -57,12 +57,6 @@ cs441GoogleMapsViz.createMenu = function() {
 	select.setAttribute("name", this.name);
 	select.setAttribute("id", this.idName);
 
-	// Create a default "All" option
-	option = document.createElement("option");
-	option.setAttribute("value", "All");
-	option.setAttribute("label", "All");
-	select.appendChild(option);
-
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
 	for(var propt in this.menuItems) {
