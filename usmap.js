@@ -348,7 +348,7 @@ cs441GoogleMapsViz.initialize = function() {
 	// Get the menu options from the model method, getFilters().
 	// Attach the method selectMenuOption() to the menu such that whenever the menu changes,
 	// the selectMenuOption() method is called.
-	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterMenu", "filterMenu", "filterPanel", "filterMenu", cs441GoogleMapsViz.getFilters(), function() {
+	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filterSelector", "filterPanel", "filterSelector", cs441GoogleMapsViz.getFilters(), function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});
 	filterMenu.createMenu();
