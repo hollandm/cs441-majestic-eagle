@@ -27,12 +27,33 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  */
 cs441GoogleMapsViz.filters = {
 	"GPA": ["GPA"], 
-	"High School Major": ["HS"], 
+	"High School": ["HS"], 
 	"Declared Major": ["Major"], 
 	"SAT (Math and Reading)": ["SAT"]
 };
 
-/*TODO: Make this return a dynamic list based on what filters have been selected
+
+cs441GoogleMapsViz.selectedFilters = {
+	
+};
+
+cs441GoogleMapsViz.getSelectedFilters = function(){
+	return cs441GoogleMapsViz.selectedFilters;
+};
+
+/*
+ * addFilter
+ * 
+ * Adds a filter to the selectedFilters list and removes the filter from
+ * the list of filters available in drop down list
+ */
+cs441GoogleMapsViz.addFilter = function(filterType, filterID){
+	delete cs441GoogleMapsViz.filters[filterType];
+	cs441GoogleMapsViz.selectedFilters[filterType] = [filterID]; 
+};
+
+
+/*TODO: Make this return a dynamic list based on what filters have not been selected
  * getFilters
  *
  * This supplies a list of the current valid filters that can be applied.
@@ -43,7 +64,6 @@ cs441GoogleMapsViz.filters = {
  *
  */
 cs441GoogleMapsViz.getFilters = function() {
-
 	return cs441GoogleMapsViz.filters;
 };
 /*

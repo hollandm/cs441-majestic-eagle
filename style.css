@@ -52,6 +52,7 @@
    	border: #808080;
    }
    
+
    #right {
    	width: calc(100% - 256px);
    	height: 100%;
@@ -69,7 +70,8 @@
   #footer{
   	clear: both;
   }
-   
+
+  
   .label div {
     padding: 1px;
     margin-right: 20px;
