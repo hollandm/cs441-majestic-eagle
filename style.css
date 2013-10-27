@@ -49,9 +49,31 @@
    }
    
    #filterMenu {
-   	border: #808080;
+   	height: 256px;
+   	border: #808080 solid 4px;
    }
    
+   #filterMenu p {
+   	font-size: 1.2em;
+   	margin-left: 2px;
+   	margin-bottom: 0px;
+   }
+   
+   #filterSelector {
+   	margin-left: 2px;
+   }
+   
+   input[type = "text"] {
+   	margin-top: 10px;
+   	margin-left: 2px;
+   	padding-left: 1px;
+   	border-style: solid;
+   	border-color: black
+   	border-width: 1px;
+   	
+   	line-height: 28px;
+   	width: calc(100% - 10px);
+   }
 
    #right {
    	width: calc(100% - 256px);
