@@ -12,6 +12,14 @@
    	font-family: "Bryant", "Gill Sans", sans-serif;
    }
    
+   
+   h1 {
+   	margin-top: 0px;
+   	font-size: 1.2em;
+   	margin-left: 3px;
+   	margin-bottom: 0px;
+   }
+   
    p {
    	 margin-top: 0.1em;
   	 font-size: 10pt;
@@ -46,6 +54,15 @@
    
    #filterPanel {
    	height: calc(100% - 256px);
+   	border: #808080 solid 4px;
+   	border-bottom-width: 0px;
+   }
+   
+   #display {
+   	border: black solid 1px;
+   	-moz-box-shadow: 2px 2px 2px 2px;
+   	-webkit-bot-shadow: 2px 2px 2px 2px;
+   	margin: 2px;
    }
    
    #filterMenu {
@@ -53,22 +70,17 @@
    	border: #808080 solid 4px;
    }
    
-   #filterMenu p {
-   	font-size: 1.2em;
-   	margin-left: 2px;
-   	margin-bottom: 0px;
-   }
-   
+
    #filterSelector {
    	margin-left: 2px;
    }
    
    input[type = "text"] {
    	margin-top: 10px;
-   	margin-left: 2px;
+   	margin-left: 3px;
    	padding-left: 1px;
    	border-style: solid;
-   	border-color: black
+   	border-color: black;
    	border-width: 1px;
    	
    	line-height: 28px;
