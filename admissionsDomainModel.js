@@ -1,12 +1,9 @@
 /*
  *  admissionsDomainModel.js
  *
- *  A collection of methods for the Domain Knowledge specific to the
- *  Admissions Unit.  These methods are all centralized in this location
- *  instead of diffused throughout the application so that one can
- *  reason about this D.K. more easily.
+ *  A collection of objects and functions to model and update the admissions data.
  *
- *  @author Tanya L. Crenshaw
+ *  @author Taylor W. Nightingale
  */
 
 /* From JavaScript patterns by S. Stefanov,
@@ -19,67 +16,94 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /*
  * filters
- *
- * An object that represents all of the unadded filters.
- * TODO: Add more documentation to this 
+ * TODO: moddify this to be a list of Filter objects
  * 
- * TODO: Incorporate this with the current selected filters
+ * A list that represents all of the filters.
  */
 cs441GoogleMapsViz.filters = {
 	"GPA": ["GPA"], 
 	"High School": ["HS"], 
-	"Declared Major": ["Major"], 
+	"Declared Major": ["MAJOR"], 
 	"SAT (Math and Reading)": ["SAT"]
 };
 
 
-cs441GoogleMapsViz.selectedFilters = {
-	
-};
+/*
+ * highSchools
+ * 
+ * A list of all the high schools
+ */
+cs441GoogleMapsViz.highSchools = [];
 
-cs441GoogleMapsViz.getSelectedFilters = function(){
-	return cs441GoogleMapsViz.selectedFilters;
+
+/*
+ * cs441GoogleMapsViz.getActiveFilters()
+ * 
+ * This supplies a list of the current valid filters that are being applied
+ * That is, any filter which has the isActive attribute set to true.
+ * 
+ * @param none
+ * @return the list of active filters
+ */
+cs441GoogleMapsViz.getActiveFilters = function() {
+	//TODO: implement
+	return cs441GoogleMapsViz.filters;
 };
 
 /*
- * addFilter
+ * cs441GoogleMapsViz.getInctiveFilters()
  * 
- * Adds a filter to the selectedFilters list and removes the filter from
- * the list of filters available in drop down list
+ * This supplies a list of the current filters that can be applied.
+ * That is, any filter which has the isActive attribute set to false.
+ * 
+ * @param none
+ * @return the list of inactive filters
  */
-cs441GoogleMapsViz.addFilter = function(filterType, filterID){
+cs441GoogleMapsViz.getInactiveFilters = function() {
+	//TODO: implement
+	return cs441GoogleMapsViz.filters;	
+};
+
+/*
+ * cs441GoogleMapsViz.removeFilter()
+ * 
+ * Sets the passed in filters to inactive. 
+ * Updates the high school information accordingly.
+ *
+ * @param filterID The string value of the filter to remove
+ * @return void
+ */
+css441GoogleMapsViz.clearFilter = function(filterID) {
+	//TODO: implement
+};
+
+/*
+ * cs441GoogleMapsViz.addFilter()
+ * 
+ * Sets the passed in filter to active, and updates the 
+ * filter with the correct values.
+ * Updates the high school information accordingly.
+ * 
+ * @param filterID The string value of the filter to add
+ * @return void 
+ */
+cs441GoogleMapsViz.addFilter = function(filterID){
+	//TODO: implement
+	
 	delete cs441GoogleMapsViz.filters[filterType];
 	cs441GoogleMapsViz.selectedFilters[filterType] = [filterID]; 
 };
 
 
-/*TODO: Make this return a dynamic list based on what filters have not been selected
- * getFilters
- *
- * This supplies a list of the current valid filters that can be applied.
- * That is, any filter which has not already been added.
+/*
+ * cs441GoogleMapsViz.updateHighSchools()
+ * 
+ * Updates the High School information based on the active filters
+ * TODO: Add more documentation regarding the nature of udating h.s. 
  *
  * @param none
- * @return filters An object containing each filter as a string
- *
+ * @return void 
  */
-cs441GoogleMapsViz.getFilters = function() {
-	return cs441GoogleMapsViz.filters;
-};
-/*
- * convertRegionToState
- *
- * Convert the possible menu choices available to a two-letter
- * state abbreviation.
- *
- * @param menuChoice A user-supplied menu choice extracted from an HTML
- * element.
- * @return state A two-letter state abbreviation.
- */
-cs441GoogleMapsViz.convertRegionToState = function(region) {
-
-	var state = cs441GoogleMapsViz.regions[region][0];
-
-	return state;
-
+cs441GoogleMapsViz.updateHighSchools() = function() {
+	//TODO: implement
 };
