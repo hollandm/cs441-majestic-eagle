@@ -58,11 +58,12 @@
    	border-bottom-width: 0px;
    }
    
-   #display {
+   #display p {
    	border: black solid 1px;
    	-moz-box-shadow: 2px 2px 2px 2px;
    	-webkit-bot-shadow: 2px 2px 2px 2px;
    	margin: 2px;
+   	font-size: .75em
    }
    
    #filterMenu {

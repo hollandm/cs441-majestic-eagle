@@ -55,7 +55,6 @@ cs441GoogleMapsViz.createMenu = function() {
 	// Set some attributes
 	select.setAttribute("name", this.name);
 	select.setAttribute("id", this.idName);
-
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
 	for(var propt in this.menuItems) {
