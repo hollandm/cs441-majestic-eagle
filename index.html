@@ -12,6 +12,7 @@
         <script type="text/javascript" src="layers.js"></script>
         <script type="text/javascript" src="admissionsDomainModel.js"></script>
         <script type="text/javascript" src="usCensusDomainModel.js"></script>
+        <script type="text/javascript" src="filterDisplay.js"></script>
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
@@ -19,18 +20,29 @@
             <div id="left">
                 <p id="errormessage"> </p>
                 <div id="filterBar">
-            		<div id="filterPanel">
-            			Filters
-            		</div>
+                	<h1>Filters:</h1>
+            		<div class="filterDisplay" id="filterPanel"></div>
+
                 	<div id="filterMenu">
-                		<div class="filterPanel" id="filterSelector"></div>
-	                </div>
+                		<h1>Filter Type:</h1>
+                		<div class="filterSelection" id="filterSelector"></div>
+                		<form id = "inputBox">
+                			<input type = "text" value = "ie Peta Flops High School" name = "filterInputs"><br>
+                		</form>
+                		<button id="filterButton">
+                			+add
+                		</button>
+                	</div> <!-- end of filterMenu -->
+                	
+                	<!-- TODO: needs to be dynamic -->
+                	
+               
     	        </div> <!--end of filterBar-->
-            </div><!--end of top-->
+            </div><!--end of left-->
             
             <div id="right">
                 <div id="contig_us_map_canvas"></div>
-            </div><!--end of bottom-->
+            </div><!--end of right-->
         </div><!--end of wrapper-->
         
         <div id="footer">

@@ -28,9 +28,29 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * @return The value of the html element with id "filterMenu"
  */
 cs441GoogleMapsViz.getMenuOption = function() {
-	return "High School";
+	return "High School"; 
 	//TODO: return the following
 	//return document.getElementById("filterMenu").value;
+};
+
+
+/*
+ * cs441GoogleMapsViz.selectMenuOption()
+ * 
+ * This function changes the filter menu shown to the user based on what 
+ * is selected in the filterMenu (in other words, the data entered by
+ * 	the user). 
+ * 
+ * @return void
+ */
+cs441GoogleMapsViz.selectMenuOption = function() {
+	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
+	if (filterToDisplay == "High School"){
+		document.getElementById("filterInput").value = "hi";
+	}
+	
+	//TODO: Display menu filters here
+	
 };
 
 /*
@@ -105,6 +125,97 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
 	cs441GoogleMapsViz.httpRequest.send();
 
 };
+
+//<--------Where UNUSED CODE was------------->
+
+
+
+/*TODO: modify this function for our project
+ *  cs441GoogleMapsViz.initialize()
+ *
+ *  A function to: 
+ *  1. create a google map centered at the us
+ *  2. Initialize two layer objects, one for zipcodes and one for schools.
+ *  3. instantiate a google maps geocoder service.  
+ *   
+ *  @param void
+ *  @return void
+ */
+cs441GoogleMapsViz.initialize = function() {
+
+	// Set the Google API key for this namespace.
+	cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
+	
+	// Create the httpRequestor for this namespace.
+	cs441GoogleMapsViz.makeRequestor();
+
+	// Encrypted IDs for the Google Fusion Table containing the
+	// Oregon high school and CEEB data.
+	var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
+
+	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
+	// available in Tanya Crenshaw's public fusion tables.
+	var zipEID = '1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU';
+
+	// Instatiate a new geocoder service
+	var geocoder = new google.maps.Geocoder();
+
+	// The center point of the map is Lincoln, NB.
+	var usa = new google.maps.LatLng(40.8358, -96.6452);
+
+	// Create a Google Map object centered at usa
+	var map = new google.maps.Map(document.getElementById("contig_us_map_canvas"), {
+		zoom : 4,
+		center : usa,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	});
+	
+	// Create a listener for the add filter button
+	// TODO: currently only adds the high school filter
+	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
+		// TODO: only works for high school filter
+		cs441GoogleMapsViz.addFilter("High School", "HS");
+		
+		// removes old filter drop down and replaces it with a new filter drop down containing
+		// a list of the updated available filters
+		// TODO: rather than creating new object, find a way to update and refresh
+		el = document.getElementById("filterSelector");
+		selectEl = document.getElementById("filter");
+		el.removeChild(selectEl);
+		filterMenu.createMenu();
+		
+		// removes old filter display and replaces it with a new one containing updated information
+		// TODO: rather than creating new object, find a way to update content and refresh
+		el = document.getElementById("filterPanel");
+		filterInfoEl = document.getElementById("display");
+		el.removeChild(filterInfoEl);
+		filterDisplay.createDisplay();	
+	});
+	
+	
+//<-----------Where UNUSED CODE2 was------->
+
+	//
+	// Constructing the Filter Menu Selector
+	//
+	// Create the Filter Selection menu
+	// Connect the filter menu to the "filterMenu" that is on the index.html page.
+	// Get the menu options from the model method, getFilters().
+	// Attach the method selectMenuOption() to the menu such that whenever the menu changes,
+	// the selectMenuOption() method is called.
+	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getFilters(), function() {
+		return cs441GoogleMapsViz.selectMenuOption();
+	});
+	filterMenu.createMenu();
+	
+	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
+	filterDisplay.createDisplay();
+	
+};
+// Setup an event listener to execute the init() function for this namespace
+// upon page load.
+google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
+
 
 //###################### UNUSED CODE ##################
 // /*
@@ -244,59 +355,10 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
 // };
 
 
-/*
- * cs441GoogleMapsViz.selectMenuOption()
- * 
- * This function changes the filter menu shown to the user based on what 
- * is selected in the filterMenu (in other words, the data entered by
- * 	the user). 
- * 
- * @return void
- */
-cs441GoogleMapsViz.selectMenuOption = function() {
-	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
-	//TODO: Display menu filters here
-};
 
-/*TODO: modify this function for our project
- *  cs441GoogleMapsViz.initialize()
- *
- *  A function to: 
- *  1. create a google map centered at the us
- *  2. Initialize two layer objects, one for zipcodes and one for schools.
- *  3. instantiate a google maps geocoder service.  
- *   
- *  @param void
- *  @return void
- */
-cs441GoogleMapsViz.initialize = function() {
 
-	// Set the Google API key for this namespace.
-	cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
-	
-	// Create the httpRequestor for this namespace.
-	cs441GoogleMapsViz.makeRequestor();
+//############ UNUSED CODE2 #################
 
-	// Encrypted IDs for the Google Fusion Table containing the
-	// Oregon high school and CEEB data.
-	var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
-
-	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
-	// available in Tanya Crenshaw's public fusion tables.
-	var zipEID = '1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU';
-
-	// Instatiate a new geocoder service
-	var geocoder = new google.maps.Geocoder();
-
-	// The center point of the map is Lincoln, NB.
-	var usa = new google.maps.LatLng(40.8358, -96.6452);
-
-	// Create a Google Map object centered at usa
-	var map = new google.maps.Map(document.getElementById("contig_us_map_canvas"), {
-		zoom : 4,
-		center : usa,
-		mapTypeId : google.maps.MapTypeId.ROADMAP
-	});
 	// //
 	// //	Construct the layers
 	// //
@@ -340,20 +402,5 @@ cs441GoogleMapsViz.initialize = function() {
 		// return cs441GoogleMapsViz.lookup(layerArray, geocoder);
 	// });
 
-	//
-	// Constructing the Filter Menu Selector
-	//
-	// Create the Filter Selection menu
-	// Connect the filter menu to the "filterMenu" that is on the index.html page.
-	// Get the menu options from the model method, getFilters().
-	// Attach the method selectMenuOption() to the menu such that whenever the menu changes,
-	// the selectMenuOption() method is called.
-	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filterSelector", "filterPanel", "filterSelector", cs441GoogleMapsViz.getFilters(), function() {
-		return cs441GoogleMapsViz.selectMenuOption();
-	});
-	filterMenu.createMenu();
 
-};
-// Setup an event listener to execute the init() function for this namespace
-// upon page load.
-google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
+

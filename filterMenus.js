@@ -46,7 +46,6 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
  * Create a select HTML element for the initialized FilterMenu object.
  */
 cs441GoogleMapsViz.createMenu = function() {
-
 	// Get the HTML element to which this menu has been assigned.
 	el = document.getElementById(this.divId);
 
