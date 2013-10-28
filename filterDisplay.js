@@ -1,4 +1,4 @@
-/*
+/*TODO: Rework this whole class after the model has been fixed.
  * filterDisplay.js
  *
  * A collection of methods for the application-specific FilterDisplay object. The
@@ -36,11 +36,19 @@ cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId, filt
 	this.createDisplay = function() {
 		return cs441GoogleMapsViz.createDisplay.call(this);
 	};
+
 };
+
+/*
+ * addFilter
+ * 
+ * Adds a filter to the filter panel
+ */
+
 /*
  * createMenu
  *
- * Create a select HTML element for the initialized FilterMenu object.
+ * Create a div to hold the 
  */
 cs441GoogleMapsViz.createDisplay = function() {
 	// Get the HTML element to which this menu has been assigned.
@@ -58,9 +66,25 @@ cs441GoogleMapsViz.createDisplay = function() {
 	for(var propt in this.filterInfoItems) {
 		filterInfo = document.createElement("p");
  		text = document.createTextNode(propt + ": ");
+ 		strongText = document.createElement("strong");
+ 		strongText.appendChild(text);
+		filterInfo.appendChild(strongText);
+		text = document.createTextNode(cs441GoogleMapsViz.getFilterInput());
 		filterInfo.appendChild(text);
-		text = document.createTextNode(document.getElementById("inputBox").filterInputs.value);
-		filterInfo.appendChild(text);
+		
+		// // Add the delete button
+		// var deleteButton = document.createElement("button");
+// 		
+		// // Set the attribute for the remove filter button
+		// deleteButton.setAttrbute("id", cs441GoogleMapsViz.getMenuOption() + "deleteButton");
+		// // Add the 'X' to the button
+		// text = document.createTextNode(X);
+		// deleteButton.appendChild(text);
+// 		
+		// // Add the button to the filterInfo
+		// filterInfo.appendChild(deleteButton);
+// 		
+		// Add the filter info to the display
 		filterInfoDisplay.appendChild(filterInfo);
 	}
 
