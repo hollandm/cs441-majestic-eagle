@@ -91,9 +91,83 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 					}	
 				}
 				
+				
+				// For every school with students, add a marker to the map
+				//for (var i = 0; i < cs441GoogleMapsViz.schools.length; ++i) {
+				console.log("begin for loop");
+				for (ceeb in cs441GoogleMapsViz.schools) {
+					var school = cs441GoogleMapsViz.schools[ceeb];
+					
+					cs441GoogleMapsViz.geocoder.geocode( { 'address': school.location}, function(results, status) {
+						
+						if (status == google.maps.GeocoderStatus.OK) {
+							console.log(school.ceeb + ' ' + results[0].geometry.location);
+							var marker = new google.maps.Marker({
+								map: cs441GoogleMapsViz.map,
+								position: results[0].geometry.location,
+								title: school.name
+							});
+						} else {
+							console.log('Geocode for ' + school.bane + ' at ' +school.address +' was not successful for the following reason: ' + status);
+						}
+					});
+					
+					//console.log(school.name);
+					//console.log(school.ceeb);
+					//console.log(school.location);
+					//alert("a");
+					function sleep(milliseconds) {
+					  var start = new Date().getTime();
+					  for (var i = 0; i < 1e7; i++) {
+						if ((new Date().getTime() - start) > milliseconds){
+						  break;
+						}
+					  }
+					}
+					sleep(1000);
+					//console.log(school);
+				}
+				console.log("end for loop");
+				
+				
+								/*
+					var i = 1;
+					var school = cs441GoogleMapsViz.schools[i];
+					console.log(cs441GoogleMapsViz.schools[i])
+					var address = school.location;
+					
+					cs441GoogleMapsViz.geocoder.geocode( { 'address': address}, function(results, status) {
+						console.log('Geocode');
+						if (status == google.maps.GeocoderStatus.OK) {
+							//map.setCenter(results[0].geometry.location);
+							var marker = new google.maps.Marker({
+								map: cs441GoogleMapsViz.map,
+								position: results[0].geometry.location,
+								title: 'Hello World!'
+							});
+						} else {
+							console.log('Geocode was not successful for the following reason: ' + status);
+							//alert('Geocode was not successful for the following reason: ' + status);
+						}
+					});
+
+				//}
+					
+					var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+					var marker = new google.maps.Marker({
+						position: myLatlng,
+						map: cs441GoogleMapsViz.map,
+						title: 'Hello World!'
+					});
+				//}
+
+				
+				*/
+				
 				// debug prints
-				console.log(response)
-				console.log(cs441GoogleMapsViz.schools);	
+				//console.log(response)
+				//console.log(cs441GoogleMapsViz.schools);	
 			}
 		}
 	}

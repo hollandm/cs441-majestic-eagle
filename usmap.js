@@ -292,7 +292,8 @@ cs441GoogleMapsViz.initialize = function() {
 
 	// Instatiate a new geocoder service
 	var geocoder = new google.maps.Geocoder();
-
+	cs441GoogleMapsViz.geocoder = geocoder;
+	
 	// The center point of the map is Lincoln, NB.
 	var usa = new google.maps.LatLng(40.8358, -96.6452);
 
@@ -302,6 +303,9 @@ cs441GoogleMapsViz.initialize = function() {
 		center : usa,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
+	cs441GoogleMapsViz.map = map;
+	
+	
 	//
 	//	Construct the layers
 	//
