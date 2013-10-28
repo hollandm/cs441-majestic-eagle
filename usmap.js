@@ -6,7 +6,7 @@
  *  2. Setup all the listeners for the main page.  
  *  3. Grab values of HTML elements for other parts of the application.
  * 
- *  @author Tanya L. Crenshaw
+ *  @author Tanya L. Crenshaw, Team PETA-Flops
  */
 
 /* From JavaScript patterns by S. Stefanov,
@@ -33,6 +33,18 @@ cs441GoogleMapsViz.getMenuOption = function() {
 	//return document.getElementById("filterMenu").value;
 };
 
+/*
+ * cs441GoogleMapsViz.getFilterInput()
+ *
+ * This function gets the input from the page, as entered by
+ * the user in the text input form with id "inputBox"
+ *
+ * @param void
+ * @return The value of the input element in the "inputBox" form
+ */
+cs441GoogleMapsViz.getFilterInput = function() {
+	return document.getElementById("inputBox").filterInputs.value;
+};
 
 /*
  * cs441GoogleMapsViz.selectMenuOption()
@@ -192,6 +204,9 @@ cs441GoogleMapsViz.initialize = function() {
 		filterDisplay.createDisplay();	
 	});
 	
+	// Create a listener for the remove filter button
+	//cs441GoogleMapsViz.addEvent(document.get)
+	
 	
 //<-----------Where UNUSED CODE2 was------->
 
@@ -200,14 +215,19 @@ cs441GoogleMapsViz.initialize = function() {
 	//
 	// Create the Filter Selection menu
 	// Connect the filter menu to the "filterMenu" that is on the index.html page.
-	// Get the menu options from the model method, getFilters().
+	// Get the menu options from the model method, getInactiveFilters().
 	// Attach the method selectMenuOption() to the menu such that whenever the menu changes,
 	// the selectMenuOption() method is called.
-	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getFilters(), function() {
+	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getInactiveFilters(), function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});
 	filterMenu.createMenu();
 	
+	//
+	// Constructing the Filter Display Panel
+	//
+	// Create the filter display panel
+	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
 	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
 	filterDisplay.createDisplay();
 	
