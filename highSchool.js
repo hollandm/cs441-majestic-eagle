@@ -112,9 +112,7 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 						}
 					});
 					
-					//console.log(school.name);
-					//console.log(school.ceeb);
-					//console.log(school.location);
+					console.log(school.name + ' ' + school.ceeb + ' ' + school.location);
 					//alert("a");
 					function sleep(milliseconds) {
 					  var start = new Date().getTime();
