@@ -10,7 +10,7 @@ with open('/home/matt/Dropbox/college/Junior Fall/cs441/cs441-majestic-eagle/hig
     count = 0
     for row in reader:
 
-        if count > 1500:
+        if count > 8210:
 
             name =  row[0] + ", " +row[2]
             url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % name.replace(" ","+")
