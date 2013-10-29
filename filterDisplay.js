@@ -42,8 +42,13 @@ cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId, filt
 /*
  * addFilter
  * 
- * Adds a filter to the filter panel
+ * Add new filter info to the filter display
  */
+cs441GoogleMapsViz.addFilterInfoToDisplay = function() {
+	
+}
+
+
 
 /*
  * createMenu

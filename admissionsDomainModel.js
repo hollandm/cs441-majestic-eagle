@@ -14,19 +14,19 @@
  */
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
+
 /*
  * filters
  * TODO: moddify this to be a list of Filter objects
  * 
  * A list that represents all of the filters.
  */
-cs441GoogleMapsViz.filters = {
-	"GPA": ["GPA"], 
-	"High School": ["HS"], 
-	"Declared Major": ["MAJOR"], 
-	"SAT (Math and Reading)": ["SAT"]
-};
-
+cs441GoogleMapsViz.filterList = [
+	cs441GoogleMapsFilter.filter("High School", "", "False"),
+	cs441GoogleMapsFilter.filter("Declared Major", "", "False"),
+	cs441GoogleMapsFilter.filter("SAT", "", "False"),
+	cs441GoogleMapsFilter.filter("GPA", "", "False"),
+];
 
 /*
  * highSchools
