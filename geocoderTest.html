@@ -61,8 +61,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 // Create an empty list of schools
 var schools = {};
-var currentSchool = 0;
-var sleepTime = 1;
+var currentSchool = 1860;
+var sleepTime = 200;
 
 function geoQuery() {
 	var hs = schools.rows[currentSchool];
@@ -78,17 +78,27 @@ function geoQuery() {
 			  position: results[0].geometry.location
 		  });
 		  */
-		  sleepTime = 1;
+		 // sleepTime = 150;
 		} else {
 		  
 		  if (status == 'OVER_QUERY_LIMIT') {
-			sleepTime *= 5;
+			//sleepTime = 1000;
 			currentSchool -= 1;
 		  } else {
+			//sleepTime = 150;
 			console.log('Geocode of ' + hs[0] + ' was not successful for the following reason: ' + status);
 		  }
 		  //alert('Geocode was not successful for the following reason: ' + status);
 		}
+		
+		if (currentSchool % 15 == 0) {
+		
+			//sleepTime = 60000;
+			//console.log("Sleep");
+			for (var i = 0; i < 20; ++i) {
+				sleep(500);
+			}
+		} 
 		
 		sleep(sleepTime);
 		currentSchool += 1;
