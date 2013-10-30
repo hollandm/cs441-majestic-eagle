@@ -97,10 +97,12 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 				// For every school with students, add a marker to the map
 				//for (var i = 0; i < cs441GoogleMapsViz.schools.length; ++i) {
 				console.log("begin for loop");
+				console.log(cs441GoogleMapsViz.map);
 				for (ceeb in cs441GoogleMapsViz.schools) {
 					var school = cs441GoogleMapsViz.schools[ceeb];
 					var myLatlng = new google.maps.LatLng(school.lat,school.lng);
 					
+					//console.log("Creating Marker for " + school.name + ", " + school.state);	
 					var marker = new google.maps.Marker({
 						map: cs441GoogleMapsViz.map,
 						position: myLatlng,

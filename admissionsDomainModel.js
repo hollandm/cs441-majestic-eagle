@@ -1,12 +1,9 @@
 /*
  *  admissionsDomainModel.js
  *
- *  A collection of methods for the Domain Knowledge specific to the
- *  Admissions Unit.  These methods are all centralized in this location
- *  instead of diffused throughout the application so that one can
- *  reason about this D.K. more easily.
+ *  A collection of objects and functions to model and update the admissions data.
  *
- *  @author Tanya L. Crenshaw
+ *  @author Taylor W. Nightingale
  */
 
 /* From JavaScript patterns by S. Stefanov,
@@ -18,74 +15,96 @@
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /*
- * regions
- *
- * An object that represents all of the region assignments in the
- * Admissions Unit.  Each property is a region name.  Each value
- * of each property is an array.  The first element of the array
- * is the two-letter state abbreviation associated with the region.
- * The remainder of the array is any subregions for the region.
+ * filters
+ * TODO: moddify this to be a list of Filter objects
  * 
- * TODO: Incomplete list.  I don't feel, either, that this is the
- * best way to organize this data.  
+ * A list that represents all of the filters.
  */
-cs441GoogleMapsViz.regions = {
-	"Alaska" : ["AK"],
-	"Arizona" : ["AZ"],
-    "Californa" : ["CA"],
-	"Colorado" : ["CO"],
-	"Hawaii" : ["HI"],
-    "Idaho" : ["ID"],
-	"Illinois" : ["IL"],
-	"Maine" : ["ME"],
-	"Minnesota" : ["MN"],
-	"Nebraska" : ["NE"],
-	"New Mexico" : ["NM"],
-	"New York" : ["NY"],
-	"North Nevada - Reno" : ["NV"],
-	"South Nevada - Las Vegas" : ["NV"],
-	"Oregon" : ["OR", "Salem", "Corvallis", "Eugene"],
-	"Portland" : ["OR", "Area1", "Catholic1", "Catholic2", "Area2", "Area3", "Area4", "North Coast"],
-	"Texas" : ["TX"],
-	"Utah" : ["UT"],
-	"Washington" : ["WA"]
+cs441GoogleMapsViz.filters = {
+	"GPA": ["GPA"], 
+	"High School": ["HS"], 
+	"Declared Major": ["MAJOR"], 
+	"SAT (Math and Reading)": ["SAT"]
+};
 
+
+/*
+ * highSchools
+ * 
+ * A list of all the high schools
+ */
+cs441GoogleMapsViz.highSchools = [];
+
+
+/*
+ * cs441GoogleMapsViz.getActiveFilters()
+ * 
+ * This supplies a list of the current valid filters that are being applied
+ * That is, any filter which has the isActive attribute set to true.
+ * 
+ * @param none
+ * @return the list of active filters
+ */
+cs441GoogleMapsViz.getActiveFilters = function() {
+	//TODO: implement
+	return cs441GoogleMapsViz.filters;
 };
 
 /*
- * getRegions
+ * cs441GoogleMapsViz.getInctiveFilters()
+ * 
+ * This supplies a list of the current filters that can be applied.
+ * That is, any filter which has the isActive attribute set to false.
+ * 
+ * @param none
+ * @return the list of inactive filters
+ */
+cs441GoogleMapsViz.getInactiveFilters = function() {
+	//TODO: implement
+	return cs441GoogleMapsViz.filters;	
+};
+
+/*
+ * cs441GoogleMapsViz.removeFilter()
+ * 
+ * Sets the passed in filters to inactive. 
+ * Updates the high school information accordingly.
  *
- * Based on the "Counselor Assignments" provided by Jason McDonald, this
- * method supplies an array of all of the Region Names for the Admissions
- * Unit, as group by counselor.
- *
- * TODO: TLC.  Currently, this is only a partial list, as I am doing a
- * proof of concept with regards to drop-down menus.  I need to finish
- * enumerating all the regions.
+ * @param filterID The string value of the filter to remove
+ * @return void
+ */
+cs441GoogleMapsViz.clearFilter = function(filterID) {
+	//TODO: implement
+};
+
+/*
+ * cs441GoogleMapsViz.addFilter()
+ * 
+ * Sets the passed in filter to active, and updates the 
+ * filter with the correct values.
+ * Updates the high school information accordingly.
+ * 
+ * @param filterID The string value of the filter to add
+ * @return void 
+ */
+cs441GoogleMapsViz.addFilter = function(filterID){
+	//TODO: implement
+	
+	delete cs441GoogleMapsViz.filters[filterType];
+	cs441GoogleMapsViz.selectedFilters[filterType] = [filterID]; 
+};
+
+
+/*
+ * cs441GoogleMapsViz.updateHighSchools()
+ * 
+ * Updates the High School information based on the active filters
+ * TODO: Add more documentation regarding the nature of udating h.s. 
  *
  * @param none
- * @return regions An object containing each region as a property and
- * an array of all subregions as the value of each property.
- *
+ * @return void 
  */
-cs441GoogleMapsViz.getRegions = function() {
-
-	return cs441GoogleMapsViz.regions;
+cs441GoogleMapsViz.updateHighSchools = function() {
+	//TODO: implement
 };
-/*
- * convertRegionToState
- *
- * Convert the possible menu choices available to a two-letter
- * state abbreviation.
- *
- * @param menuChoice A user-supplied menu choice extracted from an HTML
- * element.
- * @return state A two-letter state abbreviation.
- */
-cs441GoogleMapsViz.convertRegionToState = function(region) {
 
-	var state = cs441GoogleMapsViz.regions[region][0];
-
-	return state;
-
-}
