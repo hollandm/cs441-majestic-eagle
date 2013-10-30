@@ -21,12 +21,8 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * 
  * A list that represents all of the filters.
  */
-cs441GoogleMapsViz.filterList = [
-	cs441GoogleMapsFilter.filter("High School", "", "False"),
-	cs441GoogleMapsFilter.filter("Declared Major", "", "False"),
-	cs441GoogleMapsFilter.filter("SAT", "", "False"),
-	cs441GoogleMapsFilter.filter("GPA", "", "False"),
-];
+cs441GoogleMapsViz.filterList = {};
+
 
 /*
  * highSchools
@@ -46,12 +42,19 @@ cs441GoogleMapsViz.highSchools = [];
  * @return the list of active filters
  */
 cs441GoogleMapsViz.getActiveFilters = function() {
-	//TODO: implement
-	return cs441GoogleMapsViz.filters;
+	var activeFilters = cs441GoogleMapsViz.filterList;
+
+	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
+		key = cs441GoogleMapsViz.allFilters[i];
+		if (cs441GoogleMapsViz.filterList[key].isActive == false){
+			delete activeFilters[key];
+		}
+	}
+	return activeFilters;
 };
 
 /*
- * cs441GoogleMapsViz.getInctiveFilters()
+ * cs441GoogleMapsViz.getInactiveFilters()
  * 
  * This supplies a list of the current filters that can be applied.
  * That is, any filter which has the isActive attribute set to false.
@@ -60,8 +63,15 @@ cs441GoogleMapsViz.getActiveFilters = function() {
  * @return the list of inactive filters
  */
 cs441GoogleMapsViz.getInactiveFilters = function() {
-	//TODO: implement
-	return cs441GoogleMapsViz.filters;	
+	var inactiveFilters = cs441GoogleMapsViz.filterList;
+
+	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
+		key = cs441GoogleMapsViz.allFilters[i];
+		if (cs441GoogleMapsViz.filterList[key].isActive == true){
+			delete inactiveFilters[key];
+		}
+	}
+	return inactiveFilters;
 };
 
 /*
@@ -70,11 +80,16 @@ cs441GoogleMapsViz.getInactiveFilters = function() {
  * Sets the passed in filters to inactive. 
  * Updates the high school information accordingly.
  *
- * @param filterID The string value of the filter to remove
+ * @param filterName The name of the filter to remove
  * @return void
  */
-css441GoogleMapsViz.clearFilter = function(filterID) {
-	//TODO: implement
+cs441GoogleMapsViz.removeFilter = function(filterName) {
+	//udpate isActive status
+	cs441GoogleMapsViz.filterList[filterName].isActive = false;
+	
+	//remove from display (done by controller...not model...)
+	
+	//refilter high school information
 };
 
 /*
@@ -84,14 +99,18 @@ css441GoogleMapsViz.clearFilter = function(filterID) {
  * filter with the correct values.
  * Updates the high school information accordingly.
  * 
- * @param filterID The string value of the filter to add
+ * @param filterName The name of the filter to add
  * @return void 
  */
-cs441GoogleMapsViz.addFilter = function(filterID){
-	//TODO: implement
+cs441GoogleMapsViz.addFilter = function(filterName, input){
+	// update isActive status of specified filter
+	cs441GoogleMapsViz.filterList[filterName].isActive = true;	
 	
-	delete cs441GoogleMapsViz.filters[filterType];
-	cs441GoogleMapsViz.selectedFilters[filterType] = [filterID]; 
+	// update input
+	
+	// update high school information
+	
+	
 };
 
 
@@ -104,6 +123,6 @@ cs441GoogleMapsViz.addFilter = function(filterID){
  * @param none
  * @return void 
  */
-cs441GoogleMapsViz.updateHighSchools() = function() {
+cs441GoogleMapsViz.updateHighSchools = function() {
 	//TODO: implement
 };

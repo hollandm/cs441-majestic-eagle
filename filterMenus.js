@@ -40,6 +40,7 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
 		return cs441GoogleMapsViz.createMenu.call(this);
 	};
 };
+
 /*
  * createMenu
  *
