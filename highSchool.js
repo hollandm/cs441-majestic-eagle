@@ -25,7 +25,7 @@ cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, location) {
 	//The number of students which meet the filter results, We will only be displaying schools which have 1 or more students
 	this.students = 0;
 
-}
+};
 
 /**
  * highschoolsResponse
@@ -44,7 +44,7 @@ function highschoolsResponse() {
 			var response = JSON.parse(cs441GoogleMapsViz.HShttpRequest.responseText);
 
 			// Create an empty list of schools
-			cs441GoogleMapsViz.schools = {}
+			cs441GoogleMapsViz.schools = {};
 			
 			// for every school in the database, add an entry in our schools list with ceeb, name, and location.
 			for(var i = 0; i < response.rows.length; i++) {
@@ -54,10 +54,10 @@ function highschoolsResponse() {
 				
 			}
 			
-			console.log(cs441GoogleMapsViz.schools)
+			console.log(cs441GoogleMapsViz.schools);
 			
 			//now find out how many students go to each school
-			cs441GoogleMapsViz.highShool.refreshStats()
+			cs441GoogleMapsViz.highShool.refreshStats();
 			
 		} 
 	}
@@ -92,11 +92,11 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 				}
 				
 				// debug prints
-				console.log(response)
+				console.log(response);
 				console.log(cs441GoogleMapsViz.schools);	
 			}
 		}
-	}
+	};
 	
 	// We want the the ceeb of all the students that meet our filters
 	var query = "SELECT 'HighSchoolCode' FROM 13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624 WHERE HighSchoolCode > 0";
@@ -119,7 +119,7 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 	cs441GoogleMapsViz.statsHttpRequest.open('GET', url);
 	cs441GoogleMapsViz.statsHttpRequest.send();
 
-}
+};
 
 
 // Constuct the query to the high schools server
@@ -127,7 +127,7 @@ var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';
 var query = "SELECT 'Code', 'HighSchool', 'Address' FROM " + schoolEID;
 
 // backup api key
-cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk'
+cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
 
 // Construct the URL for the high school database query
 var url = "https://www.googleapis.com/fusiontables/v1/query";
