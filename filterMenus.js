@@ -46,7 +46,6 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
  * Create a select HTML element for the initialized FilterMenu object.
  */
 cs441GoogleMapsViz.createMenu = function() {
-
 	// Get the HTML element to which this menu has been assigned.
 	el = document.getElementById(this.divId);
 
@@ -56,13 +55,6 @@ cs441GoogleMapsViz.createMenu = function() {
 	// Set some attributes
 	select.setAttribute("name", this.name);
 	select.setAttribute("id", this.idName);
-
-	// Create a default "All" option
-	option = document.createElement("option");
-	option.setAttribute("value", "All");
-	option.setAttribute("label", "All");
-	select.appendChild(option);
-
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
 	for(var propt in this.menuItems) {
@@ -80,4 +72,5 @@ cs441GoogleMapsViz.createMenu = function() {
 	// Attach the function toggleLayers() to the toggleButton on the main page.
 	cs441GoogleMapsViz.addEvent(document.getElementById(this.divId), 'change', this.action);
 
-}
+};
+

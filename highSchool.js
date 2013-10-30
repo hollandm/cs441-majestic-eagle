@@ -16,11 +16,13 @@ cs441GoogleMapsViz.highShool = {};
  *
  * The High School object which contains the average data from it's students which meet the requirments
  */
-cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, location) {
+cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, state, latitude, longatude) {
 	
 	this.ceeb = ceeb;
 	this.name = name;
-	this.location = location;
+	this.state = state;
+	this.lat = latitude;
+	this.lng = longatude;
 
 	//The number of students which meet the filter results, We will only be displaying schools which have 1 or more students
 	this.students = 0;
@@ -50,7 +52,7 @@ function highschoolsResponse() {
 			for(var i = 0; i < response.rows.length; i++) {
 				var hs = response.rows[i];
 				
-				cs441GoogleMapsViz.schools[hs[0]] = new cs441GoogleMapsViz.highShool.highSchool(hs[0], hs[1], hs[2]);
+				cs441GoogleMapsViz.schools[hs[0]] = new cs441GoogleMapsViz.highShool.highSchool(hs[0], hs[1], hs[2], hs[3], hs[4]);
 				
 			}
 			
@@ -89,11 +91,68 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 					} else {
 						//console.log("Invalid CEEB: "+ceeb);
 					}	
-				}
+				};
+				
+				
+				// For every school with students, add a marker to the map
+				//for (var i = 0; i < cs441GoogleMapsViz.schools.length; ++i) {
+				console.log("begin for loop");
+				console.log(cs441GoogleMapsViz.map);
+				for (ceeb in cs441GoogleMapsViz.schools) {
+					var school = cs441GoogleMapsViz.schools[ceeb];
+					var myLatlng = new google.maps.LatLng(school.lat,school.lng);
+					
+					//console.log("Creating Marker for " + school.name + ", " + school.state);	
+					var marker = new google.maps.Marker({
+						map: cs441GoogleMapsViz.map,
+						position: myLatlng,
+						title: school.name + ", " + school.state
+					});
+					
+				};
+				console.log("end for loop");
+				
+				
+								/*
+					var i = 1;
+					var school = cs441GoogleMapsViz.schools[i];
+					console.log(cs441GoogleMapsViz.schools[i])
+					var address = school.location;
+					
+					cs441GoogleMapsViz.geocoder.geocode( { 'address': address}, function(results, status) {
+						console.log('Geocode');
+						if (status == google.maps.GeocoderStatus.OK) {
+							//map.setCenter(results[0].geometry.location);
+							var marker = new google.maps.Marker({
+								map: cs441GoogleMapsViz.map,
+								position: results[0].geometry.location,
+								title: 'Hello World!'
+							});
+						} else {
+							console.log('Geocode was not successful for the following reason: ' + status);
+							//alert('Geocode was not successful for the following reason: ' + status);
+						}
+					});
+
+				//}
+					
+					var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+					var marker = new google.maps.Marker({
+						position: myLatlng,
+						map: cs441GoogleMapsViz.map,
+						title: 'Hello World!'
+					});
+				//}
+
+				
+				*/
 				
 				// debug prints
 				console.log(response);
 				console.log(cs441GoogleMapsViz.schools);	
+				//console.log(response)
+				//console.log(cs441GoogleMapsViz.schools);	
 			}
 		}
 	};
@@ -123,8 +182,9 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 
 
 // Constuct the query to the high schools server
-var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
-var query = "SELECT 'Code', 'HighSchool', 'Address' FROM " + schoolEID;
+//var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
+var schoolEID = '1UpGFeVsC_oQlHGb96-1S4k1rYSp61v8RHynC1hs';	
+var query = "SELECT 'CEEB', 'School', 'State', 'Latitude', 'Longitude' FROM " + schoolEID;
 
 // backup api key
 cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
