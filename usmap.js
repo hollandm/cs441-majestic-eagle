@@ -185,22 +185,22 @@ cs441GoogleMapsViz.initialize = function() {
 	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
 		// TODO: only works for high school filter
-		cs441GoogleMapsViz.addFilter("High School", "HS");
-		
+		cs441GoogleMapsViz.addFilter("High School");
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
 		// TODO: rather than creating new object, find a way to update and refresh
 		el = document.getElementById("filterSelector");
 		selectEl = document.getElementById("filter");
 		el.removeChild(selectEl);
+		filterMenu.update();
 		filterMenu.createMenu();
 		
 		// removes old filter display and replaces it with a new one containing updated information
 		// TODO: rather than creating new object, find a way to update content and refresh
-		el = document.getElementById("filterPanel");
-		filterInfoEl = document.getElementById("display");
-		el.removeChild(filterInfoEl);
-		filterDisplay.createDisplay();	
+		// el = document.getElementById("filterPanel");
+		// filterInfoEl = document.getElementById("display");
+		// el.removeChild(filterInfoEl);
+		// filterDisplay.createDisplay();	
 	});
 	
 	// Create a listener for the remove filter button

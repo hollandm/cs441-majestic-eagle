@@ -39,6 +39,10 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
 	this.createMenu = function() {
 		return cs441GoogleMapsViz.createMenu.call(this);
 	};
+	
+	this.update = function() {
+		this.menuItems = cs441GoogleMapsViz.getInactiveFilters();
+	};
 };
 
 /*

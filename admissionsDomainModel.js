@@ -71,6 +71,7 @@ cs441GoogleMapsViz.getInactiveFilters = function() {
 			delete inactiveFilters[key];
 		}
 	}
+
 	return inactiveFilters;
 };
 
@@ -103,7 +104,7 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
  * @param filterName The name of the filter to add
  * @return void 
  */
-cs441GoogleMapsViz.addFilter = function(filterName, input){
+cs441GoogleMapsViz.addFilter = function(filterName){
 	// update isActive status of specified filter
 	cs441GoogleMapsViz.filterList[filterName].isActive = true;	
 	
