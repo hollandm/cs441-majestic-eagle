@@ -1,55 +1,7 @@
 High School, StreetAddress, City, State, Zip
-Adrian High School,305 Owyhee,Adrian, OR, 97901
-Aloha High School,18550 SW Kinnaman Rd,Beaverton, OR, 97007
-Alpha High School,876 NE 8th St,Gresham, OR, 97030
-Alsea High School,301 S 3rd,Alsea, OR, 97324
-Amity High School,503 Oak Ave,Amity, OR, 97101
-Arlington High School,1200 Main St,Arlington, OR, 97812
-Ashland High School,201 S Mountain Ave,Ashland, OR, 97520
-Astoria High School,1001 W Marine Dr,Astoria, OR, 97103
-Baker High School,2500 E St,Baker City, OR, 97814
-Bandon High School,550 9th St SW,Bandon, OR, 97411
-Banks High School,450 S Main St,Banks, OR, 97106
-Beaverton High School,13000 SW Second St,Beaverton, OR, 97005
-Bend High School,230 NE 6th St,Bend, OR, 97701
-Benson Polytechnic High School,546 NE 12th Ave,Portland, OR, 97232
-Biztech High School,3905 SE 91st Ave,Portland, OR, 97266
-Brookings Harbor High School,625 Pioneer Rd,Brookings, OR, 97415
-Burns High School,1100 OR, Ave,Burns, OR, 97720
-Canby High School,721 SW 4th Ave,Canby, OR, 97013
-Career Tech High School,801 SW Highway 101 Suite 404,Lincoln City, OR, 97367
-Cascade Christian High School,525 East E,Jacksonville, OR, 97530
-Cascade High School,10226 Marion Rd SE,Turner, OR, 97392
-Centennial High School,3505 SE 182nd Ave,Gresham, OR, 97030
-Central Catholic High School,2401 SE Stark Street,Portland, OR, 97214
-Central High School,1530 Monmouth St,Independence, OR, 97351
-Central Linn High School,32433 Hwy 228,Halsey, OR, 97348
-Century High School,2000 SE Century Blvd,Hillsboro, OR, 97123
-Chiloquin High School,300 Elm St.,Chiloquin, OR, 97624
-Churchill High School,1850 Bailey Hill Road,Eugene, OR, 97405
-Clackamas High School,14486 SE 122nd Ave,Clackamas, OR, 97015
-Clatskanie High School,471 SW Belair Dr,Clatskanie, OR, 97016
-Cleveland High School,3400 SE 26th Ave,Portland, OR, 97202
-Colton High School,30205 S Wall St,Colton, OR, 97017
-Condon High School,210 E. Bayard St.,Condon, OR, 97823
-Coquille High School,499 W. Central,Coquille, OR, 97423
-Corbett High School,35800 E Historic Columbia River Hwy,Corbett, OR, 97019
-Corvallis High School,836 NW 11th St.,Corvallis, OR, 97330
-Cottage Grove High School,1375 S River Rd,Cottage Grove, OR, 97424
-Crane Union High School,43277 Crane Venator Ln,Crane, OR, 97732
-Crater High School,655 N. Third,Central Point, OR, 97502
-Crescent Valley High School,4444 NW Highland Dr,Corvallis, OR, 97330
-Creswell High School,33390 E Nieblock Ln,Creswell, OR, 97426
-Crook County High School,1100 SE Lynn Blvd,Prineville, OR, 97754
-Crow High School,25863 Crow Rd,Eugene, OR, 97402
-Culver High School,Culver, OR, 97734
-Dallas High School,1250 Holman Ave,Dallas, OR, 97338
-David Douglas High School,1001 SE 135th Ave,Portland, OR, 97233
-Dayton High School,801 Ferry St,Dayton, OR, 97114
-Douglas High School,1381 NW Douglas,Winston, OR, 97496
 Eagle Point High School,203 N Platt St,Eagle Point, OR, 97524
 Edwin Brown High School,850 SW Antler,Redmond, OR, 97756
-Elgin High School,1400 Birch Street,Elgin, OR, 97827,
+Elgin High School,1400 Birch Street,Elgin, OR, 97827
 Elkton High School, 739 River Rd,Elkton, OR, 97436
 Elmira High School,24936 Fir Grove Ln,Elmira, OR, 97437
 Estacada High School,355 NE 6th Ave,Estacada, OR, 97023
@@ -109,7 +61,7 @@ McLoughlin High School,120 S Main St,Milton-Freewater, OR, 97862
 McMinnville High School,615 E 15th St,McMinnville, OR, 97128
 Milwaukie High School,11300 SE 23 Ave.,Milwaukie, OR, 97222
 Mohawk High School,38300 Wendling Rd,Marcola, OR, 97454
-Molalla High School,357 Frances Street,Molalla, OR, 97038
+Molalla High School,357 Frances Street,
 Monroe High School,365 N 5th St,Monroe, OR, 97456
 Mount View High School,2755 NE 27th St,Bend, OR, 97701
 Myrtle Point High School,717 4th St,Myrtle Point, OR, 97458
@@ -134,7 +86,7 @@ Parkrose High School,12003 NE Shaver St,Portland, OR, 97220
 Pendleton High School,1800 NW Carden Ave,Pendleton, OR, 97801
 Philomath High School,2054 Applegate St,Philomath, OR, 97370
 Phoenix High School,745 N Rose St,Phoenix, OR, 97535
-Pilot Rock High School,101 NE Cherry St.,BB,Pilot Rock, OR, 97868
+Pilot Rock High School,101 NE Cherry St.,BB
 Pine Eagle High School,375a N. Main Street,Halfway, OR, 97834
 Pleasant Hill High School,36386 Hwy 58,Pleasant Hill, OR, 97455
 Rainier Junior/Senior High School,28170 Old Rainier Hwy,Rainier, OR, 97048
@@ -154,7 +106,7 @@ Seaside High School,1901 N Holladay Dr,Seaside, OR, 97138
 Sheldon High School,2455 Willakenzie Rd,Eugene, OR, 97401
 Sherman High School,65912 High School Lp,Moro, OR, 97039
 Sherwood High School,16956 SW Meinecke Rd,Sherwood, OR, 97140
-Silverton High School,1700 W. McKinney Butte Rd,Sisters, OR, 97759
+Silverton High School,1700 W. McKinney Butte Rd,
 Sisters High School,1700 McKenzie Hwy,Sisters, OR, 97759
 Siuslaw High School,2975 Oak St,Florence, OR, 97439
 South Albany High School,3705 Columbus St SE,Albany, OR, 97322
@@ -185,7 +137,7 @@ Umatilla High School,1400 7th Street,Umatilla, OR, 97882
 Union High School,540 S Main St,Union, OR, 97883
 Vale High School,505 Viking Dr,Union, OR, 97883
 Vernonia High School,299 Bridge St,Vernonia, OR, 97064
-Waldport High School,320 Lower Crestline Drive,Waldport, OR, 97394
+Waldport High School,320 Lower Crestline Drive,
 Wallowa High School,315 1st St,Wallowa, OR, 97885
 Warrenton High School,1700 SE Main,Warrenton, OR, 97146
 West Albany High School,1130 Queen Ave SW,Albany, OR, 97321

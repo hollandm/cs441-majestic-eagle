@@ -90,6 +90,7 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
 	//remove from display (done by controller...not model...)
 	
 	//refilter high school information
+
 };
 
 /*
@@ -126,3 +127,4 @@ cs441GoogleMapsViz.addFilter = function(filterName, input){
 cs441GoogleMapsViz.updateHighSchools = function() {
 	//TODO: implement
 };
+

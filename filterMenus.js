@@ -74,3 +74,4 @@ cs441GoogleMapsViz.createMenu = function() {
 	cs441GoogleMapsViz.addEvent(document.getElementById(this.divId), 'change', this.action);
 
 };
+

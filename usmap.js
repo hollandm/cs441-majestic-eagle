@@ -179,6 +179,7 @@ cs441GoogleMapsViz.initialize = function() {
 		center : usa,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
+	cs441GoogleMapsViz.map = map;
 	
 	// Create a listener for the add filter button
 	// TODO: currently only adds the high school filter
@@ -247,8 +248,9 @@ cs441GoogleMapsViz.initialize = function() {
 	//
 	// Create the filter display panel
 	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
-	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
-	filterDisplay.createDisplay();
+	
+	//var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
+	//filterDisplay.createDisplay();
 	
 };
 // Setup an event listener to execute the init() function for this namespace
@@ -440,6 +442,7 @@ google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
 	// cs441GoogleMapsViz.addEvent(document.getElementById('lookupButton'), 'click', function() {
 		// return cs441GoogleMapsViz.lookup(layerArray, geocoder);
 	// });
+
 
 
 
