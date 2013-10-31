@@ -195,19 +195,8 @@ cs441GoogleMapsViz.initialize = function() {
 		filterMenu.update();
 		filterMenu.createMenu();
 		
-		// removes old filter display and replaces it with a new one containing updated information
-		// TODO: rather than creating new object, find a way to update content and refresh
-		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
-		el = document.getElementById("filterPanel");		
-		filterInfo = document.createElement("p");
- 		text = document.createTextNode(selectedFilter + ": ");
-		strongText = document.createElement("strong");
- 		strongText.appendChild(text);
- 		filterInfo.appendChild(strongText);
-		text = document.createTextNode(activeFilters[selectedFilter].input);
-
-		filterInfo.appendChild(text);
-		el.appendChild(filterInfo);
+		// update filter display
+		filterDisplay.update(selectedFilter);
 
 			
 		

@@ -35,6 +35,20 @@ cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId) {
 	this.createDisplay = function() {
 		return cs441GoogleMapsViz.createDisplay.call(this);
 	};
+	this.update = function(selectedFilter){
+		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
+		el = document.getElementById("filterPanel");		
+		filterInfo = document.createElement("p");
+		filterInfo.setAttribute("id", "info"+selectedFilter);
+ 		text = document.createTextNode(selectedFilter + ": ");
+		strongText = document.createElement("strong");
+ 		strongText.appendChild(text);
+ 		filterInfo.appendChild(strongText);
+		text = document.createTextNode(activeFilters[selectedFilter].input);
+
+		filterInfo.appendChild(text);
+		el.appendChild(filterInfo);
+	};
 
 };
 
