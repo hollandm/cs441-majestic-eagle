@@ -205,9 +205,15 @@ cs441GoogleMapsViz.initialize = function() {
 		filterDisplay.createDisplay();	
 	});
 	
-	// Create a listener for the remove filter button
-	//cs441GoogleMapsViz.addEvent(document.get)
-	
+	// TODO: Create a listener for the remove filter button
+	// Create a listener for each marker:
+	for(var i = 0; i < markers.length; i++) {
+		google.maps.event.addListener('click', function() { 
+			infowindow.open(map, markers[i]);
+		});
+	}
+
+			
 	
 //<-----------Where UNUSED CODE2 was------->
 
@@ -223,16 +229,7 @@ cs441GoogleMapsViz.initialize = function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});
 	filterMenu.createMenu();
-	
-	//
-	// Constructing the Filter Display Panel
-	//
-	// Create the filter display panel
-	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
-	
-	//var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
-	//filterDisplay.createDisplay();
-	
+
 };
 // Setup an event listener to execute the init() function for this namespace
 // upon page load.

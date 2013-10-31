@@ -61,7 +61,7 @@ function highschoolsResponse() {
 			//now find out how many students go to each school
 			cs441GoogleMapsViz.highShool.refreshStats();
 			
-		} 
+		}
 	}
 }
 
@@ -95,9 +95,6 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 				
 				
 				// For every school with students, add a marker to the map
-				//for (var i = 0; i < cs441GoogleMapsViz.schools.length; ++i) {
-				console.log("begin for loop");
-				console.log(cs441GoogleMapsViz.map);
 				for (ceeb in cs441GoogleMapsViz.schools) {
 					var school = cs441GoogleMapsViz.schools[ceeb];
 					var myLatlng = new google.maps.LatLng(school.lat,school.lng);
@@ -110,49 +107,6 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 					});
 					
 				};
-				console.log("end for loop");
-				
-				
-								/*
-					var i = 1;
-					var school = cs441GoogleMapsViz.schools[i];
-					console.log(cs441GoogleMapsViz.schools[i])
-					var address = school.location;
-					
-					cs441GoogleMapsViz.geocoder.geocode( { 'address': address}, function(results, status) {
-						console.log('Geocode');
-						if (status == google.maps.GeocoderStatus.OK) {
-							//map.setCenter(results[0].geometry.location);
-							var marker = new google.maps.Marker({
-								map: cs441GoogleMapsViz.map,
-								position: results[0].geometry.location,
-								title: 'Hello World!'
-							});
-						} else {
-							console.log('Geocode was not successful for the following reason: ' + status);
-							//alert('Geocode was not successful for the following reason: ' + status);
-						}
-					});
-
-				//}
-					
-					var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-
-					var marker = new google.maps.Marker({
-						position: myLatlng,
-						map: cs441GoogleMapsViz.map,
-						title: 'Hello World!'
-					});
-				//}
-
-				
-				*/
-				
-				// debug prints
-				console.log(response);
-				console.log(cs441GoogleMapsViz.schools);	
-				//console.log(response)
-				//console.log(cs441GoogleMapsViz.schools);	
 			}
 		}
 	};
