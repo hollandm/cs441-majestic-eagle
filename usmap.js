@@ -143,14 +143,22 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
  * 
  */
 cs441GoogleMapsViz.displayMapMarkers = function() {
-	//TODO: remove all high school markers.
+	//Remove all high school markers.
+	for (var i = 0; i < cs441GoogleMapsViz.markers.length; ++i) {
+		cs441GoogleMapsViz.markers[i].hideMarker();
+	}
+	//TODO: Double check what we defrence something
+	cs441GoogleMapsViz.markers = [];
+	
 	
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 		
-			cs441GoogleMapsViz.hsMarker(school);
+			var marker = new cs441GoogleMapsViz.hsMarker(school);
+			
+			cs441GoogleMapsViz.markers.push(marker);
 		}
 		
 	}

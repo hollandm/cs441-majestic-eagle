@@ -9,6 +9,8 @@
 
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
+cs441GoogleMapsViz.markers = [];
+
 
 /**
  * The high school marker class creates a map marker and a infoWindow for that marker
@@ -32,6 +34,9 @@ cs441GoogleMapsViz.hsMarker = function(school) {
       content: school.name + ", " + school.state
   	});
 	
+	// console.log(marker);
+	// marker.setMap(null);
+	
 	this.marker = marker;
 	this.infoWindow = infoWindow;
 	this.schoolCeeb = school.ceeb;
@@ -47,7 +52,14 @@ cs441GoogleMapsViz.hsMarker = function(school) {
 	    infoWindow.open(cs441GoogleMapsViz.map, marker);
 	});
 
+	this.hideMarker = function() {
+		this.marker.setMap(null);
+	}
+
+	
 };
+
+
 
 
 

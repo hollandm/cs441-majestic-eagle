@@ -122,9 +122,12 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
 cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 	// update isActive status of specified filter
 	cs441GoogleMapsViz.filterList[filterName].isActive = true;
-	cs441GoogleMapsViz.filterList[filterName].input = inputText;	
+	cs441GoogleMapsViz.filterList[filterName].input = inputText.toUpperCase(); ;	
+	
+	cs441GoogleMapsViz.refreshStats()
 	
 	// TODO: update input
+		
 	
 	// TODO: update high school information
 	
@@ -165,18 +168,36 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 cs441GoogleMapsViz.generateFiltersString = function() {
 	//TODO: All of it
 	
-	// if (cs441GoogleMapsViz.filterList["High School"].isActive) {
-		// var hsName = cs441GoogleMapsViz.filterList["High School"].name;
-		// for (ceeb in cs441GoogleMapsViz.schools) {
-			// if (cs441GoogleMapsViz.schools[ceeb].input == hsName) {
-				// query += " AND 'CEEB' == " + ceeb;
-				// break;
-			// }
-		// }	
-// 		
-	// }
+	var filterString = "";
 	
-	return "";
+	if (cs441GoogleMapsViz.filterList["High School"].isActive) {
+		
+		var hsName = cs441GoogleMapsViz.filterList["High School"].input;
+		
+		console.log(hsName)
+		
+		var found = false;
+		for (ceeb in cs441GoogleMapsViz.highSchools) {
+			if (cs441GoogleMapsViz.highSchools[ceeb].name == hsName) {
+				if (found == false) {
+					filterString += " WHERE HighSchoolCode = " + ceeb;
+				} else {
+					// filterString += " OR HighSchoolCode = " + ceeb;
+				}
+				found = true;
+				break;
+			}
+		}	
+		
+		if (!found) {
+			alert("Warning: High School \"" + hsName + "\" was not found.")
+		}
+		
+	} else {
+		
+	}
+	
+	return filterString;
 }
 
 /*
@@ -195,18 +216,28 @@ cs441GoogleMapsViz.refreshStats = function() {
 	
 	//TODO: set number of students of all high schools to 0
 	//TODO: set all high schools to inactive
+	for (ceeb in cs441GoogleMapsViz.highSchools) {
+		var school = cs441GoogleMapsViz.highSchools[ceeb];
+		school.students = 0;
+		school.isActive = false;	
+	}
+	
 	
 	var httpRequest = new XMLHttpRequest();
-	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
-			+  " WHERE HighSchoolCode > 0";
+	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey;
+			// +  " WHERE HighSchoolCode > 0";
 			
 	query += cs441GoogleMapsViz.generateFiltersString();
+	
+	console.log(query);
 	
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
 			if(httpRequest.status === 200) {
 		
 				var response = JSON.parse(httpRequest.responseText);
+		
+				console.log(response);
 		
 				//for every student, add one to their high school students count
 				for(var i = 0; i < response.rows.length; i++) {
@@ -303,7 +334,7 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 			+  " WHERE HighSchoolCode = " + ceeb;
 	// console.log(query);
 			
-	// query += cs441GoogleMapsViz.generateFiltersString();
+	query += cs441GoogleMapsViz.generateFiltersString();
 			
 			
 	function hsCallback() {
