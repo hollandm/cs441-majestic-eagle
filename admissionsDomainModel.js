@@ -133,11 +133,11 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
  * @return void 
  */
 cs441GoogleMapsViz.updateHighSchools = function() {
-	// Refresh Stats here
+	// TODO: Refresh Stats here
 	
 	// Set highSchools to inActive
 	for(var i = 0; i < highSchools.length; i++) {
-		if(filterList["HS"].isActive && filterList["HS"].name != highSchools[i].name) {
+		if(filterList["HS"].isActive && filterList["HS"].input != highSchools[i].name) {
 			highSchools[i].isActive = false;
 		}
 		else {
