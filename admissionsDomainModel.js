@@ -348,6 +348,9 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 				var school = cs441GoogleMapsViz.highSchools[ceeb];
 				// console.log(ceeb);
 				// console.log(school);
+				
+				// Reset the schools stats
+				cs441GoogleMapsViz.resetStats(school);
 		
 				//The number of people to take the average 		
 				var gpaCounted = 0;
@@ -359,14 +362,19 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 					var student = response.rows[i];
 					
 					var gpa = student[0];
-					if (gpa != NaN) {
-						school.gpa += gpa;
+					if (!isNaN(gpa)) {
+						gpa = Number(gpa);
+						school.avgGpa += gpa;
 						gpaCounted += 1;
-					} 
+					}
 					
-					var sat = (student[1] + student[2])/2;
-					if (sat != NaN) {
-						school.sat += sat;
+					var satM = student[1];
+					var satR = student[2];
+					if(!(isNaN(satM) && isNaN(satR))) {
+						satR = Number(satR);
+						satM = Number(satM);
+						var sat = (satM + satR);
+						school.avgSat += sat;
 						satCounted += 1;
 					}
 					
@@ -394,10 +402,17 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 					}
 					
 				};
-				
+							
 				//Averaging SAT and GPA
-				school.gpa /= gpaCounted;
-				school.sat /= satCounted;
+				if (school.avgGpa != 0) {
+					school.avgGpa /= gpaCounted;
+					school.avgGpa = school.avgGpa.toFixed(2);
+				}
+				if (school.avgSat != 0) {
+					school.avgSat /= satCounted;
+					school.avgSat = Math.floor(school.avgSat);
+				}
+			
 				
 				cs441GoogleMapsViz.setMarkerInfo(school);
 			}

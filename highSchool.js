@@ -59,3 +59,15 @@ cs441GoogleMapsViz.highSchool = function(ceeb, name, state, latitude, longatude)
 	this.isActive = true;
 
 };
+
+cs441GoogleMapsViz.resetStats  = function(school) {
+	school.applied = 0;
+	school.accepted = 0;
+	school.enrolled = 0;
+	school.inquired = 0;
+	
+	school.avgGpa = 0;
+	school.avgSat = 0;
+	
+	this.students = 0;
+};
