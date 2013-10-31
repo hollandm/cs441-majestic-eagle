@@ -37,7 +37,7 @@ cs441GoogleMapsViz.highSchools = {};
  * 
  * This is used to address queries to the schools database
  */
-cs441GoogleMapsViz.schoolsDatabaseKey = '1UpGFeVsC_oQlHGb96-1S4k1rYSp61v8RHynC1hs';
+cs441GoogleMapsViz.schoolsDatabaseKey = '1KliuZhCJ4hrnXxGNohfkdAea2MZuJwR7w6BLag4';
 
 /*
  * studentsDatabseKey

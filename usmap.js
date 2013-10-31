@@ -163,7 +163,7 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 		
 	}
 	
-}
+};
 
 //<--------Where UNUSED CODE was------------->
 
@@ -187,10 +187,6 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	// Create the httpRequestor for this namespace.
 	cs441GoogleMapsViz.makeRequestor();
-
-	// Encrypted IDs for the Google Fusion Table containing the
-	// Oregon high school and CEEB data.
-	var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
 
 	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
 	// available in Tanya Crenshaw's public fusion tables.
