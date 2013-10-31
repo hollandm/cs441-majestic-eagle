@@ -300,6 +300,9 @@ cs441GoogleMapsViz.initialize = function() {
 	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel");
 	filterDisplay.createDisplay();
 	
+	//lets load the high schools and student info from the databases
+	cs441GoogleMapsViz.initalizeHighSchools();
+	
 };
 // Setup an event listener to execute the init() function for this namespace
 // upon page load.
