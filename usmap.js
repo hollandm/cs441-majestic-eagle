@@ -205,11 +205,11 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	// TODO: Create a listener for the remove filter button
 	// Create a listener for each marker:
-	for(var i = 0; i < markers.length; i++) {
-		google.maps.event.addListener('click', function() { 
-			infowindow.open(map, markers[i]);
-		});
-	}
+	//for(var i = 0; i < markers.length; i++) {
+	//	google.maps.event.addListener('click', function() { 
+	//		infowindow.open(map, markers[i]);
+	//	});
+	//}
 
 			
 	
@@ -255,7 +255,7 @@ cs441GoogleMapsViz.initialize = function() {
 google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
 
 
-//###################### UNUSED CODE ##################
+//###################### UNUSED REFERENCE CODE ##################
 // /*
  // *  cs441GoogleMapsViz.lookup()
  // *
