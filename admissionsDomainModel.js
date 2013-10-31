@@ -43,17 +43,17 @@ cs441GoogleMapsViz.highSchools = [];
  * @return the list of active filters
  */
 cs441GoogleMapsViz.getActiveFilters = function() {
-	var activeFilters = cs441GoogleMapsViz.filterList;
-
+	var activeFilters = {};
+	var filters = cs441GoogleMapsViz.filterList;
+	
 	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
 		key = cs441GoogleMapsViz.allFilters[i];
-		if (cs441GoogleMapsViz.filterList[key].isActive == false){
-			delete activeFilters[key];
+		if (filters[key].isActive == true){
+			activeFilters[key] = filters[key];
 		}
 	}
 	return activeFilters;
 };
-
 /*
  * cs441GoogleMapsViz.getInactiveFilters()
  * 
@@ -64,17 +64,16 @@ cs441GoogleMapsViz.getActiveFilters = function() {
  * @return the list of inactive filters
  */
 cs441GoogleMapsViz.getInactiveFilters = function() {
-	//TODO: debug and remove the alert
-	var inactiveFilters = cs441GoogleMapsViz.filterList;
+	var inActiveFilters = {};
+	var filters = cs441GoogleMapsViz.filterList;
+	
 	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
 		key = cs441GoogleMapsViz.allFilters[i];
-		if (cs441GoogleMapsViz.filterList[key].isActive == true){
-			alert("hi");
-			delete inactiveFilters[key];
+		if (filters[key].isActive == false){
+			inActiveFilters[key] = filters[key];
 		}
 	}
-
-	return inactiveFilters;
+	return inActiveFilters;
 };
 
 /*
