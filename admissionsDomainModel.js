@@ -174,23 +174,21 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 		
 		var hsName = cs441GoogleMapsViz.filterList["High School"].input;
 		
-		console.log(hsName)
+		console.log(hsName);
 		
 		var found = false;
 		for (ceeb in cs441GoogleMapsViz.highSchools) {
 			if (cs441GoogleMapsViz.highSchools[ceeb].name == hsName) {
 				if (found == false) {
 					filterString += " WHERE HighSchoolCode = " + ceeb;
-				} else {
-					// filterString += " OR HighSchoolCode = " + ceeb;
+					found = true;
 				}
-				found = true;
 				break;
 			}
 		}	
 		
 		if (!found) {
-			alert("Warning: High School \"" + hsName + "\" was not found.")
+			alert("Warning: High School \"" + hsName + "\" was not found.");
 		}
 		
 	} else {
@@ -333,10 +331,7 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'Application_Status', 'App_Decision_Code', 'Confirmed', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
 			+  " WHERE HighSchoolCode = " + ceeb;
 	// console.log(query);
-			
-	query += cs441GoogleMapsViz.generateFiltersString();
-			
-			
+					
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
 			if(httpRequest.status === 200) {
@@ -370,7 +365,7 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 					
 					var satM = student[1];
 					var satR = student[2];
-					if(!(isNaN(satM) && isNaN(satR))) {
+					if(!(isNaN(satM) || isNaN(satR))) {
 						satR = Number(satR);
 						satM = Number(satM);
 						var sat = (satM + satR);
@@ -379,11 +374,13 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 					}
 					
 					var appStatus = student[3];
+					//console.log("appStatus: " + appStatus); 
 					if (appStatus == '') {
 						
 					}
 					
 					var appDecision = student[4];
+					//console.log("appDecision: " + appDecision);
 					if (appDecision == 'A') {
 						school.accepted += 1;
 					}
@@ -391,11 +388,12 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 						school.accepted += 1;
 					}
 					
+					//console.log("appConfirmed: " + appConfirmed);
 					var appConfirmed = student[5];
 					if (appConfirmed == 'C') {
 					
 					}
-					
+					//console.log("appEnrolled: " + appEnrolled);
 					var appEnrolled = student[6];
 					if (appEnrolled == 'CONF') {
 						school.accepted += 1;
