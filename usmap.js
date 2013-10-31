@@ -212,8 +212,8 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a listener for the add filter button
 	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
-		var inputText = document.getElementById("filterInputs").value;
-		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), inputText);
+		selectedFilter = cs441GoogleMapsViz.getMenuOption();
+		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
 		
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
@@ -226,19 +226,30 @@ cs441GoogleMapsViz.initialize = function() {
 		
 		// removes old filter display and replaces it with a new one containing updated information
 		// TODO: rather than creating new object, find a way to update content and refresh
-		// el = document.getElementById("filterPanel");
-		// filterInfoEl = document.getElementById("display");
-		// el.removeChild(filterInfoEl);
-		// filterDisplay.createDisplay();	
+		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
+		el = document.getElementById("filterPanel");		
+		filterInfo = document.createElement("p");
+ 		text = document.createTextNode(selectedFilter + ": ");
+		strongText = document.createElement("strong");
+ 		strongText.appendChild(text);
+ 		filterInfo.appendChild(strongText);
+		text = document.createTextNode(activeFilters[selectedFilter].input);
+
+		filterInfo.appendChild(text);
+		el.appendChild(filterInfo);
+
+			
+		
+		
 	});
 	
 	// TODO: Create a listener for the remove filter button
 	// Create a listener for each marker:
-	// for(var i = 0; i < markers.length; i++) {
-		// google.maps.event.addListener('click', function() { 
-			// infowindow.open(map, markers[i]);
-		// });
-	// }
+	//for(var i = 0; i < markers.length; i++) {
+	//	google.maps.event.addListener('click', function() { 
+	//		infowindow.open(map, markers[i]);
+	//	});
+	//}
 
 			
 	
@@ -277,14 +288,25 @@ cs441GoogleMapsViz.initialize = function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});
 	filterMenu.createMenu();
-
+	
+	//
+	// Constructing the Filter Display Panel
+	//
+	// Create the filter display panel
+	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
+	
+	//var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
+	//filterDisplay.createDisplay();
+	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel");
+	filterDisplay.createDisplay();
+	
 };
 // Setup an event listener to execute the init() function for this namespace
 // upon page load.
 google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
 
 
-//###################### UNUSED CODE ##################
+//###################### UNUSED REFERENCE CODE ##################
 // /*
  // *  cs441GoogleMapsViz.lookup()
  // *

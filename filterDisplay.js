@@ -44,6 +44,7 @@ cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId) {
  * Create a div to hold the 
  */
 cs441GoogleMapsViz.createDisplay = function() {
+
 	// Get the HTML element to which this menu has been assigned.
 	el = document.getElementById(this.divId);
 
@@ -56,15 +57,17 @@ cs441GoogleMapsViz.createDisplay = function() {
 
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
-	for(filter in cs441GoogleMapsViz.filterList.keys) {
+	activeFilters = cs441GoogleMapsViz.getActiveFilters();
+	// alert(activeFilters["High School"].isActive);
+	
+	for(var key in activeFilters) {
 		filterInfo = document.createElement("p");
- 		text = document.createTextNode(cs441GoogleMapsViz.filterList[filter].input + ": ");
- 		strongText = document.createElement("strong");
+ 		text = document.createTextNode(activeFilters[key].name + ": ");
+		strongText = document.createElement("strong");
  		strongText.appendChild(text);
-		filterInfo.appendChild(strongText);
-		text = document.createTextNode(cs441GoogleMapsViz.getFilterInput());
+ 		filterInfo.appendChild(strongText);
+		text = document.createTextNode(activeFilters[key].input);
 		filterInfo.appendChild(text);
-		
 		// // Add the delete button
 		// var deleteButton = document.createElement("button");
 // 		
@@ -74,7 +77,7 @@ cs441GoogleMapsViz.createDisplay = function() {
 		// text = document.createTextNode(X);
 		// deleteButton.appendChild(text);
 // 		
-		// // Add the button to the filterInfo
+		// Add the button to the filterInfo
 		// filterInfo.appendChild(deleteButton);
 // 		
 		// Add the filter info to the display
@@ -84,7 +87,5 @@ cs441GoogleMapsViz.createDisplay = function() {
 	// Append the resulting select menu to the div assigned
 	// to this object.
 	el.appendChild(filterInfoDisplay);
-
-
 
 };
