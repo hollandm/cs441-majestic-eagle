@@ -127,6 +127,28 @@
    	font-size: 10pt;
   }
    
-   
+  .divider {
+  	width: 100%;
+  	height: 4px;
+  	border-bottom: #777777 solid 1px;
+  }
+  
+  #infotitle {
+  	width: 100%;
+  	font-size: .8em;
+  	color: #444444;
+  }
+  
+  #hsname {
+	display: inline-block;
+  }
+  
+  #ceeb {
+  	margin-left: .75em;
+  	display: inline-block;
+  }
 
+  #info {
+  	font-size: 1.2em;
+  }
 

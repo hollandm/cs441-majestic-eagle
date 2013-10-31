@@ -198,7 +198,7 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 	}
 	
 	return filterString;
-}
+};
 
 /*
  * cs441GoogleMapsViz.refreshStats()

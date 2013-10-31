@@ -29,9 +29,24 @@ cs441GoogleMapsViz.hsMarker = function(school) {
 		position: myLatlng,
 		title: school.name + ", " + school.state
 	});
-	
+	var infoContent = '<div id=content>' +
+		'<div id=infotitle>' +
+		'<h2 id=hsname>' + school.name + '</h2>' +
+		'<h2 id=ceeb>CEEB: ' + school.ceeb + '</h2>'  +
+		'</div>' +
+		'<div class=divider></div>' +
+		'<ul id="info">' +
+		'<li>applied: ' + school.applied + '</li>' +
+		'<li>accepted: ' + school.accepted + '</li>' +
+		'<li>enrolled: ' + school.enrolled + '</li>' +
+		'<li>inquired: ' + school.inquired + '</li>' +
+		'<li>average GPA: ' + school.avgGpa + '</li>' +
+		'<li>average SAT: ' + school.avgSat + '</li>' +
+		'</ul>' +
+		'</div>';
+		
 	var infoWindow = new google.maps.InfoWindow({
-      content: school.name + ", " + school.state
+      content: infoContent
   	});
 	
 	// console.log(marker);
