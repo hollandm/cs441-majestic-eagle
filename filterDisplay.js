@@ -26,9 +26,8 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * 
  */
 
-cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId) {
+cs441GoogleMapsViz.FilterDisplay = function(name, className, divId) {
 	this.name = name;
-	this.idName = idName;
 	this.className = className;
 	this.divId = divId;
 
@@ -38,7 +37,7 @@ cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId) {
 	this.update = function(selectedFilter){
 		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
 		el = document.getElementById("filterPanel");		
-		filterInfo = document.createElement("p");
+		filterInfo = document.createElement("div");
 		filterInfo.setAttribute("id", "info"+selectedFilter);
  		text = document.createTextNode(selectedFilter + ": ");
 		strongText = document.createElement("strong");
@@ -62,44 +61,36 @@ cs441GoogleMapsViz.createDisplay = function() {
 	// Get the HTML element to which this menu has been assigned.
 	el = document.getElementById(this.divId);
 
-	// Create a div element
-	var filterInfoDisplay = document.createElement("div");
-
-	// Set some attributes
-	filterInfoDisplay.setAttribute("name", this.name);
-	filterInfoDisplay.setAttribute("id", this.idName);
-
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
 	activeFilters = cs441GoogleMapsViz.getActiveFilters();
-	alert(activeFilters["High School"].isActive);
 	
 	for(var key in activeFilters) {
-		filterInfo = document.createElement("p");
+		// Create an element to write in
+		filterInfo = document.createElement("div");
+		filterInfo.setAttribute("class", this.className);
  		text = document.createTextNode(activeFilters[key].name + ": ");
 		strongText = document.createElement("strong");
  		strongText.appendChild(text);
  		filterInfo.appendChild(strongText);
 		text = document.createTextNode(activeFilters[key].input);
 		filterInfo.appendChild(text);
+		
+		el.appendChild(filterInfo);
+		
 		// // Add the delete button
 		// var deleteButton = document.createElement("button");
-// 		
+ 		
 		// // Set the attribute for the remove filter button
 		// deleteButton.setAttrbute("id", cs441GoogleMapsViz.getMenuOption() + "deleteButton");
 		// // Add the 'X' to the button
 		// text = document.createTextNode(X);
 		// deleteButton.appendChild(text);
-// 		
+ 		
 		// Add the button to the filterInfo
 		// filterInfo.appendChild(deleteButton);
-// 		
+ 		
 		// Add the filter info to the display
-		filterInfoDisplay.appendChild(filterInfo);
+
 	}
-
-	// Append the resulting select menu to the div assigned
-	// to this object.
-	el.appendChild(filterInfoDisplay);
-
 };

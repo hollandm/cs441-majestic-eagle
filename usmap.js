@@ -135,11 +135,40 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
 
 };
 
+
+/**
+ * Displays Markers
+ * 
+ * Displays the markers for all active highschools in the model
+ * 
+ */
+cs441GoogleMapsViz.displayMapMarkers = function() {
+	//TODO: remove all high school markers.
+	
+	// For every school with students, add a marker to the map
+	for (ceeb in cs441GoogleMapsViz.highSchools) {
+		var school = cs441GoogleMapsViz.highSchools[ceeb];
+		if (school.isActive) {
+		
+			var myLatlng = new google.maps.LatLng(school.lat,school.lng);
+			
+			//console.log("Creating Marker for " + school.name + ", " + school.state);	
+			var marker = new google.maps.Marker({
+				map: cs441GoogleMapsViz.map,
+				position: myLatlng,
+				title: school.name + ", " + school.state
+			});
+		}
+		
+	}
+	
+}
+
 //<--------Where UNUSED CODE was------------->
 
 
 
-/*TODO: modify this function for our project
+/*
  *  cs441GoogleMapsViz.initialize()
  *
  *  A function to: 
@@ -198,14 +227,21 @@ cs441GoogleMapsViz.initialize = function() {
 		// update filter display
 		filterDisplay.update(selectedFilter);
 
+
 			
 		
 		
 	});
 	
-	// Create a listener for the remove filter button
-	//cs441GoogleMapsViz.addEvent(document.get)
-	
+	// TODO: Create a listener for the remove filter button
+	// Create a listener for each marker:
+	//for(var i = 0; i < markers.length; i++) {
+	//	google.maps.event.addListener('click', function() { 
+	//		infowindow.open(map, markers[i]);
+	//	});
+	//}
+
+			
 	
 //<-----------Where UNUSED CODE2 was------->
 
@@ -243,8 +279,16 @@ cs441GoogleMapsViz.initialize = function() {
 	});
 	filterMenu.createMenu();
 	
-	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel");
+	//
+	// Constructing the Filter Display Panel
+	//
+	// Create the filter display panel
+	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
+	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "filterBox", "filterPanel");
 	filterDisplay.createDisplay();
+	
+	//lets load the high schools and student info from the databases
+	cs441GoogleMapsViz.initalizeHighSchools();
 	
 };
 // Setup an event listener to execute the init() function for this namespace
@@ -252,7 +296,7 @@ cs441GoogleMapsViz.initialize = function() {
 google.maps.event.addDomListener(window, 'load', cs441GoogleMapsViz.initialize);
 
 
-//###################### UNUSED CODE ##################
+//###################### UNUSED REFERENCE CODE ##################
 // /*
  // *  cs441GoogleMapsViz.lookup()
  // *
