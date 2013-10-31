@@ -38,6 +38,7 @@ cs441GoogleMapsViz.FilterDisplay = function(name, className, divId) {
 		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
 		el = document.getElementById("filterPanel");		
 		filterInfo = document.createElement("div");
+		filterInfo.setAttribute("class", this.className);
 		filterInfo.setAttribute("id", "info"+selectedFilter);
  		text = document.createTextNode(selectedFilter + ": ");
 		strongText = document.createElement("strong");
