@@ -29,24 +29,10 @@ cs441GoogleMapsViz.hsMarker = function(school) {
 		position: myLatlng,
 		title: school.name + ", " + school.state
 	});
-	var infoContent = '<div id=content>' +
-		'<div id=infotitle>' +
-		'<h2 id=hsname>' + school.name + '</h2>' +
-		'<h2 id=ceeb>CEEB: ' + school.ceeb + '</h2>'  +
-		'</div>' +
-		'<div class=divider></div>' +
-		'<ul id="info">' +
-		'<li>applied: ' + school.applied + '</li>' +
-		'<li>accepted: ' + school.accepted + '</li>' +
-		'<li>enrolled: ' + school.enrolled + '</li>' +
-		'<li>inquired: ' + school.inquired + '</li>' +
-		'<li>average GPA: ' + school.avgGpa + '</li>' +
-		'<li>average SAT: ' + school.avgSat + '</li>' +
-		'</ul>' +
-		'</div>';
+
 		
 	var infoWindow = new google.maps.InfoWindow({
-      content: infoContent
+      content: ""
   	});
 	
 	// console.log(marker);
@@ -69,13 +55,47 @@ cs441GoogleMapsViz.hsMarker = function(school) {
 
 	this.hideMarker = function() {
 		this.marker.setMap(null);
-	}
+	};
 
 	
 };
 
 
-
+/*
+ * cs441GoogleMapsViz.setMarkerInfo()
+ * TODO: shit
+ *
+ * @param none
+ * @return void 
+ */
+cs441GoogleMapsViz.setMarkerInfo = function(school) {
+		var infoContent = '<div id=content>' +
+		'<div id=infotitle>' +
+		'<h2 id=hsname>' + school.name + '</h2>' +
+		'<h2 id=ceeb>CEEB: ' + school.ceeb + '</h2>'  +
+		'</div>' +
+		'<div class=divider></div>' +
+		'<ul id="info">' +
+		'<li>applied: ' + school.applied + '</li>' +
+		'<li>accepted: ' + school.accepted + '</li>' +
+		'<li>enrolled: ' + school.enrolled + '</li>' +
+		'<li>inquired: ' + school.inquired + '</li>' +
+		'<li>average GPA: ' + school.avgGpa + '</li>' +
+		'<li>average SAT: ' + school.avgSat + '</li>' +
+		'</ul>' +
+		'</div>';
+		
+		var mks = cs441GoogleMapsViz.markers;
+		
+		for (var i = 0; i < mks.length; ++i) {
+			mk = mks[i];
+			if (mk.schoolCeeb == school.ceeb) {
+				mk.infoWindow.content = infoContent;
+				mk.infoWindow.open(cs441GoogleMapsViz.map, mk.marker);
+				break;
+			}
+		}
+};
 
 
 

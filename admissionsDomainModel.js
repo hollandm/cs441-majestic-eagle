@@ -395,13 +395,15 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 					
 				};
 				
+				//Averaging SAT and GPA
+				school.gpa /= gpaCounted;
+				school.sat /= satCounted;
 				
-			
-		
+				cs441GoogleMapsViz.setMarkerInfo(school);
 			}
 		}
 	}
 	
-	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
-	
+	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);		
 };
+
