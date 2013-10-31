@@ -145,8 +145,6 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
  */
 cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 	
-	cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
-	
 	var url = "https://www.googleapis.com/fusiontables/v1/query";
 	url = url + "?sql=";
 	url = url + query;
@@ -158,29 +156,15 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 	
 }
 
-/*
- * cs441GoogleMapsViz.updateHighSchools()
+/**
+ * generateFiltersString
  * 
- * Updates the High School information based on the active filters.
- * That is, each highSchool will either update it's information based on the filters,
- * or it will be deleted based on the following:
- * 		-There are no students that meet the criteria.
- * 		-The "High School" filter is active and filtering out the High School 
- *
- * @param none
- * @return void 
+ * generates a string to append to a SQL query to filter the results with the filters the 
+ * 		user has selected
  */
-cs441GoogleMapsViz.updateHighSchools = function() {
+cs441GoogleMapsViz.generateFiltersString = function() {
+	//TODO: All of it
 	
-	//TODO: set number of students of all high schools to 0
-	//TODO: set all high schools to inactive
-	
-	var httpRequest = new XMLHttpRequest();
-	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
-			+  " WHERE HighSchoolCode > 0";
-			
-	//TODO: add to query to support filters
-			
 	// if (cs441GoogleMapsViz.filterList["High School"].isActive) {
 		// var hsName = cs441GoogleMapsViz.filterList["High School"].name;
 		// for (ceeb in cs441GoogleMapsViz.schools) {
@@ -191,7 +175,31 @@ cs441GoogleMapsViz.updateHighSchools = function() {
 		// }	
 // 		
 	// }
+	
+	return "";
+}
+
+/*
+ * cs441GoogleMapsViz.refreshStats()
+ * 
+ * Updates the High School information based on the active filters.
+ * That is, each highSchool will either update it's information based on the filters
+ * 		-There are no students that meet the criteria.
+ *
+ * @param none
+ * @return void 
+ */
+cs441GoogleMapsViz.refreshStats = function() {
+	
+	//TODO: set number of students of all high schools to 0
+	//TODO: set all high schools to inactive
+	
+	var httpRequest = new XMLHttpRequest();
+	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
+			+  " WHERE HighSchoolCode > 0";
 			
+	query += cs441GoogleMapsViz.generateFiltersString();
+	
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
 			if(httpRequest.status === 200) {
@@ -236,7 +244,8 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'CEEB', 'School', 'State', 'Latitude', 'Longitude' FROM " + cs441GoogleMapsViz.schoolsDatabaseKey;
-			
+		
+	query += cs441GoogleMapsViz.generateFiltersString();
 			
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
@@ -257,12 +266,12 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 					
 					// add an entry in our schools list with ceeb, name, and location.
 					cs441GoogleMapsViz.highSchools[ceeb] 
-						= new cs441GoogleMapsViz.highShool.highSchool(ceeb, hs[1], hs[2], hs[3], hs[4]);
+						= new cs441GoogleMapsViz.highSchool(ceeb, hs[1], hs[2], hs[3], hs[4]);
 					
 				}
 				
 				//now find out how many students go to each school
-				cs441GoogleMapsViz.updateHighSchools();
+				cs441GoogleMapsViz.refreshStats();
 		
 			}
 		}
@@ -273,3 +282,93 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 };
 
 
+/*
+ * cs441GoogleMapsViz.updateHighSchool()
+ * 
+ * Updates the information of the given High School based on the active filters.
+ * That is, each highSchool will either update it's information based on the filters,
+ *
+ * @param none
+ * @return void 
+ */
+cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
+	
+	//TODO: set number of students of all high schools to 0
+	//TODO: set all high schools to inactive
+	
+	var httpRequest = new XMLHttpRequest();
+	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'Application_Status', 'App_Decision_Code', 'Confirmed', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
+			+  " WHERE HighSchoolCode = " + ceeb;
+	// console.log(query);
+			
+	// query += cs441GoogleMapsViz.generateFiltersString();
+			
+			
+	function hsCallback() {
+		if (httpRequest.readyState === 4) {
+			if(httpRequest.status === 200) {
+		
+				var response = JSON.parse(httpRequest.responseText);
+				console.log(response);
+		
+				
+				var school = cs441GoogleMapsViz.highSchools[ceeb];
+				// console.log(ceeb);
+				// console.log(school);
+		
+				//The number of people to take the average 		
+				var gpaCounted = 0;
+				var satCounted = 0;
+		
+						
+				//for every student, add one to their high school students count
+				for(var i = 0; i < response.rows.length; i++) {
+					var student = response.rows[i];
+					
+					var gpa = student[0];
+					if (gpa != NaN) {
+						school.gpa += gpa;
+						gpaCounted += 1;
+					} 
+					
+					var sat = (student[1] + student[2])/2;
+					if (sat != NaN) {
+						school.sat += sat;
+						satCounted += 1;
+					}
+					
+					var appStatus = student[3];
+					if (appStatus == '') {
+						
+					}
+					
+					var appDecision = student[4];
+					if (appDecision == 'A') {
+						school.accepted += 1;
+					}
+					if (appDecision != undefined) {
+						school.accepted += 1;
+					}
+					
+					var appConfirmed = student[5];
+					if (appConfirmed == 'C') {
+					
+					}
+					
+					var appEnrolled = student[6];
+					if (appEnrolled == 'CONF') {
+						school.accepted += 1;
+					}
+					
+				};
+				
+				
+			
+		
+			}
+		}
+	}
+	
+	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
+	
+};

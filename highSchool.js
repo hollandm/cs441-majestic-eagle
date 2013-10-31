@@ -9,8 +9,6 @@
 
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
-cs441GoogleMapsViz.highShool = {};
-
 /**
  * highSchool
  * This object models a high school and how it is displayed.
@@ -41,7 +39,7 @@ cs441GoogleMapsViz.highShool = {};
  * 					by the 'highSchool' filter (boolean)
  * 
  */
-cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, state, latitude, longatude) {
+cs441GoogleMapsViz.highSchool = function(ceeb, name, state, latitude, longatude) {
 	
 	this.ceeb = ceeb;
 	this.name = name;

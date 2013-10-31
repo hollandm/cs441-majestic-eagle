@@ -150,14 +150,7 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 		
-			var myLatlng = new google.maps.LatLng(school.lat,school.lng);
-			
-			//console.log("Creating Marker for " + school.name + ", " + school.state);	
-			var marker = new google.maps.Marker({
-				map: cs441GoogleMapsViz.map,
-				position: myLatlng,
-				title: school.name + ", " + school.state
-			});
+			cs441GoogleMapsViz.hsMarker(school);
 		}
 		
 	}
