@@ -28,9 +28,8 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * @return The value of the html element with id "filterMenu"
  */
 cs441GoogleMapsViz.getMenuOption = function() {
-	return "High School"; 
-	//TODO: return the following
-	//return document.getElementById("filterMenu").value;
+	selectEl = document.getElementById("filter");
+	return selectEl.options[selectEl.selectedIndex].value;
 };
 
 /*
@@ -184,8 +183,8 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a listener for the add filter button
 	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
-		// TODO: only works for high school filter
-		cs441GoogleMapsViz.addFilter("High School");
+		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption());
+
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
 		// TODO: rather than creating new object, find a way to update and refresh

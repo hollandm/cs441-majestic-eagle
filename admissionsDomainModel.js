@@ -64,10 +64,11 @@ cs441GoogleMapsViz.getActiveFilters = function() {
  */
 cs441GoogleMapsViz.getInactiveFilters = function() {
 	var inactiveFilters = cs441GoogleMapsViz.filterList;
-
 	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
 		key = cs441GoogleMapsViz.allFilters[i];
 		if (cs441GoogleMapsViz.filterList[key].isActive == true){
+			alert("hi");
+
 			delete inactiveFilters[key];
 		}
 	}
