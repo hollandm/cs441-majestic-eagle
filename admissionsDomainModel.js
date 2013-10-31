@@ -64,12 +64,12 @@ cs441GoogleMapsViz.getActiveFilters = function() {
  * @return the list of inactive filters
  */
 cs441GoogleMapsViz.getInactiveFilters = function() {
+	//TODO: debug and remove the alert
 	var inactiveFilters = cs441GoogleMapsViz.filterList;
 	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
 		key = cs441GoogleMapsViz.allFilters[i];
 		if (cs441GoogleMapsViz.filterList[key].isActive == true){
 			alert("hi");
-
 			delete inactiveFilters[key];
 		}
 	}
@@ -90,9 +90,7 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
 	//udpate isActive status
 	cs441GoogleMapsViz.filterList[filterName].isActive = false;
 	
-	//remove from display (done by controller...not model...)
-	
-	//refilter high school information
+	//TODO:refilter high school information
 
 };
 
@@ -112,9 +110,9 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 	cs441GoogleMapsViz.filterList[filterName].isActive = true;
 	cs441GoogleMapsViz.filterList[filterName].input = inputText;	
 	
-	// update input
+	// TODO: update input
 	
-	// update high school information
+	// TODO: update high school information
 	
 	
 };

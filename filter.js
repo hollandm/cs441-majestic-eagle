@@ -15,6 +15,8 @@
 
 var cs441GoogleMapViz = cs441GoogleMapsViz || {};
 
+
+//TODO: remove this reference code.
 // cs441GoogleMapsViz.filter = function(name, input, status){
 	// this.name = name;
 	// this.isActive = status;
