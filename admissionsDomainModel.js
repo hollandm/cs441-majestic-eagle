@@ -3,7 +3,7 @@
  *
  *  A collection of objects and functions to model and update the admissions data.
  *
- *  @author Taylor W. Nightingale
+ *  @author Taylor W. Nightingale and Sherry Liao
  */
 
 /* From JavaScript patterns by S. Stefanov,
@@ -123,13 +123,32 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 /*
  * cs441GoogleMapsViz.updateHighSchools()
  * 
- * Updates the High School information based on the active filters
- * TODO: Add more documentation regarding the nature of udating h.s. 
+ * Updates the High School information based on the active filters.
+ * That is, each highSchool will either update it's information based on the filters,
+ * or it will be deleted based on the following:
+ * 		-There are no students that meet the criteria.
+ * 		-The "High School" filter is active and filtering out the High School 
  *
  * @param none
  * @return void 
  */
 cs441GoogleMapsViz.updateHighSchools = function() {
-	//TODO: implement
+	// Refresh Stats here
+	
+	// Set highSchools to inActive
+	for(var i = 0; i < highSchools.length; i++) {
+		if(filterList["HS"].isActive && filterList["HS"].name != highSchools[i].name) {
+			highSchools[i].isActive = false;
+		}
+		else {
+			highSchools[i].isActive = false;
+		}
+		if (highSchools[i].students <= 0) {
+			highSchools[i].isActive = false;
+		}
+		else {
+			highSchools[i].isActive = false;
+		}
+	}
 };
 
