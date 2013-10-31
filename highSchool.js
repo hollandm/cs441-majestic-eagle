@@ -37,6 +37,9 @@ cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, state, latitude, 
 	this.students = 0;
 	
 	this.isActive = true;
+	
+	this.marker = null;
+	this.infoWindow = "";
 
 };
 
@@ -74,7 +77,7 @@ function highschoolsResponse() {
 			
 		}
 	}
-}
+};
 
 /**
  * refreshStats
