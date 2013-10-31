@@ -135,6 +135,35 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
 
 };
 
+
+/**
+ * Displays Markers
+ * 
+ * Displays the markers for all active highschools in the model
+ * 
+ */
+cs441GoogleMapsViz.displayMapMarkers = function() {
+	//TODO: remove all high school markers.
+	
+	// For every school with students, add a marker to the map
+	for (ceeb in cs441GoogleMapsViz.highSchools) {
+		var school = cs441GoogleMapsViz.highSchools[ceeb];
+		if (school.isActive) {
+		
+			var myLatlng = new google.maps.LatLng(school.lat,school.lng);
+			
+			//console.log("Creating Marker for " + school.name + ", " + school.state);	
+			var marker = new google.maps.Marker({
+				map: cs441GoogleMapsViz.map,
+				position: myLatlng,
+				title: school.name + ", " + school.state
+			});
+		}
+		
+	}
+	
+}
+
 //<--------Where UNUSED CODE was------------->
 
 
@@ -205,11 +234,11 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	// TODO: Create a listener for the remove filter button
 	// Create a listener for each marker:
-	for(var i = 0; i < markers.length; i++) {
-		google.maps.event.addListener('click', function() { 
-			infowindow.open(map, markers[i]);
-		});
-	}
+	// for(var i = 0; i < markers.length; i++) {
+		// google.maps.event.addListener('click', function() { 
+			// infowindow.open(map, markers[i]);
+		// });
+	// }
 
 			
 	

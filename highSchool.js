@@ -57,111 +57,26 @@ function highschoolsResponse() {
 			var response = JSON.parse(cs441GoogleMapsViz.HShttpRequest.responseText);
 
 			// Create an empty list of schools
-			cs441GoogleMapsViz.schools = {};
+			// cs441GoogleMapsViz.schools = {};
 			
 			// for every school in the database, add an entry in our schools list with ceeb, name, and location.
 			for(var i = 0; i < response.rows.length; i++) {
 				var hs = response.rows[i];
+				var ceeb = hs[0];
 				
-				cs441GoogleMapsViz.schools[hs[0]] = new cs441GoogleMapsViz.highShool.highSchool(hs[0], hs[1], hs[2], hs[3], hs[4]);
+				cs441GoogleMapsViz.highSchools[ceeb] = new cs441GoogleMapsViz.highShool.highSchool(hs[0], hs[1], hs[2], hs[3], hs[4]);
 				
 			}
 			
-			console.log(cs441GoogleMapsViz.schools);
+			console.log(cs441GoogleMapsViz.highSchools);
 			
 			//now find out how many students go to each school
-			cs441GoogleMapsViz.highShool.refreshStats();
-			
+			cs441GoogleMapsViz.updateHighSchools();
 		}
 	}
 }
 
-/**
- * refreshStats
- * 
- * queries the students database to find out how many students at each school
- * meet the filter criterea
- * 
- */
-cs441GoogleMapsViz.highShool.refreshStats = function() {
-
-	// Create the function to call when the query response is recieved	
-	function respondStats() {
-		// If we didn't have an error
-		if (cs441GoogleMapsViz.statsHttpRequest.readyState === 4) {
-			if(cs441GoogleMapsViz.statsHttpRequest.status === 200) {
-		
-				var response = JSON.parse(cs441GoogleMapsViz.statsHttpRequest.responseText);
-				
-				//for every student, add one to their high school students count
-				for(var i = 0; i < response.rows.length; i++) {
-					var ceeb = response.rows[i];
-					
-					if (typeof cs441GoogleMapsViz.schools[ceeb] != 'undefined') {
-						cs441GoogleMapsViz.schools[ceeb].students += 1;
-					} else {
-						//console.log("Invalid CEEB: "+ceeb);
-					}	
-				};
-				
-				
-				// For every school with students, add a marker to the map
-				for (ceeb in cs441GoogleMapsViz.schools) {
-					var school = cs441GoogleMapsViz.schools[ceeb];
-					var myLatlng = new google.maps.LatLng(school.lat,school.lng);
-					
-					//console.log("Creating Marker for " + school.name + ", " + school.state);	
-					var marker = new google.maps.Marker({
-						map: cs441GoogleMapsViz.map,
-						position: myLatlng,
-						title: school.name + ", " + school.state
-					});
-					
-				};
-			}
-		}
-	};
-	
-	
-	
-	// We want the the ceeb of all the students that meet our filters
-	var query = "SELECT 'HighSchoolCode' FROM 13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624 WHERE HighSchoolCode > 0";
-	
-
-	//TODO: Add Filter Code Here
-	//
-	//Example:
-	//query += " AND WHERE HS_GPA = 4"	
-	
-	if (cs441GoogleMapsViz.filterList["High School"].isActive) {
-		var hsName = cs441GoogleMapsViz.filterList["High School"].name;
-		for (ceeb in cs441GoogleMapsViz.schools) {
-			if (cs441GoogleMapsViz.schools[ceeb].input == hsName) {
-				query += " AND 'CEEB' == " + ceeb;
-				break;
-			}
-		}	
-		
-	}
-	
-
-	// Construct the URL to send the query
-	var url = "https://www.googleapis.com/fusiontables/v1/query";
-	url = url + "?sql=";
-	url = url + query;
-	url = url + " &key=" + cs441GoogleMapsViz.apikey;
-	
-	// Send the query
-	cs441GoogleMapsViz.statsHttpRequest = new XMLHttpRequest();
-	cs441GoogleMapsViz.statsHttpRequest.onreadystatechange = respondStats;
-	cs441GoogleMapsViz.statsHttpRequest.open('GET', url);
-	cs441GoogleMapsViz.statsHttpRequest.send();
-
-};
-
-
 // Constuct the query to the high schools server
-//var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
 var schoolEID = '1UpGFeVsC_oQlHGb96-1S4k1rYSp61v8RHynC1hs';	
 var query = "SELECT 'CEEB', 'School', 'State', 'Latitude', 'Longitude' FROM " + schoolEID;
 

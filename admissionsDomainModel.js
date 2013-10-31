@@ -30,7 +30,21 @@ cs441GoogleMapsViz.filterList = {};
  * 
  * A list of all the high schools
  */
-cs441GoogleMapsViz.highSchools = [];
+cs441GoogleMapsViz.highSchools = {};
+
+/*
+ * schoolDatabseKey
+ * 
+ * This is used to address queries to the schools database
+ */
+cs441GoogleMapsViz.schoolsDatabaseKey = '1UpGFeVsC_oQlHGb96-1S4k1rYSp61v8RHynC1hs';
+
+/*
+ * studentsDatabseKey
+ * 
+ * This is used to address queries to the schools database
+ */
+cs441GoogleMapsViz.studentsDatabaseKey = '13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624';
 
 
 /*
@@ -121,6 +135,30 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 
 
 /*
+ * fusionQuery
+ * 
+ * Given the query string we construct the url to call
+ * 
+ * @param query: the string of the SQL query we will use
+ * 
+ * @param httpRequest: the XMLHttpRequest object that we will be modifying
+ * 
+ * @param callback: the function to be used on callback
+ */
+cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
+	
+	var url = "https://www.googleapis.com/fusiontables/v1/query";
+	url = url + "?sql=";
+	url = url + query;
+	url = url + " &key=" + cs441GoogleMapsViz.apikey;
+	
+	httpRequest.onreadystatechange = callback;
+	httpRequest.open('GET', url);
+	httpRequest.send();
+	
+}
+
+/*
  * cs441GoogleMapsViz.updateHighSchools()
  * 
  * Updates the High School information based on the active filters.
@@ -133,22 +171,55 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
  * @return void 
  */
 cs441GoogleMapsViz.updateHighSchools = function() {
-	// TODO: Refresh Stats here
 	
-	// Set highSchools to inActive
-	for(var i = 0; i < highSchools.length; i++) {
-		if(filterList["HS"].isActive && filterList["HS"].input != highSchools[i].name) {
-			highSchools[i].isActive = false;
-		}
-		else {
-			highSchools[i].isActive = false;
-		}
-		if (highSchools[i].students <= 0) {
-			highSchools[i].isActive = false;
-		}
-		else {
-			highSchools[i].isActive = false;
+	//TODO: set number of students of all high schools to 0
+	//TODO: set active of high schools to 0
+	
+	var httpRequest = new XMLHttpRequest();
+	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
+			+  " WHERE HighSchoolCode > 0";
+			
+	//TODO: add to query to support filters
+			
+	// if (cs441GoogleMapsViz.filterList["High School"].isActive) {
+		// var hsName = cs441GoogleMapsViz.filterList["High School"].name;
+		// for (ceeb in cs441GoogleMapsViz.schools) {
+			// if (cs441GoogleMapsViz.schools[ceeb].input == hsName) {
+				// query += " AND 'CEEB' == " + ceeb;
+				// break;
+			// }
+		// }	
+// 		
+	// }
+			
+	function hsCallback() {
+		if (httpRequest.readyState === 4) {
+			if(httpRequest.status === 200) {
+		
+				var response = JSON.parse(httpRequest.responseText);
+		
+				//for every student, add one to their high school students count
+				for(var i = 0; i < response.rows.length; i++) {
+					var ceeb = response.rows[i];
+					
+					if (typeof cs441GoogleMapsViz.highSchools[ceeb] != 'undefined') {
+						cs441GoogleMapsViz.highSchools[ceeb].students += 1;
+						cs441GoogleMapsViz.highSchools[ceeb].isActive = true;
+						
+					} else {
+						//console.log("Invalid CEEB: "+ceeb);
+					}	
+				};
+		
+				//TODO: Try to find a way to remove this from the model
+				cs441GoogleMapsViz.displayMapMarkers();	
+		
+			}
 		}
 	}
+	
+	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
+	
+	
 };
 
