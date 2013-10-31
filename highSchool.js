@@ -3,7 +3,7 @@
  *
  * This file contains code to fetch and store the high school data. 
  *  
- * @author Matt Holland
+ * @author Matt Holland and Taylor W. Nightingale
  * @since October 27th, 2013
  */
 
@@ -21,11 +21,22 @@ cs441GoogleMapsViz.highShool.highSchool = function(ceeb, name, state, latitude, 
 	this.ceeb = ceeb;
 	this.name = name;
 	this.state = state;
+	
+	this.applied = 0;
+	this.accepted = 0;
+	this.enrolled = 0;
+	this.inquired = 0;
+	this.avgGpa = 0;
+	this.avgSat = 0;
+	
 	this.lat = latitude;
 	this.lng = longatude;
 
-	//The number of students which meet the filter results, We will only be displaying schools which have 1 or more students
+	// The number of students which meet the filter results.
+	// We will only be displaying schools which have 1 or more students
 	this.students = 0;
+	
+	this.isActive = true;
 
 };
 
