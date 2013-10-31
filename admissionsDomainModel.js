@@ -17,7 +17,7 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 /*
  * filters
- * TODO: moddify this to be a list of Filter objects
+ * This is initialized in usmap.js
  * 
  * A list that represents all of the filters.
  */
@@ -26,6 +26,7 @@ cs441GoogleMapsViz.filterList = {};
 
 /*
  * highSchools
+ * This is initialized in usmap.js
  * 
  * A list of all the high schools
  */
