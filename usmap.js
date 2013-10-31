@@ -161,7 +161,7 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 
 
 
-/*TODO: modify this function for our project
+/*
  *  cs441GoogleMapsViz.initialize()
  *
  *  A function to: 
@@ -221,7 +221,8 @@ cs441GoogleMapsViz.initialize = function() {
 		// TODO: rather than creating new object, find a way to update content and refresh
 		var activeFilters = cs441GoogleMapsViz.getActiveFilters();	
 		el = document.getElementById("filterPanel");		
-		filterInfo = document.createElement("p");
+		filterInfo = document.createElement("div");
+		filterInfo.setAttribute("class", "filterBox");
  		text = document.createTextNode(selectedFilter + ": ");
 		strongText = document.createElement("strong");
  		strongText.appendChild(text);
@@ -287,10 +288,7 @@ cs441GoogleMapsViz.initialize = function() {
 	//
 	// Create the filter display panel
 	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
-	
-	//var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel", cs441GoogleMapsViz.getSelectedFilters());
-	//filterDisplay.createDisplay();
-	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "display", "filterDisplay", "filterPanel");
+	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "filterBox", "filterPanel");
 	filterDisplay.createDisplay();
 	
 	//lets load the high schools and student info from the databases

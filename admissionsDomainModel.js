@@ -154,7 +154,7 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 	httpRequest.open('GET', url);
 	httpRequest.send();
 	
-}
+};
 
 /**
  * generateFiltersString
@@ -183,7 +183,9 @@ cs441GoogleMapsViz.generateFiltersString = function() {
  * cs441GoogleMapsViz.refreshStats()
  * 
  * Updates the High School information based on the active filters.
- * That is, each highSchool will either update it's information based on the filters
+
+ * That is, each highSchool will either update it's information based on the filters,
+ * or it will be made inactive based on the following:
  * 		-There are no students that meet the criteria.
  *
  * @param none
