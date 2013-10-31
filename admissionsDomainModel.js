@@ -103,11 +103,13 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
  * Updates the high school information accordingly.
  * 
  * @param filterName The name of the filter to add
+ * @param inputText is the text that was in the text box
  * @return void 
  */
-cs441GoogleMapsViz.addFilter = function(filterName){
+cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 	// update isActive status of specified filter
-	cs441GoogleMapsViz.filterList[filterName].isActive = true;	
+	cs441GoogleMapsViz.filterList[filterName].isActive = true;
+	cs441GoogleMapsViz.filterList[filterName].input = inputText;	
 	
 	// update input
 	
