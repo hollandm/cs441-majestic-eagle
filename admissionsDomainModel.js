@@ -14,22 +14,19 @@
  */
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
+
 /*
  * filters
- * TODO: moddify this to be a list of Filter objects
+ * This is initialized in usmap.js
  * 
  * A list that represents all of the filters.
  */
-cs441GoogleMapsViz.filters = {
-	"GPA": ["GPA"], 
-	"High School": ["HS"], 
-	"Declared Major": ["MAJOR"], 
-	"SAT (Math and Reading)": ["SAT"]
-};
+cs441GoogleMapsViz.filterList = {};
 
 
 /*
  * highSchools
+ * This is initialized in usmap.js
  * 
  * A list of all the high schools
  */
@@ -46,12 +43,19 @@ cs441GoogleMapsViz.highSchools = [];
  * @return the list of active filters
  */
 cs441GoogleMapsViz.getActiveFilters = function() {
-	//TODO: implement
-	return cs441GoogleMapsViz.filters;
+	var activeFilters = cs441GoogleMapsViz.filterList;
+
+	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
+		key = cs441GoogleMapsViz.allFilters[i];
+		if (cs441GoogleMapsViz.filterList[key].isActive == false){
+			delete activeFilters[key];
+		}
+	}
+	return activeFilters;
 };
 
 /*
- * cs441GoogleMapsViz.getInctiveFilters()
+ * cs441GoogleMapsViz.getInactiveFilters()
  * 
  * This supplies a list of the current filters that can be applied.
  * That is, any filter which has the isActive attribute set to false.
@@ -60,8 +64,17 @@ cs441GoogleMapsViz.getActiveFilters = function() {
  * @return the list of inactive filters
  */
 cs441GoogleMapsViz.getInactiveFilters = function() {
-	//TODO: implement
-	return cs441GoogleMapsViz.filters;	
+	var inactiveFilters = cs441GoogleMapsViz.filterList;
+	for(var i = 0; i < cs441GoogleMapsViz.allFilters.length; i++){
+		key = cs441GoogleMapsViz.allFilters[i];
+		if (cs441GoogleMapsViz.filterList[key].isActive == true){
+			alert("hi");
+
+			delete inactiveFilters[key];
+		}
+	}
+
+	return inactiveFilters;
 };
 
 /*
@@ -70,11 +83,17 @@ cs441GoogleMapsViz.getInactiveFilters = function() {
  * Sets the passed in filters to inactive. 
  * Updates the high school information accordingly.
  *
- * @param filterID The string value of the filter to remove
+ * @param filterName The name of the filter to remove
  * @return void
  */
-cs441GoogleMapsViz.clearFilter = function(filterID) {
-	//TODO: implement
+cs441GoogleMapsViz.removeFilter = function(filterName) {
+	//udpate isActive status
+	cs441GoogleMapsViz.filterList[filterName].isActive = false;
+	
+	//remove from display (done by controller...not model...)
+	
+	//refilter high school information
+
 };
 
 /*
@@ -84,14 +103,20 @@ cs441GoogleMapsViz.clearFilter = function(filterID) {
  * filter with the correct values.
  * Updates the high school information accordingly.
  * 
- * @param filterID The string value of the filter to add
+ * @param filterName The name of the filter to add
+ * @param inputText is the text that was in the text box
  * @return void 
  */
-cs441GoogleMapsViz.addFilter = function(filterID){
-	//TODO: implement
+cs441GoogleMapsViz.addFilter = function(filterName, inputText){
+	// update isActive status of specified filter
+	cs441GoogleMapsViz.filterList[filterName].isActive = true;
+	cs441GoogleMapsViz.filterList[filterName].input = inputText;	
 	
-	delete cs441GoogleMapsViz.filters[filterType];
-	cs441GoogleMapsViz.selectedFilters[filterType] = [filterID]; 
+	// update input
+	
+	// update high school information
+	
+	
 };
 
 

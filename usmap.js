@@ -28,9 +28,8 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * @return The value of the html element with id "filterMenu"
  */
 cs441GoogleMapsViz.getMenuOption = function() {
-	return "High School"; 
-	//TODO: return the following
-	//return document.getElementById("filterMenu").value;
+	selectEl = document.getElementById("filter");
+	return selectEl.options[selectEl.selectedIndex].value;
 };
 
 /*
@@ -57,9 +56,7 @@ cs441GoogleMapsViz.getFilterInput = function() {
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
-	if (filterToDisplay == "High School"){
-		document.getElementById("filterInput").value = "hi";
-	}
+
 	
 	//TODO: Display menu filters here
 	
@@ -186,8 +183,8 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a listener for the add filter button
 	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
-		// TODO: only works for high school filter
-		cs441GoogleMapsViz.addFilter("High School", "HS");
+		var inputText = document.getElementById("filterInputs").value;
+		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), inputText);
 		
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
@@ -195,14 +192,15 @@ cs441GoogleMapsViz.initialize = function() {
 		el = document.getElementById("filterSelector");
 		selectEl = document.getElementById("filter");
 		el.removeChild(selectEl);
+		filterMenu.update();
 		filterMenu.createMenu();
 		
 		// removes old filter display and replaces it with a new one containing updated information
 		// TODO: rather than creating new object, find a way to update content and refresh
-		el = document.getElementById("filterPanel");
-		filterInfoEl = document.getElementById("display");
-		el.removeChild(filterInfoEl);
-		filterDisplay.createDisplay();	
+		// el = document.getElementById("filterPanel");
+		// filterInfoEl = document.getElementById("display");
+		// el.removeChild(filterInfoEl);
+		// filterDisplay.createDisplay();	
 	});
 	
 	// TODO: Create a listener for the remove filter button
@@ -225,6 +223,27 @@ cs441GoogleMapsViz.initialize = function() {
 	// Get the menu options from the model method, getInactiveFilters().
 	// Attach the method selectMenuOption() to the menu such that whenever the menu changes,
 	// the selectMenuOption() method is called.
+	
+	var categoricalFilters = ["High School", "Major"];
+	
+	var quantitativeFilters = ["GPA", "SAT"];
+	
+	cs441GoogleMapsViz.allFilters = ["High School", "Major", "GPA", "SAT"];
+	
+	// add filters to filterList hash
+	for (var i = 0; i < categoricalFilters.length; i++) {
+		var filter = categoricalFilters[i];
+		var newFilter = new cs441GoogleMapsViz.categoricalFilter(filter, false);
+		cs441GoogleMapsViz.filterList[filter] = newFilter;
+	}
+
+	for (var i = 0; i < quantitativeFilters.length; i++) {
+		var filter = quantitativeFilters[i];
+		var newFilter = new cs441GoogleMapsViz.quantitativeFilter(filter, false);
+		cs441GoogleMapsViz.filterList[filter] = newFilter;
+	}
+	
+	
 	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getInactiveFilters(), function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});

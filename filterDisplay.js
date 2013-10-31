@@ -26,24 +26,17 @@ var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
  * 
  */
 
-cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId, filterInfoItems) {
+cs441GoogleMapsViz.FilterDisplay = function(name, idName, className, divId) {
 	this.name = name;
 	this.idName = idName;
 	this.className = className;
 	this.divId = divId;
-	this.filterInfoItems = filterInfoItems;
 
 	this.createDisplay = function() {
 		return cs441GoogleMapsViz.createDisplay.call(this);
 	};
 
 };
-
-/*
- * addFilter
- * 
- * Adds a filter to the filter panel
- */
 
 /*
  * createMenu
@@ -63,9 +56,9 @@ cs441GoogleMapsViz.createDisplay = function() {
 
 	// Create some options in the select element based on the
 	// menuItems assigned to this object.
-	for(var propt in this.filterInfoItems) {
+	for(filter in cs441GoogleMapsViz.filterList.keys) {
 		filterInfo = document.createElement("p");
- 		text = document.createTextNode(propt + ": ");
+ 		text = document.createTextNode(cs441GoogleMapsViz.filterList[filter].input + ": ");
  		strongText = document.createElement("strong");
  		strongText.appendChild(text);
 		filterInfo.appendChild(strongText);

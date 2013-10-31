@@ -111,6 +111,8 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 		}
 	};
 	
+	
+	
 	// We want the the ceeb of all the students that meet our filters
 	var query = "SELECT 'HighSchoolCode' FROM 13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624 WHERE HighSchoolCode > 0";
 	
@@ -119,6 +121,18 @@ cs441GoogleMapsViz.highShool.refreshStats = function() {
 	//
 	//Example:
 	//query += " AND WHERE HS_GPA = 4"	
+	
+	if (cs441GoogleMapsViz.filterList["High School"].isActive) {
+		var hsName = cs441GoogleMapsViz.filterList["High School"].name;
+		for (ceeb in cs441GoogleMapsViz.schools) {
+			if (cs441GoogleMapsViz.schools[ceeb].input == hsName) {
+				query += " AND 'CEEB' == " + ceeb;
+				break;
+			}
+		}	
+		
+	}
+	
 
 	// Construct the URL to send the query
 	var url = "https://www.googleapis.com/fusiontables/v1/query";
