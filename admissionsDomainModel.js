@@ -145,6 +145,8 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
  */
 cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 	
+	cs441GoogleMapsViz.apikey = 'AIzaSyCGPkL4Q0Ki278FcPmJAjlMIzwQPtyiLdk';
+	
 	var url = "https://www.googleapis.com/fusiontables/v1/query";
 	url = url + "?sql=";
 	url = url + query;
@@ -170,7 +172,7 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 cs441GoogleMapsViz.updateHighSchools = function() {
 	
 	//TODO: set number of students of all high schools to 0
-	//TODO: set active of high schools to true
+	//TODO: set all high schools to inactive
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
@@ -217,6 +219,56 @@ cs441GoogleMapsViz.updateHighSchools = function() {
 	
 	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
 	
+};
+
+/*
+ * cs441GoogleMapsViz.initalizeHighSchools()
+ * 
+ * Loads the static information of every high school into the program from the database
+ * For every high school we will create a highSchool object, place our static info within it, 
+ * and then add the high school object to our highSchools list using its CEEB as the index
+ * 
+ * @param none
+ * @return void 
+ */
+cs441GoogleMapsViz.initalizeHighSchools = function() {
+	
+	var httpRequest = new XMLHttpRequest();
+	var query = "SELECT 'CEEB', 'School', 'State', 'Latitude', 'Longitude' FROM " + cs441GoogleMapsViz.schoolsDatabaseKey;
+			
+			
+	function hsCallback() {
+		if (httpRequest.readyState === 4) {
+			if(httpRequest.status === 200) {
+		
+				var response = JSON.parse(httpRequest.responseText);
+	
+	
+				// for every school in the database
+				for(var i = 0; i < response.rows.length; i++) {
+					var hs = response.rows[i];
+					
+					var ceeb = hs[0];
+					//hs[1] is name
+					//hs[2] is state
+					//hs[3] is latitude
+					//hs[4] is longitude
+					
+					// add an entry in our schools list with ceeb, name, and location.
+					cs441GoogleMapsViz.highSchools[ceeb] 
+						= new cs441GoogleMapsViz.highShool.highSchool(ceeb, hs[1], hs[2], hs[3], hs[4]);
+					
+				}
+				
+				//now find out how many students go to each school
+				cs441GoogleMapsViz.updateHighSchools();
+		
+			}
+		}
+	}
+	
+	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
 	
 };
+
 
