@@ -43,7 +43,7 @@
    	margin-top: -8px;
    	position:fixed;
    	height: 100%;
-   	width: 256px;
+   	width: 300px;
    	float: left;
    }
 
@@ -54,21 +54,32 @@
    
    #filterPanel {
    	height: calc(100% - 256px);
-   	border: #808080 solid 4px;
-   	border-bottom-width: 0px;
    }
    
-   #display p {
-   	border: black solid 1px;
-   	-moz-box-shadow: 2px 2px 2px 2px;
-   	-webkit-bot-shadow: 2px 2px 2px 2px;
-   	margin: 2px;
-   	font-size: .75em
+   .filterBox {
+   	width: calc(100% - 12px);
+   	height: 40px;
+   	box-shadow: 2px 2px 0px #555555;
+   	border: solid 1px black;
+   	margin-top: 8px;
+   	margin-bottom: 8px;
+   	margin-left: 1px;
+	padding: 2px 2px 2px 2px;
+   	font-size: .75em;
+   	background-color: #FFFFF5;
+   }
+   
+   .filterBox strong {
+   	font-size: 1.2em
+   }
+   
+   .filterMenuDisplay {
+   	border: black solid 2px;
+   	box-shadow: 1px 1px 0px #999999 inset;
    }
    
    #filterMenu {
    	height: 256px;
-   	border: #808080 solid 4px;
    }
    
 
@@ -88,7 +99,7 @@
    	width: calc(100% - 10px);
    }
    #right {
-   	width: calc(100% - 256px);
+   	width: calc(100% - 300px);
    	height: 100%;
    	float:right;
    }

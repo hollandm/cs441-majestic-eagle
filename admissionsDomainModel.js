@@ -68,6 +68,7 @@ cs441GoogleMapsViz.getActiveFilters = function() {
 	}
 	return activeFilters;
 };
+
 /*
  * cs441GoogleMapsViz.getInactiveFilters()
  * 
@@ -153,16 +154,15 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 	httpRequest.open('GET', url);
 	httpRequest.send();
 	
-}
+};
 
 /*
  * cs441GoogleMapsViz.updateHighSchools()
  * 
  * Updates the High School information based on the active filters.
  * That is, each highSchool will either update it's information based on the filters,
- * or it will be deleted based on the following:
+ * or it will be made inactive based on the following:
  * 		-There are no students that meet the criteria.
- * 		-The "High School" filter is active and filtering out the High School 
  *
  * @param none
  * @return void 
@@ -170,7 +170,7 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
 cs441GoogleMapsViz.updateHighSchools = function() {
 	
 	//TODO: set number of students of all high schools to 0
-	//TODO: set active of high schools to 0
+	//TODO: set active of high schools to true
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
