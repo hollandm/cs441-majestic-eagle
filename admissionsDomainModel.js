@@ -330,7 +330,6 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'Application_Status', 'App_Decision_Code', 'Confirmed', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
 			+  " WHERE HighSchoolCode = " + ceeb;
-	// console.log(query);
 					
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
