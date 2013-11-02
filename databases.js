@@ -32,7 +32,6 @@ cs441GoogleMapsViz.schoolsDatabaseKey = '1KliuZhCJ4hrnXxGNohfkdAea2MZuJwR7w6BLag
 cs441GoogleMapsViz.studentsDatabaseKey = '13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624';
 
 
-
 /*
  * fusionQuery
  * 
@@ -71,8 +70,6 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
  */
 cs441GoogleMapsViz.refreshStats = function() {
 	
-	//TODO: set number of students of all high schools to 0
-	//TODO: set all high schools to inactive
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		school.students = 0;
@@ -82,7 +79,6 @@ cs441GoogleMapsViz.refreshStats = function() {
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HighSchoolCode' FROM " + cs441GoogleMapsViz.studentsDatabaseKey;
-			// +  " WHERE HighSchoolCode > 0";
 			
 	query += cs441GoogleMapsViz.generateFiltersString();
 	

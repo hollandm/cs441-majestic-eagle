@@ -33,7 +33,7 @@ var cs441GoogleMapViz = cs441GoogleMapsViz || {};
  */
 cs441GoogleMapsViz.parseToCatagoricalFilter = function(filter) {
 	
-	var items = filter.input.toUpperCase().split(",");
+	var items = filter.input.split(",");
 	for (i in items) {
 		items[i] = items[i].trim();
 	}

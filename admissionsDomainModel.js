@@ -116,6 +116,10 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 		cs441GoogleMapsViz.parseToCatagoricalFilter(filter);
 	}
 	
+	if (filterName == "Major") {
+		cs441GoogleMapsViz.parseToCatagoricalFilter(filter);
+	}
+	
 	
 	cs441GoogleMapsViz.refreshStats();
 	
