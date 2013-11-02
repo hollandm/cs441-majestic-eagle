@@ -126,6 +126,9 @@ cs441GoogleMapsViz.generateHighschoolFiltersString = function() {
 		// if we have at leat one high school in our list
 		if (found.length > 0) {
 			return" HighSchoolCode IN (" + found.toString() + ")";
+		} else {
+			alert("None of the given high schools could been found");
+			return" HighSchoolCode = -1";
 		}
 		
 	} 

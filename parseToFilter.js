@@ -4,7 +4,7 @@
  * This file contains methods to parse input from our filter input box
  * and create a filter object from that
  * 
- * @author Matt H
+ * @author Matt Holland
  * @since November 1st, 2013
  */
 
