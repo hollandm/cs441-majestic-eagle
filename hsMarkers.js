@@ -76,12 +76,12 @@ cs441GoogleMapsViz.setMarkerInfo = function(school) {
 		'</div>' +
 		'<div class=divider></div>' +
 		'<ul id="info">' +
-		'<li>applied: ' + school.applied + '</li>' +
-		'<li>accepted: ' + school.accepted + '</li>' +
-		'<li>enrolled: ' + school.enrolled + '</li>' +
-		'<li>inquired: ' + school.inquired + '</li>' +
-		'<li>average GPA: ' + school.avgGpa + '</li>' +
-		'<li>average SAT: ' + school.avgSat + '</li>' +
+		'<li title="Number of prospective students who have interacted with UP">Inquired: ' + school.inquired + '</li>' +
+		'<li title="Number of prospective students who have applied to UP">Applied: ' + school.applied + '</li>' +
+		'<li title="Number of prospective students who have been accepted into UP">Accepted: ' + school.accepted + '</li>' +
+		'<li title="Number of prospective students who have enrolled as a student">Enrolled: ' + school.enrolled + '</li>' +
+		'<li title="Average GPA of prospective students">Average GPA: ' + school.avgGpa + '</li>' +
+		'<li title="Average of the sum of each prospective students Verbal and Math  SAT Scores">Average SAT: ' + school.avgSat + '</li>' +
 		'</ul>' +
 		'</div>';
 		

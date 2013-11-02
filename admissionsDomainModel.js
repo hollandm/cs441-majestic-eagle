@@ -328,7 +328,7 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 	//TODO: set all high schools to inactive
 	
 	var httpRequest = new XMLHttpRequest();
-	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'Application_Status', 'App_Decision_Code', 'Confirmed', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
+	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'App_Decision_Code', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
 			+  " WHERE HighSchoolCode = " + ceeb;
 					
 	function hsCallback() {
@@ -372,32 +372,25 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 						satCounted += 1;
 					}
 					
-					var appStatus = student[3];
-					//console.log("appStatus: " + appStatus); 
-					if (appStatus == '') {
-						
-					}
 					
-					var appDecision = student[4];
+					var appDecision = student[3];
 					//console.log("appDecision: " + appDecision);
 					if (appDecision == 'A') {
 						school.accepted += 1;
 					}
-					if (appDecision != undefined) {
-						school.accepted += 1;
+					
+					//if anything happend with an application then they must have applied
+					if (appDecision != undefined && appDecision != '' ) {
+						school.applied += 1;
 					}
 					
-					//console.log("appConfirmed: " + appConfirmed);
-					var appConfirmed = student[5];
-					if (appConfirmed == 'C') {
-					
-					}
 					//console.log("appEnrolled: " + appEnrolled);
-					var appEnrolled = student[6];
-					if (appEnrolled == 'CONF') {
-						school.accepted += 1;
+					var appEnrolled = student[4];
+					if (appEnrolled == 'Y') {
+						school.enrolled += 1;
 					}
 					
+					school.inquired += 1;
 				};
 							
 				//Averaging SAT and GPA
