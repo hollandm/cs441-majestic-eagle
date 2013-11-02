@@ -25,6 +25,7 @@ var cs441GoogleMapViz = cs441GoogleMapsViz || {};
 
 cs441GoogleMapsViz.quantitativeFilter = function(name, status){
 	this.name = name;
+	this.input = "";
 	this.min = "";
 	this.max = "";
 	this.isActive = status;
@@ -33,6 +34,7 @@ cs441GoogleMapsViz.quantitativeFilter = function(name, status){
 
 cs441GoogleMapsViz.categoricalFilter = function(name, status){
 	this.name = name;
-	this.input = "";	
+	this.input = "";
+	this.items = [];
 	this.isActive = status;
 };

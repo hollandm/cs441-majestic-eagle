@@ -120,11 +120,20 @@ cs441GoogleMapsViz.removeFilter = function(filterName) {
  * @return void 
  */
 cs441GoogleMapsViz.addFilter = function(filterName, inputText){
-	// update isActive status of specified filter
-	cs441GoogleMapsViz.filterList[filterName].isActive = true;
-	cs441GoogleMapsViz.filterList[filterName].input = inputText.toUpperCase(); ;	
 	
-	cs441GoogleMapsViz.refreshStats()
+	var filter = cs441GoogleMapsViz.filterList[filterName];
+	
+	
+	// update isActive status of specified filter
+	filter.isActive = true;
+	filter.input = inputText;
+	
+	if (filterName == "High School") {
+		cs441GoogleMapsViz.parseToCatagoricalFilter(filter);
+	}
+	
+	
+	cs441GoogleMapsViz.refreshStats();
 	
 	// TODO: update input
 		
@@ -169,35 +178,44 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 
 	var filterString = " WHERE";
 	
-	if (cs441GoogleMapsViz.filterList["High School"].isActive) {
+	var hsFiltering = false;
+	
+	var hsFilter = cs441GoogleMapsViz.filterList["High School"];
+	if (hsFilter.isActive) {
 		
-		var hsName = cs441GoogleMapsViz.filterList["High School"].input;
+		var found = [];
 		
-		console.log(hsName);
-		
-		var found = false;
+		//for every high school in our database
 		for (ceeb in cs441GoogleMapsViz.highSchools) {
-			if (cs441GoogleMapsViz.highSchools[ceeb].name == hsName) {
-				
-				
-				if (found == false) {
-					filterString += " HighSchoolCode IN (" + ceeb;
-					found = true;
-				} else {
-					filterString += ", " + ceeb;
-				}
-				
-			}
-		}
-		
-		if (found) {
-			filterString += ")";
 			
-		} else {
-			alert("Warning: High School \"" + hsName + "\" was not found.");
+			//and every high school we are filtering by
+			for (index in hsFilter.items) {
+				var hsName = hsFilter.items[index];
+				
+				//check if they are the same
+				if (cs441GoogleMapsViz.highSchools[ceeb].name == hsName) {
+				
+					// and if they are add them to our list of accepted high schools
+					found.push(ceeb);
+				
+				}
+			}
+			
 		}
 		
-	} else {
+		// if we have at leat one high school in our list
+		if (found.length > 0) {
+			filterString += " HighSchoolCode IN (" + found.toString() + ")";
+			hsFiltering = true;
+		} else {
+			alert("Warning: No high schools where found given the criteria.");
+		}
+		
+	} 
+	
+	//if we arn't filtering by a ceeb then tell it to only get info about students who have given us their high school
+	// aka they have a HighSchoolCode associated with them
+	if (hsFiltering == false) {
 		filterString += " HighSchoolCode > 0";
 	}
 	

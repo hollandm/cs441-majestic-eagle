@@ -266,7 +266,7 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	var quantitativeFilters = ["GPA", "SAT"];
 	
-	cs441GoogleMapsViz.allFilters = ["High School", "Major", "GPA", "SAT"];
+	cs441GoogleMapsViz.allFilters = [].concat(categoricalFilters, quantitativeFilters);
 	
 	// add filters to filterList hash
 	for (var i = 0; i < categoricalFilters.length; i++) {
