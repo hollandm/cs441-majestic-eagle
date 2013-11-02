@@ -166,9 +166,8 @@ cs441GoogleMapsViz.fusionQuery = function (query, httpRequest, callback) {
  * 		user has selected
  */
 cs441GoogleMapsViz.generateFiltersString = function() {
-	//TODO: All of it
-	
-	var filterString = "";
+
+	var filterString = " WHERE";
 	
 	if (cs441GoogleMapsViz.filterList["High School"].isActive) {
 		
@@ -179,21 +178,36 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 		var found = false;
 		for (ceeb in cs441GoogleMapsViz.highSchools) {
 			if (cs441GoogleMapsViz.highSchools[ceeb].name == hsName) {
+				
+				
 				if (found == false) {
-					filterString += " WHERE HighSchoolCode = " + ceeb;
+					filterString += " HighSchoolCode IN (" + ceeb;
 					found = true;
+				} else {
+					filterString += ", " + ceeb;
 				}
-				break;
+				
 			}
-		}	
+		}
 		
-		if (!found) {
+		if (found) {
+			filterString += ")";
+			
+		} else {
 			alert("Warning: High School \"" + hsName + "\" was not found.");
 		}
 		
 	} else {
-		
+		filterString += " HighSchoolCode > 0";
 	}
+	
+	//TODO: Major Filter
+	
+	//TODO: GPA Filter
+	
+	//TODO: SAT Filter
+	
+	// console.log(filterString)
 	
 	return filterString;
 };
@@ -276,8 +290,6 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'CEEB', 'School', 'State', 'Latitude', 'Longitude' FROM " + cs441GoogleMapsViz.schoolsDatabaseKey;
 		
-	query += cs441GoogleMapsViz.generateFiltersString();
-			
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
 			if(httpRequest.status === 200) {
@@ -330,7 +342,10 @@ cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'App_Decision_Code', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
 			+  " WHERE HighSchoolCode = " + ceeb;
-					
+	
+	
+	console.log(query);
+	
 	function hsCallback() {
 		if (httpRequest.readyState === 4) {
 			if(httpRequest.status === 200) {
