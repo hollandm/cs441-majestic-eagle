@@ -204,6 +204,14 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 	//TODO: Major Filter
 	
 	//TODO: GPA Filter
+	if (cs441GoogleMapsViz.filterList["GPA"].isActive) {
+		console.log(cs441GoogleMapsViz.filterList);
+		
+		var gpa = cs441GoogleMapsViz.filterList["GPA"].input;
+		
+		console.log(gpa);
+		
+	}
 	
 	//TODO: SAT Filter
 	
