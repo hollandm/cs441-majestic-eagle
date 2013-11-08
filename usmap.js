@@ -143,26 +143,27 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
  * 
  */
 cs441GoogleMapsViz.displayMapMarkers = function() {
-	//TODO: remove all high school markers.
+	//Remove all high school markers.
+	for (var i = 0; i < cs441GoogleMapsViz.markers.length; ++i) {
+		cs441GoogleMapsViz.markers[i].hideMarker();
+	}
+	//TODO: Double check what we defrence something
+	cs441GoogleMapsViz.markers = [];
+	
 	
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 		
-			var myLatlng = new google.maps.LatLng(school.lat,school.lng);
+			var marker = new cs441GoogleMapsViz.hsMarker(school);
 			
-			//console.log("Creating Marker for " + school.name + ", " + school.state);	
-			var marker = new google.maps.Marker({
-				map: cs441GoogleMapsViz.map,
-				position: myLatlng,
-				title: school.name + ", " + school.state
-			});
+			cs441GoogleMapsViz.markers.push(marker);
 		}
 		
 	}
 	
-}
+};
 
 //<--------Where UNUSED CODE was------------->
 
@@ -186,10 +187,6 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	// Create the httpRequestor for this namespace.
 	cs441GoogleMapsViz.makeRequestor();
-
-	// Encrypted IDs for the Google Fusion Table containing the
-	// Oregon high school and CEEB data.
-	var schoolEID = '1TysRKf1siV396AMbUKmi8w2-XB3Zeye2ObXjl8Y';	
 
 	// The Encrypted ID used below is that of tl_2010_41_zcta051_clean.kml
 	// available in Tanya Crenshaw's public fusion tables.
@@ -255,7 +252,7 @@ cs441GoogleMapsViz.initialize = function() {
 	
 	var quantitativeFilters = ["GPA", "SAT"];
 	
-	cs441GoogleMapsViz.allFilters = ["High School", "Major", "GPA", "SAT"];
+	cs441GoogleMapsViz.allFilters = [].concat(categoricalFilters, quantitativeFilters);
 	
 	// add filters to filterList hash
 	for (var i = 0; i < categoricalFilters.length; i++) {

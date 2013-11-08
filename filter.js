@@ -25,6 +25,7 @@ var cs441GoogleMapViz = cs441GoogleMapsViz || {};
 
 cs441GoogleMapsViz.quantitativeFilter = function(name, status){
 	this.name = name;
+	this.input = "";
 	this.min = "";
 	this.max = "";
 	this.isActive = status;
@@ -33,6 +34,163 @@ cs441GoogleMapsViz.quantitativeFilter = function(name, status){
 
 cs441GoogleMapsViz.categoricalFilter = function(name, status){
 	this.name = name;
-	this.input = "";	
+	this.input = "";
+	this.items = [];
 	this.isActive = status;
+};
+
+
+/**
+ * generateFiltersString
+ * 
+ * generates a string to append to a fusion query to filter the results with the filters the 
+ * 		user has selected
+ * 
+ * The output query section will filter out all students who have not given us their High School. (No ceeb attached)
+ * 
+ * @returns the filter section of the query string
+ */
+cs441GoogleMapsViz.generateFiltersString = function() {
+
+	var filterString = " WHERE";
+	
+	
+	//generate the string to query only high schools with the given names
+	var hsFilterString = cs441GoogleMapsViz.generateHighschoolFiltersString();
+	
+	//if we arn't filtering by a ceeb then tell it to only get info about students who have given us their high school
+	// aka they have a HighSchoolCode associated with them
+	if (hsFilterString === "") {
+		filterString += " HighSchoolCode > 0";
+	} else {
+		filterString += hsFilterString;
+	}
+	
+	//TODO: Major Filter
+	
+	var majorFilterString = cs441GoogleMapsViz.generateMajorFiltersString(); 
+	if (majorFilterString != "") {
+		filterString += " AND " + majorFilterString;
+	}
+	
+	
+	//TODO: GPA Filter
+	if (cs441GoogleMapsViz.filterList["GPA"].isActive) {
+		console.log(cs441GoogleMapsViz.filterList);
+		
+		var gpa = cs441GoogleMapsViz.filterList["GPA"].input;
+		
+		console.log(gpa);
+		
+	}
+	
+	//TODO: SAT Filter
+	
+	// console.log(filterString)
+	
+	return filterString;
+};
+
+
+/*
+ * generateHighschoolFiltersString
+ * 
+ * This function will generate a string which will be part of a fusion query
+ * It's part of the query instucts the databse to only return student info of the students
+ * who attened one of the high schools listen by our filters
+ * 
+ * If the High School filter is not active or no high schools names match the input
+ * then this function will return an empty string  ("")
+ * 
+ * @returns the high school section of the query string
+ */
+cs441GoogleMapsViz.generateHighschoolFiltersString = function() {
+	
+	var hsFilter = cs441GoogleMapsViz.filterList["High School"];
+	if (hsFilter.isActive) {
+		
+		var found = [];
+		
+		//for every high school in our database
+		for (ceeb in cs441GoogleMapsViz.highSchools) {
+			
+			//and every high school we are filtering by
+			for (index in hsFilter.items) {
+				var hsName = hsFilter.items[index].toUpperCase();
+				
+				//check if they are the same
+				if (cs441GoogleMapsViz.highSchools[ceeb].name.toUpperCase() == hsName) {
+				
+					// and if they are add them to our list of accepted high schools
+					found.push(ceeb);
+				
+				}
+			}
+			
+		}
+		
+		// if we have at leat one high school in our list
+		if (found.length > 0) {
+			return" HighSchoolCode IN (" + found.toString() + ")";
+		} else {
+			alert("None of the given high schools could been found");
+			return" HighSchoolCode = -1";
+		}
+		
+		
+	} 
+	
+	return "";
+};
+
+
+
+/*
+ * generateMajorFiltersString
+ * 
+ * This function will generate a string which will be part of a fusion query
+ * It's part of the query instucts the databse to only return student info of the students
+ * who are one of the majors specified
+ * 
+ * If the Major filter is not active or no major names match the input
+ * then this function will return an empty string  ("")
+ * 
+ * @returns the major section of the query string
+ */
+cs441GoogleMapsViz.generateMajorFiltersString = function() {
+	
+	var majorFilter = cs441GoogleMapsViz.filterList["Major"];
+	if (majorFilter.isActive) {
+		
+		var found = [];
+		
+		//for every high school in our database
+		for (major in cs441GoogleMapsViz.majorCodes) {
+			
+			//and every high school we are filtering by
+			for (index in majorFilter.items) {
+				var majorName = majorFilter.items[index];
+				
+				//check if they are the same
+				if (major.toUpperCase() == majorName.toUpperCase()) {
+				
+					// and if they are add them to our list of accepted high schools
+					found.push(cs441GoogleMapsViz.majorCodes[major]);
+				
+				}
+			}
+			
+		}
+		
+		// if we have at leat one high school in our list
+		if (found.length > 0) {
+			return" Planned_Major_Code IN (" + found.toString() + ")";
+		} else {
+			alert("None of the given majors exist");
+			return" Planned_Major_Code = -1";
+		}
+		
+	} 
+	
+	return "";
 };
