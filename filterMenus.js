@@ -40,9 +40,26 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
 		return cs441GoogleMapsViz.createMenu.call(this);
 	};
 	
-	this.update = function() {
-		this.menuItems = cs441GoogleMapsViz.getInactiveFilters();
+	this.removeFilter = function(id) {
+		filterOptionEl = document.getElementById("option"+id);
+		parent = filterOptionEl.parentNode;
+		parent.removeChild(filterOptionEl);
 	};
+	
+	this.addFilter = function(id) {
+		filterOptionEl = document.createElement("option");
+		filterOptionEl.setAttribute("id", "option"+id);
+		filterOptionEl.setAttribute("value", id);
+		filterOptionEl.setAttribute("label", id);
+		parent = document.getElementById(this.idName);
+		alert(parent.name);
+		parent.appendChild(filterOptionEl);
+	};
+	
+	// this.update = function() {
+		// filterOptionEl = document.getElementsByName(id);
+		// filterOptionEl.parentNode.removeChild(filterOptionEl);
+	// };
 };
 
 /*
@@ -64,6 +81,7 @@ cs441GoogleMapsViz.createMenu = function() {
 	// menuItems assigned to this object.
 	for(var propt in this.menuItems) {
 		option = document.createElement("option");
+		option.setAttribute("id", "option"+propt);
 		option.setAttribute("value", propt);
 		option.setAttribute("label", propt);
 		select.appendChild(option);
