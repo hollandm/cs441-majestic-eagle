@@ -207,22 +207,30 @@ cs441GoogleMapsViz.initialize = function() {
 	cs441GoogleMapsViz.map = map;
 	
 	// Create a listener for the add filter button
-	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
 		selectedFilter = cs441GoogleMapsViz.getMenuOption();
-		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
-		
-		// removes old filter drop down and replaces it with a new filter drop down containing
-		// a list of the updated available filters
-		// TODO: rather than creating new object, find a way to update and refresh
-		el = document.getElementById("filterSelector");
-		selectEl = document.getElementById("filter");
-		el.removeChild(selectEl);
-		filterMenu.update();
-		filterMenu.createMenu();
-		
-		// update filter display
-		filterDisplay.update(selectedFilter);
+		filterInput = cs441GoogleMapsViz.getFilterInput();
+		// Check if the input is valid:
+		if(cs441GoogleMapsViz.isInputValid(selectedFilter, filterInput)) {
+			//if so, add the filter
+			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
+			
+			// removes old filter drop down and replaces it with a new filter drop down containing
+			// a list of the updated available filters
+			// TODO: rather than creating new object, find a way to update and refresh
+			el = document.getElementById("filterSelector");
+			selectEl = document.getElementById("filter");
+			el.removeChild(selectEl);
+			filterMenu.update();
+			filterMenu.createMenu();
+			
+			// update filter display
+			filterDisplay.update(selectedFilter);
+		}
+		else {
+			alert('Invalid input. Please Try again.');
+		}
+
 
 
 			

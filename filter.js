@@ -136,10 +136,7 @@ cs441GoogleMapsViz.generateHighschoolFiltersString = function() {
 			alert("None of the given high schools could been found");
 			return" HighSchoolCode = -1";
 		}
-		
-		
 	} 
-	
 	return "";
 };
 
@@ -189,7 +186,6 @@ cs441GoogleMapsViz.generateMajorFiltersString = function() {
 			alert("None of the given majors exist");
 			return" Planned_Major_Code = -1";
 		}
-		
 	} 
 	
 	return "";

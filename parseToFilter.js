@@ -42,3 +42,47 @@ cs441GoogleMapsViz.parseToCatagoricalFilter = function(filter) {
 	
 };
 
+/*
+ * isInputValid
+ * 
+ * This function will determine the validity of input. That is, if the 
+ * passed in string matches the type of filter, it will accept. Note, this
+ * function will not check to see if the input exists in our database. Only if
+ * the query has the correct syntax.
+ * 
+ * @param filterType Determines the type of valid strings
+ * @param filterInput The string to have its validity checked
+ */
+cs441GoogleMapsViz.isInputValid = function(filterType, filterInput) {
+	
+	if(filterType == "High School") {
+		// All 
+		//TODO: Check for multiple high schools
+		return true;
+	}
+	else if(filterType == "GPA") {
+		// Make sure the input is an arbitrary amount 
+		// of ranges or a single number. Where each range 
+		// can be a positive double or an integer from 
+		// 0.0 to 4.0.
+		// i.e. w.x - y.z where w.x <= y.z
+		return true;
+	}
+	else if(filterType == "SAT") {
+		// Make sure the input is an arbitrary amount 
+		// of ranges. Where each range consists of two whole numbers.
+		// These numbers must be in the range of 0 to 1600.
+		return true;
+	}
+	else if(filterType == "Major") {
+		// Make sure the input is a list of majors.
+		// These majors will be comman delimited.
+		// These majors must exist.
+		return true;
+	}
+	else { 
+		alert("Invalid filter type."); 
+		return false;
+	}
+};
+
