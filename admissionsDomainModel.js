@@ -120,6 +120,13 @@ cs441GoogleMapsViz.addFilter = function(filterName, inputText){
 		cs441GoogleMapsViz.parseToCatagoricalFilter(filter);
 	}
 	
+	if (filterName == "GPA") {
+		cs441GoogleMapsViz.parseToNumericFilter(filter);
+	}
+	
+	if (filterName == "SAT") {
+		cs441GoogleMapsViz.parseToNumericFilter(filter);
+	}
 	
 	cs441GoogleMapsViz.refreshStats();
 	

@@ -29,7 +29,8 @@ cs441GoogleMapsViz.schoolsDatabaseKey = '1KliuZhCJ4hrnXxGNohfkdAea2MZuJwR7w6BLag
  * 
  * This is used to address queries to the schools database
  */
-cs441GoogleMapsViz.studentsDatabaseKey = '13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624';
+cs441GoogleMapsViz.studentsDatabaseKey = '14e_kQ0zQSC-UegJ4-1FtuCuB-3ByCD4wblXfjzQ';
+//'13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624';
 
 
 /*
