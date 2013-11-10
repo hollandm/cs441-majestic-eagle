@@ -59,7 +59,7 @@
    
    .filterBox {
    	width: calc(100% - 12px);
-   	height: 40px;
+   	height: 45px;
    	box-shadow: 2px 2px 0px #555555;
    	border: solid 1px black;
    	margin-top: 8px;
@@ -82,7 +82,7 @@
    .deleteFilterButton {
    	float: right;
    	margin-right: 4px;
-   	margin-top: 4px;
+   	margin-top: 3px;
    	color: white;
    	font-style: bold;
    	background-color: #aa0000;
