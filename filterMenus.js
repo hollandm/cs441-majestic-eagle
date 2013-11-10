@@ -52,7 +52,7 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
 		filterOptionEl.setAttribute("value", id);
 		filterOptionEl.setAttribute("label", id);
 		parent = document.getElementById(this.idName);
-		alert(parent.name);
+		//alert(parent.name);
 		parent.appendChild(filterOptionEl);
 	};
 	
