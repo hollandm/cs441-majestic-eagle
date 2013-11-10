@@ -218,8 +218,6 @@ cs441GoogleMapsViz.initialize = function() {
 		// selectEl = document.getElementById("filter");
 		// el.removeChild(selectEl);
 				
-		
-		
 		cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
 		// filterMenu.createMenu();
 		

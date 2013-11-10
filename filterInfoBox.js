@@ -1,4 +1,4 @@
-
+// Uhh... where are the comments Sherry... 
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
@@ -10,7 +10,7 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		el = document.getElementById("filterPanel");	
 		filterInfo = document.createElement("div");
 		filterInfo.setAttribute("id", "infoBox"+this.idName);
-		filterInfo.setAttribute("class", "filterMenuDisplay");
+		filterInfo.setAttribute("class", "filterBox");
  		text = document.createTextNode(this.idName+ ": ");
 		strongText = document.createElement("strong");
  		strongText.appendChild(text);
@@ -21,6 +21,7 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		// add remove button
 		this.removeButton.appendChild(document.createTextNode("x"));
 		this.removeButton.setAttribute("id", "button"+this.idName);
+		this.removeButton.setAttribute("class", "deleteFilterButton");
 		filterInfo.appendChild(this.removeButton);
 		
 		el.appendChild(filterInfo);

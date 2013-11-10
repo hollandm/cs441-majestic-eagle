@@ -79,6 +79,17 @@
    	box-shadow: 1px 1px 0px #999999 inset;
    }
    
+   .deleteFilterButton {
+   	float: right;
+   	margin-right: 4 px;
+   }
+   
+   #filterButton {
+   	float:right;
+   	margin-right: 2px;
+   	font-size: 1.5em;
+   }
+   
    #filterMenu {
    	height: 256px;
    	background-color: white;
