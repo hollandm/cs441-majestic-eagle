@@ -66,8 +66,7 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 		filterString += hsFilterString;
 	}
 	
-	//TODO: Major Filter
-	
+	//Major Filter
 	var majorFilterString = cs441GoogleMapsViz.generateMajorFiltersString(); 
 	if (majorFilterString != "") {
 		filterString += " AND " + majorFilterString;
@@ -75,17 +74,18 @@ cs441GoogleMapsViz.generateFiltersString = function() {
 	
 	
 	//TODO: GPA Filter
+	var gpaFilterString = cs441GoogleMapsViz.generateGPAFiltersString(); 
+	
 	if (cs441GoogleMapsViz.filterList["GPA"].isActive) {
-		console.log(cs441GoogleMapsViz.filterList);
-		
-		var gpa = cs441GoogleMapsViz.filterList["GPA"].input;
-		
-		console.log(gpa);
-		
+		filterString += " AND " + gpaFilterString;
 	}
 	
 	//TODO: SAT Filter
 	
+	var satFilterString = cs441GoogleMapsViz.generateSATFiltersString(); 
+	if (cs441GoogleMapsViz.filterList["SAT"].isActive) {
+		filterString += " AND " + satFilterString;
+	}
 	// console.log(filterString)
 	
 	return filterString;
@@ -194,3 +194,88 @@ cs441GoogleMapsViz.generateMajorFiltersString = function() {
 	
 	return "";
 };
+
+
+/*
+ * generateGPAFiltersString
+ * 
+ * This function will generate a string which will be part of a fusion query
+ * It's part of the query instucts the databse to only return student info of the students
+ * who are in one of the ranges specified
+ * 
+ * If the GPA filter is not active then this function will return an empty string  ("")
+ * 
+ * @returns the gpa section of the query string
+ */
+cs441GoogleMapsViz.generateGPAFiltersString = function() {
+	return cs441GoogleMapsViz.generateNumericFiltersString("GPA", "HS_GPA",0.01);
+};
+
+/*
+ * generateSATFiltersString
+ * 
+ * This function will generate a string which will be part of a fusion query
+ * It's part of the query instucts the databse to only return student info of the students
+ * who are in one of the ranges specified
+ * 
+ * If the GPA filter is not active then this function will return an empty string  ("")
+ * 
+ * @returns the sat section of the query string
+ */
+cs441GoogleMapsViz.generateSATFiltersString = function() {
+	return cs441GoogleMapsViz.generateNumericFiltersString("SAT", "SAT_SUM",10);
+};
+
+
+
+/*
+ * generateNumericFiltersString
+ * 
+ * This function will generate a string which will be part of a fusion query
+ * It's part of the query instucts the databse to only return student info of the students
+ * who are in one of the ranges specified
+ * 
+ * If the given filter is not active then this function will return an empty string  ("")
+ * 
+ * @param filterName: The string index of the filter
+ * @param databaseColumName: The name of the colum in the database that we will be referencing
+ * @param increment: is the amount that numbers change from one index to another
+ * 
+ * @returns the section of the query string
+ */
+cs441GoogleMapsViz.generateNumericFiltersString = function(filterName, databaseColumName, increment) {
+	
+	var gpaFilter = cs441GoogleMapsViz.filterList[filterName];
+	if (gpaFilter.isActive) {
+		
+		var rangeString = databaseColumName + " IN (";
+		
+		for (i in gpaFilter.ranges) {
+			var r = gpaFilter.ranges[i];
+			
+			rangeString += r[0];
+			
+			var max = parseFloat(r[1]);
+			
+			//As far as I can tell fusion tables don't support having a number in one range or a different range
+			//To counter this I have used the IN command. I am checking if it is any number between min and max
+			//by listing out every possible number between min and max
+			
+			//TODO: Find a less stupid way to do this...
+			var inc = parseFloat(r[0]) + increment;
+			for (; inc <= max; inc += increment) {
+				rangeString += ","+Number((inc).toFixed(2));
+				
+			}
+			
+		}
+		
+		//console.log(rangeString);
+		return rangeString + ")";
+
+		
+	} 
+	
+	return "";
+};
+
