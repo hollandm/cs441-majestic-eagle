@@ -209,25 +209,22 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a listener for the add filter button
 	// TODO: currently only adds the high school filter
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
-		selectedFilter = cs441GoogleMapsViz.getMenuOption();
+		var selectedFilter = cs441GoogleMapsViz.getMenuOption();
 		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
 		
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
 		// TODO: rather than creating new object, find a way to update and refresh
-		el = document.getElementById("filterSelector");
-		selectEl = document.getElementById("filter");
-		el.removeChild(selectEl);
-		filterMenu.update();
-		filterMenu.createMenu();
+		// el = document.getElementById("filterSelector");
+		// selectEl = document.getElementById("filter");
+		// el.removeChild(selectEl);
+		cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
+		// filterMenu.createMenu();
 		
 		// update filter display
-		filterDisplay.update(selectedFilter);
-
-
-			
-		
-		
+		input = cs441GoogleMapsViz.getFilterInput();
+		inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
+		inputBox.createInfoBox();
 	});
 	
 	// TODO: Create a listener for the remove filter button
@@ -271,18 +268,10 @@ cs441GoogleMapsViz.initialize = function() {
 	}
 	
 	
-	var filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getInactiveFilters(), function() {
+	cs441GoogleMapsViz.filterMenu = new cs441GoogleMapsViz.FilterMenu("filterSelector", "filter", "filterSelection", "filterSelector", cs441GoogleMapsViz.getInactiveFilters(), function() {
 		return cs441GoogleMapsViz.selectMenuOption();
 	});
-	filterMenu.createMenu();
-	
-	//
-	// Constructing the Filter Display Panel
-	//
-	// Create the filter display panel
-	// Connect the filter display panel to the "filterDisplay" that is in the index.html page. 
-	var filterDisplay = new cs441GoogleMapsViz.FilterDisplay("filterDisplay", "filterBox", "filterPanel");
-	filterDisplay.createDisplay();
+	cs441GoogleMapsViz.filterMenu.createMenu();
 	
 	//lets load the high schools and student info from the databases
 	cs441GoogleMapsViz.initalizeHighSchools();
