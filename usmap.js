@@ -224,27 +224,9 @@ cs441GoogleMapsViz.initialize = function() {
 			alert("Invalid input. Please try again.");
 		}
 		
-		//TODO: Sherry please update this.
-		// removes old filter drop down and replaces it with a new filter drop down containing
-		// a list of the updated available filters
-		// TODO: rather than creating new object, find a way to update and refresh
-		// el = document.getElementById("filterSelector");
-		// selectEl = document.getElementById("filter");
-		// el.removeChild(selectEl);
-		
-		// filterMenu.createMenu();
-		
 
 	});
 	
-	//TODO: Sherry please update this.
-	// TODO: Create a listener for the remove filter button
-	// Create a listener for each marker:
-	//for(var i = 0; i < markers.length; i++) {
-	//	google.maps.event.addListener('click', function() { 
-	//		infowindow.open(map, markers[i]);
-	//	});
-	//}
 
 			
 	
