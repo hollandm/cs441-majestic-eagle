@@ -42,6 +42,46 @@ cs441GoogleMapsViz.parseToCatagoricalFilter = function(filter) {
 	
 };
 
+/**
+ * parseToNumericFilter
+ * 
+ * This method uses the input from the given filter parses it to set the populate the items array
+ * 
+ * Parse Rules:
+ * 	1. a , (comma) will be used to seperate multiple enteries. Therefor we can have a list
+ * 		Example: A, B, C will result in a filter that accepts A or B or C
+ * 
+ * 	Precondition: the filter has a valid non-empty input
+ * 
+ * @param filter: the filter object to update
+ * 
+ */
+cs441GoogleMapsViz.parseToNumericFilter = function(filter) {
+	
+	var item = filter.input.split(",");
+	var ranges = [];
+	
+	
+	for (i in item) {
+		// item[i] = item[i].trim();
+		
+		var range = item[i].split("-");
+		
+		if (range.length == 1) {
+			ranges[i] = [range[0], range[0]];
+		} else if (range.length == 2) {
+			ranges[i] = [range[0], range[1]];
+		} else {
+			//It is an invalid string, do something maybe?
+		}
+		
+		
+	}
+	
+	filter.ranges = ranges;
+	
+};
+
 /*
  * isInputValid
  * 
@@ -85,4 +125,3 @@ cs441GoogleMapsViz.isInputValid = function(filterType, filterInput) {
 		return false;
 	}
 };
-
