@@ -209,26 +209,35 @@ cs441GoogleMapsViz.initialize = function() {
 	// Create a listener for the add filter button
 	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
 		var selectedFilter = cs441GoogleMapsViz.getMenuOption();
-		cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
+		var input = cs441GoogleMapsViz.getFilterInput();
+		// Check for valid input before applying the filter
+		if(cs441GoogleMapsViz.isInputValid(selectedFilter,input)) {
+			// Add a new filter
+			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
+			cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
+			// update filter display
+			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
+			inputBox.createInfoBox();
+		}
+		// Alert the user of their mistake
+		else {
+			alert("Invalid input. Please try again.");
+		}
 		
+		//TODO: Sherry please update this.
 		// removes old filter drop down and replaces it with a new filter drop down containing
 		// a list of the updated available filters
 		// TODO: rather than creating new object, find a way to update and refresh
 		// el = document.getElementById("filterSelector");
 		// selectEl = document.getElementById("filter");
 		// el.removeChild(selectEl);
-				
-		cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
+		
 		// filterMenu.createMenu();
 		
-		// update filter display
-		input = cs441GoogleMapsViz.getFilterInput();
-		// Check if the input is valid
-		cs441GoogleMapsViz.isInputValid(selectedFilter,input);
-		inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
-		inputBox.createInfoBox();
+
 	});
 	
+	//TODO: Sherry please update this.
 	// TODO: Create a listener for the remove filter button
 	// Create a listener for each marker:
 	//for(var i = 0; i < markers.length; i++) {

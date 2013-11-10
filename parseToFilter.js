@@ -94,30 +94,31 @@ cs441GoogleMapsViz.parseToNumericFilter = function(filter) {
  * @param filterInput The string to have its validity checked
  */
 cs441GoogleMapsViz.isInputValid = function(filterType, filterInput) {
-	
-	if(filterType == "High School") {
-		// All 
-		//TODO: Check for multiple high schools
-		return true;
-	}
-	else if(filterType == "GPA") {
+	if(filterType == "GPA") {
 		// Make sure the input is an arbitrary amount 
-		// of ranges or a single number. Where each range 
-		// can be a positive double or an integer from 
-		// 0.0 to 4.0.
-		// i.e. w.x - y.z where w.x <= y.z
-		return true;
+		// of ranges or a single number delimitted by a comma.
+		// Where each range can be a positive double or 
+		// integer from 0.0 to 4.0 (or 0 - 4 or 0.0 - 4, etc...).
+		var pattern = new RegExp("^\\s*[0-9]*\\.?[0-9]+\\s*(-\\s*[0-9]*\\.?[0-9]+\\s*)?(,\\s*[0-9]*\\.?[0-9]+\\s*(-\\s*[0-9]*\\.?[0-9]+\\s*)?)*$");
+		if(pattern.test(filterInput)) {
+			return true;	
+		}
+		else {
+			return false;
+		}
 	}
 	else if(filterType == "SAT") {
 		// Make sure the input is an arbitrary amount 
 		// of ranges. Where each range consists of two whole numbers.
-		// These numbers must be in the range of 0 to 1600.
-		return true;
+		var pattern = new RegExp("^\\s*[0-9]*\\s*(-\\s*[0-9]*\\s*)?(,\\s*[0-9]*\\s*(-\\s*[0-9]*\\.?[0-9]+\\s*)?)*$");
+		if(pattern.test(filterInput)) {
+			return true;	
+		}
+		else {
+			return false;
+		}
 	}
-	else if(filterType == "Major") {
-		// Make sure the input is a list of majors.
-		// These majors will be comman delimited.
-		// These majors must exist.
+	else if(filterType == "Major" || filterType == "High School") {
 		return true;
 	}
 	else { 

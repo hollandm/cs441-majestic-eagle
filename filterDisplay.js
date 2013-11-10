@@ -1,4 +1,5 @@
-/*TODO: Rework this whole class after the model has been fixed.
+//TODO: Sherry please update this.
+/*
  * filterDisplay.js
  *
  * A collection of methods for the application-specific FilterDisplay object. The

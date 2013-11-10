@@ -1,4 +1,4 @@
-// Uhh... where are the comments Sherry... 
+//TODO: Sherry please update this.
 var cs441GoogleMapsViz = cs441GoogleMapsViz || {};
 
 cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
