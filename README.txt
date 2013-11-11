@@ -1,6 +1,6 @@
 ********************************
 cs441GoogleMapsViz README.txt
-Written by Tanya L. Crenshaw
+Written by Tanya L. Crenshaw edited by Allie Seibert
 Sept 15, 2013
 ********************************
 
