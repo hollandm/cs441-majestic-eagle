@@ -109,6 +109,9 @@ cs441GoogleMapsViz.refreshStats = function() {
 					};
 					
 				}
+
+				//We are done loading! lets hide the loading bar now.
+				cs441GoogleMapsViz.hideLoadingBar();
 		
 				//TODO: Try to find a way to remove this from the model
 				cs441GoogleMapsViz.displayMapMarkers();	
@@ -116,6 +119,9 @@ cs441GoogleMapsViz.refreshStats = function() {
 			}
 		}
 	}
+	
+	//We are about to load, lets show the loading bar so the user isn't confused'.
+	cs441GoogleMapsViz.showLoadingBar();
 	
 	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
 	

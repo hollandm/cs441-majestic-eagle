@@ -166,4 +166,9 @@
   #info {
   	font-size: 1.2em;
   }
+  
+  .loading-hidden {
+  	height: 0;
+  	visibility: hidden;
+  }
 
