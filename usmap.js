@@ -71,7 +71,6 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 		filterInputs.setAttribute("placeholder", "Computer Science");
 	}
 	
-	
 };
 
 /*
@@ -217,16 +216,19 @@ cs441GoogleMapsViz.initialize = function() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 	cs441GoogleMapsViz.map = map;
-	
-	// Create a listener for the add filter button
-	cs441GoogleMapsViz.addEvent(document.getElementById('filterButton'), 'click', function() {
-		var selectedFilter = cs441GoogleMapsViz.getMenuOption();
+
+
+	var form = document.getElementById('inputBox');
+	form.addEventListener("submit", function(e) {
+   		e.preventDefault();		
+    	var selectedFilter = cs441GoogleMapsViz.getMenuOption();
 		var input = cs441GoogleMapsViz.getFilterInput();
 		// Check for valid input before applying the filter
 		if(cs441GoogleMapsViz.isInputValid(selectedFilter,input)) {
 			// Add a new filter
 			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
-			cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
+			cs441GoogleMapsViz.filterMenu.update();
+			//cs441GoogleMapsViz.createMenu();
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
@@ -235,8 +237,6 @@ cs441GoogleMapsViz.initialize = function() {
 		else {
 			alert("Invalid input. Please try again.");
 		}
-		
-
 	});
 	
 

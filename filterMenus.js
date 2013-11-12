@@ -40,26 +40,21 @@ cs441GoogleMapsViz.FilterMenu = function(name, idName, className, divId, menuIte
 		return cs441GoogleMapsViz.createMenu.call(this);
 	};
 	
+	// remove filter from drop down menu
 	this.removeFilter = function(id) {
 		filterOptionEl = document.getElementById("option"+id);
 		parent = filterOptionEl.parentNode;
 		parent.removeChild(filterOptionEl);
 	};
 	
-	this.addFilter = function(id) {
-		filterOptionEl = document.createElement("option");
-		filterOptionEl.setAttribute("id", "option"+id);
-		filterOptionEl.setAttribute("value", id);
-		filterOptionEl.setAttribute("label", id);
-		parent = document.getElementById(this.idName);
-		//alert(parent.name);
-		parent.appendChild(filterOptionEl);
+	// update the drop down menu whenever new filters are added or removed
+	this.update = function() {
+		this.menuItems = cs441GoogleMapsViz.getInactiveFilters();
+		el = document.getElementById(this.divId);
+		selectObject = document.getElementById(this.idName);
+		el.removeChild(selectObject);
+		this.createMenu();
 	};
-	
-	// this.update = function() {
-		// filterOptionEl = document.getElementsByName(id);
-		// filterOptionEl.parentNode.removeChild(filterOptionEl);
-	// };
 };
 
 /*

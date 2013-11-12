@@ -246,11 +246,12 @@ cs441GoogleMapsViz.generateNumericFiltersString = function(filterName, databaseC
 	if (gpaFilter.isActive) {
 		
 		var rangeString = databaseColumName + " IN (";
+		var firstItem = true;
 		
 		for (i in gpaFilter.ranges) {
 			var r = gpaFilter.ranges[i];
 			
-			rangeString += r[0];
+			// rangeString += ","+r[0];
 			
 			var max = parseFloat(r[1]);
 			
@@ -259,9 +260,15 @@ cs441GoogleMapsViz.generateNumericFiltersString = function(filterName, databaseC
 			//by listing out every possible number between min and max
 			
 			//TODO: Find a less stupid way to do this...
-			var inc = parseFloat(r[0]) + increment;
+			var inc = parseFloat(r[0]);
 			for (; inc <= max; inc += increment) {
-				rangeString += ","+Number((inc).toFixed(2));
+				if (!firstItem) {
+					rangeString += ",";
+				} else {
+					firstItem = false;
+				}
+				
+				rangeString += Number((inc).toFixed(2));
 				
 			}
 			

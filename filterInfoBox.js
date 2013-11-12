@@ -68,8 +68,8 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		// set isActive status to false
 		cs441GoogleMapsViz.removeFilter(filterId);
 		
-		// add the filter back to the drop down menu
-		cs441GoogleMapsViz.filterMenu.addFilter(filterId);
+		// update the filter drop down menu (add filter back)
+		cs441GoogleMapsViz.filterMenu.update();
 
 		//remove filter info box from the display panel
 		infoBox = document.getElementById("infoBox"+filterId);
