@@ -110,7 +110,7 @@ cs441GoogleMapsViz.isInputValid = function(filterType, filterInput) {
 	else if(filterType == "SAT") {
 		// Make sure the input is an arbitrary amount 
 		// of ranges. Where each range consists of two whole numbers.
-		var pattern = new RegExp("^\\s*[0-9]*\\s*(-\\s*[0-9]*\\s*)?(,\\s*[0-9]*\\s*(-\\s*[0-9]*\\.?[0-9]+\\s*)?)*$");
+		var pattern = new RegExp("^\\s*[0-9]+\\s*(-\\s*[0-9]*\\s*)?(,\\s*[0-9]*\\s*(-\\s*[0-9]*\\.?[0-9]+\\s*)?)*$");
 		if(pattern.test(filterInput)) {
 			return true;	
 		}
