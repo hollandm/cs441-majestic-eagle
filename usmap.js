@@ -32,6 +32,7 @@ cs441GoogleMapsViz.getMenuOption = function() {
 	return selectEl.options[selectEl.selectedIndex].value;
 };
 
+
 /*
  * cs441GoogleMapsViz.getFilterInput()
  *
@@ -56,9 +57,20 @@ cs441GoogleMapsViz.getFilterInput = function() {
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
-
+	filterInputs = document.getElementById("filterInputs");
+	if (filterToDisplay == "High School"){
+		filterInputs.setAttribute("placeholder", "Franklin High School, Camas High School");
+	}
+	if (filterToDisplay == "SAT"){
+		filterInputs.setAttribute("placeholder", "1400-1500, 1600");
+	}
+	if (filterToDisplay == "GPA"){
+		filterInputs.setAttribute("placeholder", "3.0-3.5, 4.0");
+	}
+	if (filterToDisplay == "Major"){
+		filterInputs.setAttribute("placeholder", "Computer Science");
+	}
 	
-	//TODO: Display menu filters here
 	
 };
 

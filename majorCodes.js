@@ -15,7 +15,7 @@
  * a namespace, it's best to check first that it doesn't already exist"
  */
 var cs441GoogleMapViz = cs441GoogleMapsViz || {};
-
+ 
 
 
 cs441GoogleMapsViz.majorCodes = {
