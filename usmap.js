@@ -57,8 +57,24 @@ cs441GoogleMapsViz.getFilterInput = function() {
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
 	
+	selectEl = document.getElementById("catagoricalItemList");
 	
-	//TODO: Display menu filters here
+	if (filterToDisplay === "High School") {
+		cs441GoogleMapViz.setHSCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+		
+	} else if (filterToDisplay === "Major") {
+		cs441GoogleMapViz.setMajorCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+		
+	} else {
+		cs441GoogleMapViz.setCatagoricalList([]);
+		selectEl.setAttribute("class","catagoricalItemList-hidden");
+		
+		
+	}
+
+	
 	
 };
 

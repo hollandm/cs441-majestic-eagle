@@ -31,6 +31,8 @@ cs441GoogleMapViz.catagoricalList = [];
  */
 cs441GoogleMapViz.setCatagoricalList = function(list) {
 	cs441GoogleMapViz.catagoricalList = list;
+	
+	cs441GoogleMapViz.refreshCatagoricalInput();
 }
 
 /**
@@ -55,7 +57,9 @@ cs441GoogleMapViz.setHSCatagoricalList = function() {
 	schoolNames = schoolNames.sort();
 	
 	
-	cs441GoogleMapViz.catagoricalList = schoolNames;
+	// cs441GoogleMapViz.catagoricalList = schoolNames;
+	
+	cs441GoogleMapViz.setCatagoricalList(schoolNames);
 }
 
 
@@ -79,8 +83,8 @@ cs441GoogleMapViz.setMajorCatagoricalList = function() {
 	
 	majorNames = majorNames.sort();
 	
-	
-	cs441GoogleMapViz.catagoricalList = majorNames;
+	cs441GoogleMapViz.setCatagoricalList(majorNames);
+	// cs441GoogleMapViz.catagoricalList = majorNames;
 }
 
 /**
@@ -93,9 +97,6 @@ cs441GoogleMapViz.refreshCatagoricalInput = function() {
 	
 	//get the text in the input box
 	var input = document.getElementById("filterInputs").value;
-	
-	
-	//TODO: don't show the items that are already in the list 
 	
 	var inputItems = input.split(",");
 	
