@@ -57,6 +57,8 @@ cs441GoogleMapsViz.getFilterInput = function() {
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
+	//gives each filterInput a placeholder that shows the functionality of the filter text
+	//parser
 	filterInputs = document.getElementById("filterInputs");
 	if (filterToDisplay == "High School"){
 		filterInputs.setAttribute("placeholder", "Franklin High School, Camas High School");
