@@ -90,7 +90,7 @@
    
    #filterButton {
    	float:right;
-   	margin-right: 2px;
+   	margin-right: 4px;
    	font-size: 1.5em;
    }
    
@@ -172,3 +172,18 @@
   	visibility: hidden;
   }
 
+  #catagoricalItemList {
+  	margin-left: 4px;
+  	/*width: calc(100% - 10px);*/
+  	
+  	width:206px;
+  	
+  }
+  
+  .catagoricalSelectItem {
+  	font-size: 5px;
+  }
+  
+  .catagoricalItemList-hidden {
+  	visibility: hidden;
+  }

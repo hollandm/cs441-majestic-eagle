@@ -18,6 +18,7 @@
         <script type="text/javascript" src="databases.js"></script>
         <script type="text/javascript" src="majorCodes.js"></script>
         <script type="text/javascript" src="loadingBar.js"></script>
+        <script type="text/javascript" src="catagoricalListInput.js"></script>
 
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
@@ -33,7 +34,8 @@
                 		<h1>Filter Type:</h1>
                 		<div class="filterSelection" id="filterSelector"></div>
                 		<form id = "inputBox">
-                			<input type = "text" id = "filterInputs" required>
+                			<input type = "text" id = "filterInputs" onKeyUp="javascript:cs441GoogleMapViz.refreshCatagoricalInput();" required>
+                			<select id="catagoricalItemList" size=3></select>
                 			<input type = "submit" value = "+add" id = "filterButton"/><br>
                 		</form>
 

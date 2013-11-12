@@ -165,6 +165,9 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 					
 				}
 				
+				cs441GoogleMapViz.setHSCatagoricalList();
+				// cs441GoogleMapViz.setMajorCatagoricalList();
+				
 				//now find out how many students go to each school
 				cs441GoogleMapsViz.refreshStats();
 		
@@ -187,9 +190,6 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
  * @return void 
  */
 cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
-	
-	//TODO: set number of students of all high schools to 0
-	//TODO: set all high schools to inactive
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'App_Decision_Code', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
