@@ -56,7 +56,7 @@ cs441GoogleMapsViz.getFilterInput = function() {
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
-
+	
 	
 	//TODO: Display menu filters here
 	
@@ -216,7 +216,8 @@ cs441GoogleMapsViz.initialize = function() {
 		if(cs441GoogleMapsViz.isInputValid(selectedFilter,input)) {
 			// Add a new filter
 			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
-			cs441GoogleMapsViz.filterMenu.removeFilter(selectedFilter);
+			cs441GoogleMapsViz.filterMenu.update();
+			//cs441GoogleMapsViz.createMenu();
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
