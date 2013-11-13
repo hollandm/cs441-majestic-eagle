@@ -167,20 +167,25 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 	cs441GoogleMapsViz.markers = [];
 	
 	
+	var bounds = new google.maps.LatLngBounds();
+
+	
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 		
 			var marker = new cs441GoogleMapsViz.hsMarker(school);
+			bounds.extend(marker.marker.position);
 			
 			cs441GoogleMapsViz.markers.push(marker);
 		}
 		
 	}
+	cs441GoogleMapsViz.map.fitBounds(bounds);
 	
 };
-
+	
 //<--------Where UNUSED CODE was------------->
 
 
