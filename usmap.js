@@ -58,7 +58,6 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
 	
 	selectEl = document.getElementById("catagoricalItemList");
-	
 	if (filterToDisplay === "High School") {
 		cs441GoogleMapViz.setHSCatagoricalList();
 		selectEl.setAttribute("class","catagoricalItemList-visable");
@@ -70,10 +69,11 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 	} else {
 		cs441GoogleMapViz.setCatagoricalList([]);
 		selectEl.setAttribute("class","catagoricalItemList-hidden");
-		
-		
 	}
-
+	console.log("After hidding stuff");
+	// Clear the last input out of the text box
+	var textBox = document.getElementById("filterInputs");
+	textBox.value = "";
 	
 	
 };
@@ -222,7 +222,10 @@ cs441GoogleMapsViz.initialize = function() {
 	});
 	cs441GoogleMapsViz.map = map;
 
-
+	// 
+	// A listener for submitting our form
+	// This will pull the information from the text box 
+	// and add a filter accordingly.
 	var form = document.getElementById('inputBox');
 	form.addEventListener("submit", function(e) {
    		e.preventDefault();		
@@ -237,6 +240,8 @@ cs441GoogleMapsViz.initialize = function() {
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
+			// Update the filter type selector
+			cs441GoogleMapsViz.selectMenuOption(); 
 		}
 		// Alert the user of their mistake
 		else {
