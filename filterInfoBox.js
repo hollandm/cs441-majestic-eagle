@@ -79,6 +79,10 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		infoBox = document.getElementById("infoBox"+filterId);
 		el = document.getElementById("filterPanel");
 		el.removeChild(infoBox);
+		
+		// Update the filter type selector
+		cs441GoogleMapsViz.selectMenuOption(); 
+
 	});
 
 

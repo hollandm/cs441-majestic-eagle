@@ -74,19 +74,19 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 	}
 	
 	selectEl = document.getElementById("catagoricalItemList");
-	if (filterToDisplay === "High School") {
+	if (filterToDisplay == "High School") {
 		cs441GoogleMapViz.setHSCatagoricalList();
 		selectEl.setAttribute("class","catagoricalItemList-visable");
-		
-	} else if (filterToDisplay === "Major") {
+	} 
+	else if (filterToDisplay == "Major") {
 		cs441GoogleMapViz.setMajorCatagoricalList();
 		selectEl.setAttribute("class","catagoricalItemList-visable");
-		
-	} else {
+	} 
+	else {
 		cs441GoogleMapViz.setCatagoricalList([]);
 		selectEl.setAttribute("class","catagoricalItemList-hidden");
 	}
-	console.log("After hidding stuff");
+		
 	// Clear the last input out of the text box
 	var textBox = document.getElementById("filterInputs");
 	textBox.value = "";
@@ -255,18 +255,22 @@ cs441GoogleMapsViz.initialize = function() {
 			// Add a new filter
 			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
 			cs441GoogleMapsViz.filterMenu.update();
-			//cs441GoogleMapsViz.createMenu();
+
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
+			
 			// Update the filter type selector
 			cs441GoogleMapsViz.selectMenuOption(); 
+			 
 		}
 		// Alert the user of their mistake
 		else {
 			alert("Invalid input. Please try again.");
 		}
 	});
+	
+
 	
 
 			
