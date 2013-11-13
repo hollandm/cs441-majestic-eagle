@@ -59,15 +59,18 @@
    
    .filterBox {
    	width: calc(100% - 12px);
-   	height: 45px;
+
    	box-shadow: 2px 2px 0px #555555;
    	border: solid 1px black;
    	margin-top: 8px;
    	margin-bottom: 8px;
-   	margin-left: 1px;
+   	margin-left: 2px;
 	padding: 2px 2px 2px 2px;
    	font-size: .8em;
    	background-color: #FFFFF5;
+   	overflow: hidden;
+   	min-height: 45px;
+   	height: auto;
    }
    
    .filterBox strong {
@@ -90,7 +93,7 @@
    
    #filterButton {
    	float:right;
-   	margin-right: 2px;
+   	margin-right: 4px;
    	font-size: 1.5em;
    }
    
@@ -154,6 +157,13 @@
   	color: #444444;
   }
   
+  #infoBoxText {
+  	float: left;
+  	max-width: 240px;
+  	height: auto;
+  }
+  
+  
   #hsname {
 	display: inline-block;
   }
@@ -166,4 +176,24 @@
   #info {
   	font-size: 1.2em;
   }
+  
+  .loading-hidden {
+  	height: 0;
+  	visibility: hidden;
+  }
 
+  #catagoricalItemList {
+  	margin-left: 4px;
+  	/*width: calc(100% - 10px);*/
+  	
+  	width:206px;
+  	
+  }
+  
+  .catagoricalSelectItem {
+  	font-size: 5px;
+  }
+  
+  .catagoricalItemList-hidden {
+  	visibility: hidden;
+  }

@@ -17,6 +17,8 @@
         <script type="text/javascript" src="parseToFilter.js"></script>
         <script type="text/javascript" src="databases.js"></script>
         <script type="text/javascript" src="majorCodes.js"></script>
+        <script type="text/javascript" src="loadingBar.js"></script>
+        <script type="text/javascript" src="catagoricalListInput.js"></script>
 
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
@@ -32,7 +34,8 @@
                 		<h1>Filter Type:</h1>
                 		<div class="filterSelection" id="filterSelector"></div>
                 		<form id = "inputBox">
-                			<input type = "text" id = "filterInputs" placeholder="Franklin High School, Camas High School" required>
+                			<input type = "text" id = "filterInputs" placeholder="Franklin High School, Camas High School" onKeyUp="javascript:cs441GoogleMapViz.refreshCatagoricalInput();" required>
+                			<select id="catagoricalItemList" size=3></select>
                 			<input type = "submit" value = "+add" id = "filterButton"/><br>
                 		</form>
 
@@ -43,6 +46,7 @@
             </div><!--end of left-->
             
             <div id="right">
+            	<div id="loading" class="loading-hidden">Loading High Schools...</div>
                 <div id="contig_us_map_canvas"></div>
             </div><!--end of right-->
         </div><!--end of wrapper-->

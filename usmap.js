@@ -50,13 +50,13 @@ cs441GoogleMapsViz.getFilterInput = function() {
  * cs441GoogleMapsViz.selectMenuOption()
  * 
  * This function changes the filter menu shown to the user based on what 
- * is selected in the filterMenu (in other words, the data entered by
- * 	the user). 
+ * is selected in the filterMenu. 
  * 
  * @return void
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
+
 	//gives each filterInput a placeholder that shows the functionality of the filter text
 	//parser
 	filterInputs = document.getElementById("filterInputs");
@@ -73,6 +73,23 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 		filterInputs.setAttribute("placeholder", "Computer Science");
 	}
 	
+	selectEl = document.getElementById("catagoricalItemList");
+	if (filterToDisplay == "High School") {
+		cs441GoogleMapViz.setHSCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+	} 
+	else if (filterToDisplay == "Major") {
+		cs441GoogleMapViz.setMajorCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+	} 
+	else {
+		cs441GoogleMapViz.setCatagoricalList([]);
+		selectEl.setAttribute("class","catagoricalItemList-hidden");
+	}
+		
+	// Clear the last input out of the text box
+	var textBox = document.getElementById("filterInputs");
+	textBox.value = "";
 };
 
 /*
@@ -164,11 +181,20 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 		cs441GoogleMapsViz.markers[i].hideMarker();
 	}
 	cs441GoogleMapsViz.markers = [];
+<<<<<<< HEAD
+=======
+	
+	
+	var bounds = new google.maps.LatLngBounds();
+
+	
+>>>>>>> master
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 			var marker = new cs441GoogleMapsViz.hsMarker(school);
+<<<<<<< HEAD
 			var latlng = new google.maps.LatLng(school.lat,school.lng);
 			//centers the map on the first school
 			if(count == 0){
@@ -193,6 +219,9 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 					minlng = school.lng;
 				}	
 			}
+=======
+			bounds.extend(marker.marker.position);
+>>>>>>> master
 			
 			else {
 				if (school.lat > maxlat){
@@ -218,6 +247,7 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 			count++;
 		}
 	}
+<<<<<<< HEAD
 	if (count > 1){
 		min = new google.maps.LatLng(minlat, minlng);
 		max = new google.maps.LatLng(maxlat,maxlng);
@@ -225,8 +255,12 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 		cs441GoogleMapsViz.map.fitBounds(new google.maps.LatLngBounds(min,max));		
 	}
 
+=======
+	cs441GoogleMapsViz.map.fitBounds(bounds);
+	
+>>>>>>> master
 };
-
+	
 //<--------Where UNUSED CODE was------------->
 
 
@@ -268,7 +302,10 @@ cs441GoogleMapsViz.initialize = function() {
 	});
 	cs441GoogleMapsViz.map = map;
 
-
+	// 
+	// A listener for submitting our form
+	// This will pull the information from the text box 
+	// and add a filter accordingly.
 	var form = document.getElementById('inputBox');
 	form.addEventListener("submit", function(e) {
    		e.preventDefault();		
@@ -279,16 +316,22 @@ cs441GoogleMapsViz.initialize = function() {
 			// Add a new filter
 			cs441GoogleMapsViz.addFilter(cs441GoogleMapsViz.getMenuOption(), cs441GoogleMapsViz.getFilterInput());
 			cs441GoogleMapsViz.filterMenu.update();
-			//cs441GoogleMapsViz.createMenu();
+
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
+			
+			// Update the filter type selector
+			cs441GoogleMapsViz.selectMenuOption(); 
+			 
 		}
 		// Alert the user of their mistake
 		else {
 			alert("Invalid input. Please try again.");
 		}
 	});
+	
+
 	
 
 			

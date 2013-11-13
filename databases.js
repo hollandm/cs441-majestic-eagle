@@ -109,6 +109,9 @@ cs441GoogleMapsViz.refreshStats = function() {
 					};
 					
 				}
+
+				//We are done loading! lets hide the loading bar now.
+				cs441GoogleMapsViz.hideLoadingBar();
 		
 				//TODO: Try to find a way to remove this from the model
 				cs441GoogleMapsViz.displayMapMarkers();	
@@ -116,6 +119,9 @@ cs441GoogleMapsViz.refreshStats = function() {
 			}
 		}
 	}
+	
+	//We are about to load, lets show the loading bar so the user isn't confused'.
+	cs441GoogleMapsViz.showLoadingBar();
 	
 	cs441GoogleMapsViz.fusionQuery(query, httpRequest, hsCallback);	
 	
@@ -159,6 +165,9 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
 					
 				}
 				
+				cs441GoogleMapViz.setHSCatagoricalList();
+				// cs441GoogleMapViz.setMajorCatagoricalList();
+				
 				//now find out how many students go to each school
 				cs441GoogleMapsViz.refreshStats();
 		
@@ -181,9 +190,6 @@ cs441GoogleMapsViz.initalizeHighSchools = function() {
  * @return void 
  */
 cs441GoogleMapsViz.updateHighSchool = function(ceeb) {
-	
-	//TODO: set number of students of all high schools to 0
-	//TODO: set all high schools to inactive
 	
 	var httpRequest = new XMLHttpRequest();
 	var query = "SELECT 'HS_GPA', 'SAT_Verbal', 'SAT_MAth', 'App_Decision_Code', 'Enrolled' FROM " + cs441GoogleMapsViz.studentsDatabaseKey 
