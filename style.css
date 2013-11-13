@@ -59,7 +59,7 @@
    
    .filterBox {
    	width: calc(100% - 12px);
-   	height: 45px;
+   	min-height: 45px;
    	box-shadow: 2px 2px 0px #555555;
    	border: solid 1px black;
    	margin-top: 8px;
@@ -153,6 +153,12 @@
   	font-size: .8em;
   	color: #444444;
   }
+  
+  #infoBoxText {
+  	float: left;
+  	max-width: 240px;
+  }
+  
   
   #hsname {
 	display: inline-block;
