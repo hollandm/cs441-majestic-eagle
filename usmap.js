@@ -50,13 +50,13 @@ cs441GoogleMapsViz.getFilterInput = function() {
  * cs441GoogleMapsViz.selectMenuOption()
  * 
  * This function changes the filter menu shown to the user based on what 
- * is selected in the filterMenu (in other words, the data entered by
- * 	the user). 
+ * is selected in the filterMenu. 
  * 
  * @return void
  */
 cs441GoogleMapsViz.selectMenuOption = function() {
 	var filterToDisplay = cs441GoogleMapsViz.getMenuOption();
+
 	//gives each filterInput a placeholder that shows the functionality of the filter text
 	//parser
 	filterInputs = document.getElementById("filterInputs");
@@ -73,6 +73,23 @@ cs441GoogleMapsViz.selectMenuOption = function() {
 		filterInputs.setAttribute("placeholder", "Computer Science");
 	}
 	
+	selectEl = document.getElementById("catagoricalItemList");
+	if (filterToDisplay === "High School") {
+		cs441GoogleMapViz.setHSCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+		
+	} else if (filterToDisplay === "Major") {
+		cs441GoogleMapViz.setMajorCatagoricalList();
+		selectEl.setAttribute("class","catagoricalItemList-visable");
+		
+	} else {
+		cs441GoogleMapViz.setCatagoricalList([]);
+		selectEl.setAttribute("class","catagoricalItemList-hidden");
+	}
+	console.log("After hidding stuff");
+	// Clear the last input out of the text box
+	var textBox = document.getElementById("filterInputs");
+	textBox.value = "";
 };
 
 /*
@@ -164,20 +181,25 @@ cs441GoogleMapsViz.displayMapMarkers = function() {
 	cs441GoogleMapsViz.markers = [];
 	
 	
+	var bounds = new google.maps.LatLngBounds();
+
+	
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
 		
 			var marker = new cs441GoogleMapsViz.hsMarker(school);
+			bounds.extend(marker.marker.position);
 			
 			cs441GoogleMapsViz.markers.push(marker);
 		}
 		
 	}
+	cs441GoogleMapsViz.map.fitBounds(bounds);
 	
 };
-
+	
 //<--------Where UNUSED CODE was------------->
 
 
@@ -219,7 +241,10 @@ cs441GoogleMapsViz.initialize = function() {
 	});
 	cs441GoogleMapsViz.map = map;
 
-
+	// 
+	// A listener for submitting our form
+	// This will pull the information from the text box 
+	// and add a filter accordingly.
 	var form = document.getElementById('inputBox');
 	form.addEventListener("submit", function(e) {
    		e.preventDefault();		
@@ -234,6 +259,8 @@ cs441GoogleMapsViz.initialize = function() {
 			// update filter display
 			inputBox = new cs441GoogleMapsViz.FilterInfoBox(selectedFilter, input);
 			inputBox.createInfoBox();
+			// Update the filter type selector
+			cs441GoogleMapsViz.selectMenuOption(); 
 		}
 		// Alert the user of their mistake
 		else {

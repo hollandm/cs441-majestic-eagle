@@ -38,16 +38,20 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		filterInfo.setAttribute("id", "infoBox"+this.idName);
 		filterInfo.setAttribute("class", "filterBox");
 		
+		//Create another div element to house the text
+		textEl = document.createElement("div");
+		textEl.setAttribute("id", "infoBoxText");
+		
 		// display the name of the filter selected
  		text = document.createTextNode(this.idName+ ": ");
 		strongText = document.createElement("strong");
  		strongText.appendChild(text);
+ 		textEl.appendChild(strongText);
  		
  		// display the input
- 		filterInfo.appendChild(strongText);
 		text = document.createTextNode(this.input);
-		filterInfo.appendChild(text);
-		
+		textEl.appendChild(text);
+		filterInfo.appendChild(textEl);
 		// add remove button
 		this.removeButton.appendChild(document.createTextNode("x"));
 		this.removeButton.setAttribute("id", "button"+this.idName);
