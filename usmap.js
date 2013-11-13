@@ -156,26 +156,75 @@ cs441GoogleMapsViz.sendRequest = function(url, response) {
  * 
  */
 cs441GoogleMapsViz.displayMapMarkers = function() {
-	//Remove all high school markers.
+	// zoom in
+	cs441GoogleMapViz.map.setZoom(10);
+	count = 0;
+	//reset current board
 	for (var i = 0; i < cs441GoogleMapsViz.markers.length; ++i) {
 		cs441GoogleMapsViz.markers[i].hideMarker();
 	}
-	//TODO: Double check what we defrence something
 	cs441GoogleMapsViz.markers = [];
-	
-	
 	// For every school with students, add a marker to the map
 	for (ceeb in cs441GoogleMapsViz.highSchools) {
 		var school = cs441GoogleMapsViz.highSchools[ceeb];
 		if (school.isActive) {
-		
 			var marker = new cs441GoogleMapsViz.hsMarker(school);
+			var latlng = new google.maps.LatLng(school.lat,school.lng);
+			//centers the map on the first school
+			if(count == 0){
+				cs441GoogleMapsViz.map.setCenter(latlng);
+				var minlat = school.lat;
+				var minlng = school.lng;
+			}
+			//adjusts the bounds to include each consecutive school
+			else if (count == 1){
+				if (school.lat > minlat){ 
+					var maxlat = school.lat;
+				}
+				else{
+					var maxlat = minlat;
+					minlat = school.lat;
+				}
+				if (school.lng > minlng){ 
+					var maxlng = school.lng;
+				}
+				else{
+					var maxlng = minlng; 
+					minlng = school.lng;
+				}	
+			}
 			
+			else {
+				if (school.lat > maxlat){
+					maxlat = school.lat;
+				}
+				if (school.lng > maxlng){
+					maxlng = school.lng;
+				}
+				if (school.lat < minlat){
+					minlat = school.lat;
+				}
+				if (school.lat < minlat){
+					minlat = school.lat;
+				}
+			}	
+				//for (count < 7){}
+				//var bounds = cs441GoogleMapsViz.map.getBounds();
+				//cs441GoogleMapsViz.map.fitBounds(bounds.extend(latlng));//count++;}
+			//}	
+			//cs441GoogleMapsViz.map.fitbounds(latlngbuilder.build());
+			//pushes the marker onto the markers list
 			cs441GoogleMapsViz.markers.push(marker);
+			count++;
 		}
-		
 	}
-	
+	if (count > 1){
+		min = new google.maps.LatLng(minlat, minlng);
+		max = new google.maps.LatLng(maxlat,maxlng);
+		console.log("min:"+min.toString()+"max: "+ max.toString());
+		cs441GoogleMapsViz.map.fitBounds(new google.maps.LatLngBounds(min,max));		
+	}
+
 };
 
 //<--------Where UNUSED CODE was------------->
