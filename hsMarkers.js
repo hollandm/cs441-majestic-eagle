@@ -27,7 +27,13 @@ cs441GoogleMapsViz.hsMarker = function(school) {
 	var marker = new google.maps.Marker({
 		map: cs441GoogleMapsViz.map,
 		position: myLatlng,
-		title: school.name + ", " + school.state
+		title: school.name + ", " + school.state,
+		icon: 'graduation.png'
+		
+		// icon: 'http://upload.wikimedia.org/wikipedia/commons/7/76/Farm-Fresh_money.png'
+		// icon: 'https://cdn1.iconfinder.com/data/icons/packy_by_etcoman/48/Pokeball.png'
+		// icon: 'http://www.gothamschools.org/wp-content/themes/gotham/images/obama_icon.png'
+		// icon: 'https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0'
 	});
 
 		
