@@ -54,6 +54,7 @@ cs441GoogleMapsViz.FilterInfoBox = function(idName, input) {
 		filterInfo.appendChild(textEl);
 		// add remove button
 		this.removeButton.appendChild(document.createTextNode("X"));
+		this.removeButton.setAttribute("title", "Delete " + this.idName + " filter");
 		this.removeButton.setAttribute("id", "button"+this.idName);
 		this.removeButton.setAttribute("class", "deleteFilterButton");
 		filterInfo.appendChild(this.removeButton);
