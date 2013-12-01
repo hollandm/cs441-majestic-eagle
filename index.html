@@ -36,12 +36,11 @@
                 		<form id = "inputBox">
                 			<input type = "text" id = "filterInputs" placeholder="Franklin High School, Camas High School" onKeyUp="javascript:cs441GoogleMapViz.refreshCatagoricalInput();" required>
                 			<select id="catagoricalItemList" size=3></select>
-                			<input type = "submit" value = "+add" id = "filterButton"/><br>
+                			<input type = "submit" value = "+add" id = "filterButton"/>
                 		</form>
-
+						<a id="openHelp" href="#helpModal">?</a>
+						<p>*Taken from 2011-2012 admissions data</p>
                 	</div> <!-- end of filterMenu -->
-                	
-                	<!-- TODO: needs to be dynamic -->
     	        </div> <!--end of filterBar-->
             </div><!--end of left-->
             
@@ -52,6 +51,29 @@
         </div><!--end of wrapper-->
         
         <div id="footer">
+        	<div id="helpModal" class="modalDialog">
+							<div>
+								<a href="#close" title="Close" class="close">X</a>
+								<h2>Input Help</h2>
+								<p>
+									Multiple High Schools/Majors can be selected at once by seperating 
+								   	them via commas. 
+								</p>
+								   	<ul>
+								   		<li>Example input: Accounting, Bio-Chemistry</li>
+								   	</ul>
+								
+								<p>
+									SAT's range from 0 to 1600 and do not include Writing.
+									GPA ranges from 0.0 to 40.
+									Multiple SAT/GPA ranges can be added with commas and dashes.
+								</p>
+									<ul>
+								   		<li>Example SAT input: 3-3.2, 4</li>
+								   		<li>Example GPA input: 1000, 1440-1500</li>
+								   	</ul>
+							</div>
+						</div>
         </div><!--end of footer-->
     </body>
 
