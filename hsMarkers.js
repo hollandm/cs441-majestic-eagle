@@ -98,7 +98,6 @@ cs441GoogleMapsViz.setMarkerInfo = function(school) {
 			if (mk.schoolCeeb == school.ceeb) {
 				mk.infoWindow.content = infoContent;
 				mk.infoWindow.open(cs441GoogleMapsViz.map, mk.marker);
-				break;
 			} 
 			else {
 				mk.infoWindow.close(cs441GoogleMapsViz.map, mk.marker);
