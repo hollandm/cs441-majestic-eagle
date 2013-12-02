@@ -100,6 +100,9 @@ cs441GoogleMapsViz.setMarkerInfo = function(school) {
 				mk.infoWindow.open(cs441GoogleMapsViz.map, mk.marker);
 				break;
 			} 
+			else {
+				mk.infoWindow.close(cs441GoogleMapsViz.map, mk.marker);
+			}
 		}
 };
 
